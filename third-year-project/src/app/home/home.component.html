@@ -1,13 +1,23 @@
-<label>Enter a word:</label>
+<label>Enter a sentence:</label>
 <input #box>
 <button (click)="onButton(box.value)">Enter</button>
 <br>
-<label>{{word}}</label>
+<label>{{output}}</label>
 <br>
-<video height="200" width="300" autoplay [muted]="'muted'">
-  <source src={{url}} type="video/mp4">
-  Your browser does not support the video tag.
+
+<video #videoPlayer
+  (ended)="endOfVid()"
+  autoplay
+  [muted]="'muted'"
+  playsinline
+  controls
+  id="videoPlayer"
+  height="200"
+  width="300">
 </video>
+
+
+
 
 
 
