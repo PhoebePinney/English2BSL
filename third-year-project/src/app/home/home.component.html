@@ -3,8 +3,10 @@
 <button (click)="onButton(box.value)">Enter</button>
 <br>
 <label>{{output}}</label>
+<label>{{message}}</label>
 <br>
 
+<div #vidDiv style="display:none;">
 <video #videoPlayer
   (ended)="endOfVid()"
   autoplay
@@ -15,7 +17,7 @@
   height="200"
   width="300">
 </video>
-
+</div>
 
 
 
