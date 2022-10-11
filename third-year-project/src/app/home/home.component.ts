@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2} from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,8 @@ export class HomeComponent implements AfterViewInit{
   output: string[] = [];
   message = '';
 
-  listOfVideos = ['./assets/videos/testVideo2.mp4', './assets/videos/testVideo.mp4'];
+  listOfVideos: string[][] = [[]];
+  playlist: string[] = [];
   i = 0;
   @ViewChild('videoPlayer') videoPlayer!: ElementRef;
   @ViewChild('vidDiv') vidDiv!: ElementRef;
@@ -19,10 +20,12 @@ export class HomeComponent implements AfterViewInit{
   constructor(private renderer: Renderer2) {}
 
   ngAfterViewInit(): void {
-    //this.playVid(0, false);
+    this.listOfVideos = this.getVidList();
   }
 
   onButton(userInput: string){
+    this.output = [];
+    this.playlist = [];
     const checkInput = new RegExp(/[^a-zA-Z0-9\s\.]/);
     if (!checkInput.test(userInput)){
       this.message = '';
@@ -40,6 +43,13 @@ export class HomeComponent implements AfterViewInit{
         }
       }
       this.output = out;
+      for (const word in this.output){
+        for (const link in this.listOfVideos){
+          if (this.output[word]===this.listOfVideos[link][1]){
+            this.playlist.push(this.listOfVideos[link][0]);
+          }
+        }
+      }
       this.vidDiv.nativeElement.setAttribute("style", "display:block;")
       this.playVid(0, true);
     } else{
@@ -50,7 +60,7 @@ export class HomeComponent implements AfterViewInit{
   }
 
   playVid(videoNum: number, auto: Boolean) {
-    this.videoPlayer.nativeElement.setAttribute("src", this.listOfVideos[videoNum]);
+    this.videoPlayer.nativeElement.setAttribute("src", this.playlist[videoNum]);
     if (auto){
       this.videoPlayer.nativeElement.autoplay = true;
     } else {
@@ -67,5 +77,13 @@ export class HomeComponent implements AfterViewInit{
     } else {
         this.playVid(this.i, true);
     }
+  }
+
+  getVidList(): string[][]{
+    const list =
+    [['./assets/videos/testVideo2.mp4', 'A'],
+    ['./assets/videos/testVideo.mp4', 'B']];
+
+    return list;
   }
 }
