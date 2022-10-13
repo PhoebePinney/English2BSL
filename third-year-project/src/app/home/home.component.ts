@@ -1,4 +1,6 @@
 import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { ReplaySubject } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -6,32 +8,50 @@ import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@ang
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements AfterViewInit{
-  availableWords = ['Hello', 'my', 'name', 'is'];
+  availableWords = ['hello', 'my', 'name', 'is'];
   listOfWords: string[] = [];
   output: string[] = [];
   message = '';
 
-  listOfVideos: string[][] = [[]];
+  listOfVideos: string[][] = [];
   playlist: string[] = [];
   i = 0;
   @ViewChild('videoPlayer') videoPlayer!: ElementRef;
   @ViewChild('vidDiv') vidDiv!: ElementRef;
+  httpClient: HttpClient;
 
-  constructor(private renderer: Renderer2) {}
+  constructor(private renderer: Renderer2, http: HttpClient) {
+    this.httpClient = http;
+  }
 
   ngAfterViewInit(): void {
-    this.listOfVideos = this.getVidList();
+    this.httpClient.get('./assets/videoLinks.txt', { responseType: 'text' })
+      .subscribe(textFile => this.getVidList(textFile));
+  }
+
+  getVidList(textFile: string){
+    const lines = textFile.split('\n');
+    for (let i = 0; i <= (lines.length)-3; i++){
+      const b = lines[i].split(',');
+      b[1] = b[1].replace("\r", "");
+      this.listOfVideos.push(b);
+    }
   }
 
   onButton(userInput: string){
     this.output = [];
     this.playlist = [];
+    this.message = '';
     const checkInput = new RegExp(/[^a-zA-Z0-9\s\.]/);
     if (!checkInput.test(userInput)){
-      this.message = '';
+      if (userInput === ''){
+        this.message = 'Please input a word or phase';
+        return;
+      }
       this.listOfWords = userInput.split(' ');
       var out: string[] = [];
-      for (const w in this.listOfWords){
+      for (let w in this.listOfWords){
+        this.listOfWords[w] = this.listOfWords[w].toLowerCase();
         if (this.availableWords.includes(this.listOfWords[w])){
           out.push(this.listOfWords[w]);
         }
@@ -45,8 +65,11 @@ export class HomeComponent implements AfterViewInit{
       this.output = out;
       for (const word in this.output){
         for (const link in this.listOfVideos){
-          if (this.output[word]===this.listOfVideos[link][1]){
-            this.playlist.push(this.listOfVideos[link][0]);
+          const possible = this.listOfVideos[link][1].split('_');
+          for (const p in possible){
+            if (this.output[word]===possible[p]){
+              this.playlist.push(this.listOfVideos[link][0]);
+            }
           }
         }
       }
@@ -71,7 +94,7 @@ export class HomeComponent implements AfterViewInit{
 
   endOfVid(): void{
     this.i++;
-    if (this.i == this.listOfVideos.length) {
+    if (this.i == this.playlist.length) {
         this.i = 0;
         this.playVid(this.i, false);
     } else {
@@ -79,11 +102,7 @@ export class HomeComponent implements AfterViewInit{
     }
   }
 
-  getVidList(): string[][]{
-    const list =
-    [['./assets/videos/testVideo2.mp4', 'A'],
-    ['./assets/videos/testVideo.mp4', 'B']];
-
-    return list;
-  }
+  // Hello my name is Phoebe
+  // Welcome to my BSL translation app
+  // I hope you like it!
 }
