@@ -8,7 +8,7 @@ import { ReplaySubject } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements AfterViewInit{
-  availableWords = ['hello', 'my', 'name', 'is'];
+  availableWords: string[] = [];
   listOfWords: string[] = [];
   output: string[] = [];
   message = '';
@@ -26,7 +26,9 @@ export class HomeComponent implements AfterViewInit{
 
   ngAfterViewInit(): void {
     this.httpClient.get('./assets/videoLinks.txt', { responseType: 'text' })
-      .subscribe(textFile => this.getVidList(textFile));
+      .subscribe(vidTextFile => this.getVidList(vidTextFile));
+    this.httpClient.get('./assets/availableWords.txt', { responseType: 'text' })
+      .subscribe(wordsTextFile => this.getAvailableWords(wordsTextFile));
   }
 
   getVidList(textFile: string){
@@ -38,10 +40,22 @@ export class HomeComponent implements AfterViewInit{
     }
   }
 
+  getAvailableWords(textFile: string){
+    let lines = textFile.split('\n');
+    for (const l in lines){
+      lines[l] = lines[l].replace('\r','');
+    }
+    const pop = lines.pop();
+    for (const l in lines){
+      this.availableWords.push(lines[l]);
+    }
+  }
+
   onButton(userInput: string){
     this.output = [];
     this.playlist = [];
     this.message = '';
+    this.i = 0;
     const checkInput = new RegExp(/[^a-zA-Z0-9\s\.]/);
     if (!checkInput.test(userInput)){
       if (userInput === ''){
