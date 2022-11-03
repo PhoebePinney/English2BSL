@@ -1,5 +1,5 @@
 <label>Enter a sentence:</label>
-<input #box>
+<input #box ngModel maxlength="35" (keyup)="updateChar()"> <label>{{char}}/35</label>
 <button (click)="onButton(box.value)">Enter</button>
 <br>
 <label>{{output}}</label>

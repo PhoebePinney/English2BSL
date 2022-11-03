@@ -106,7 +106,7 @@
 ./assets/videos/m.mp4,m
 ./assets/videos/man.mp4,man
 ./assets/videos/maths.mp4,maths_number
-./assets/videos/me.mp4,me_my
+./assets/videos/me.mp4,me_my_I
 ./assets/videos/meet.mp4,meet
 ./assets/videos/million.mp4,million
 ./assets/videos/minute.mp4,minute
