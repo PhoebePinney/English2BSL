@@ -16,8 +16,10 @@ export class HomeComponent implements AfterViewInit{
   listOfVideos: string[][] = [];
   playlist: string[] = [];
   i = 0;
+  go = true;
   @ViewChild('box') box!: ElementRef;
   @ViewChild('videoPlayer') videoPlayer!: ElementRef;
+  @ViewChild('videoPlayer2') videoPlayer2!: ElementRef;
   @ViewChild('vidDiv') vidDiv!: ElementRef;
   httpClient: HttpClient;
   translate: TranslateService;
@@ -63,30 +65,11 @@ export class HomeComponent implements AfterViewInit{
     this.char = inputValue.length;
   }
 
-  wordLimit(){
-    var j = this.box.nativeElement.value;
-    var words = j.split(/\s+/);
-    var limit = 3;
-    // var numWords = words.length;
-    // if(numWords > maxWords){
-    //    j.preventDefault();
-    // }
-    var legal = "";
-    for(let i = 0; i < words.length; i++) {
-        if(i < limit) {
-            legal += words[i] + " ";
-        }
-        if(i >= limit) {
-          this.box.nativeElement.value = legal.trim();
-        }
-    }
-  }
-
   onButton(userInput: string){
     // When button pressed
     this.output = []; // List of words to be output
     this.playlist = []; // List of videos to be shown
-    this.message = '';
+    this.message = ' ';
     this.i = 0;
 
     // Check if input is valid
@@ -111,35 +94,44 @@ export class HomeComponent implements AfterViewInit{
         }
       }
       // Show video div and play first vid in playlist
-      this.vidDiv.nativeElement.setAttribute("style", "display:block;")
-      this.playVid(0, true);
+      // this.vidDiv.nativeElement.setAttribute("style", "display:block;")
+      this.playVid();
 
     } else{
       this.message = 'Invalid input';
       this.output = [];
-      this.vidDiv.nativeElement.setAttribute("style", "display:none;") // hide video div
     }
   }
 
-  playVid(videoNum: number, auto: Boolean) {
-    // Play video in playlist
-    this.videoPlayer.nativeElement.setAttribute("src", this.playlist[videoNum]);
-    if (auto){
-      this.videoPlayer.nativeElement.autoplay = true;
-    } else {
-      this.videoPlayer.nativeElement.autoplay = false;
-    }
+  playVid() {
+    this.i = 0;
+    this.videoPlayer.nativeElement.classList.remove("beNone");
+    this.videoPlayer2.nativeElement.classList.add("beNone");
+    this.videoPlayer.nativeElement.setAttribute("src", this.playlist[this.i]);
+    this.videoPlayer2.nativeElement.setAttribute("src", this.playlist[this.i+1]);
     this.videoPlayer.nativeElement.load();
+    this.videoPlayer2.nativeElement.load();
+    this.videoPlayer.nativeElement.play();
   }
 
   endOfVid(): void{
     // Once video ended
-    this.i++;
-    if (this.i == this.playlist.length) { // all videos in playlist show
-        this.i = 0;
-        this.playVid(this.i, false);
-    } else {
-        this.playVid(this.i, true); // play next vid
+    this.i ++;
+    if(this.i + 1 > this.playlist.length){
+      return
+    }
+    const inRange = this.i + 1 < this.playlist.length
+    this.videoPlayer2.nativeElement.classList.toggle("beNone");
+    this.videoPlayer.nativeElement.classList.toggle("beNone");
+    if (this.i % 2 != 0){
+      this.videoPlayer2.nativeElement.play();
+      inRange && this.videoPlayer.nativeElement.setAttribute("src", this.playlist[this.i+1]);
+      inRange && this.videoPlayer.nativeElement.load();
+    }
+    else{
+      this.videoPlayer.nativeElement.play();
+      inRange && this.videoPlayer2.nativeElement.setAttribute("src", this.playlist[this.i+1]);
+      inRange && this.videoPlayer2.nativeElement.load();
     }
   }
 

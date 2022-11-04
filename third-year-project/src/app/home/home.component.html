@@ -1,22 +1,61 @@
-<label>Enter a sentence:</label>
-<input #box ngModel maxlength="35" (keyup)="updateChar()"> <label>{{char}}/35</label>
-<button (click)="onButton(box.value)">Enter</button>
-<br>
-<label>{{output}}</label>
-<label>{{message}}</label>
-<br>
+<div class="header">
+  <div class="inner-header flex">
+    <h1>English to BSL Translation Tool</h1>
+    <img src="./assets/videos/welcome-unscreen.gif" width=300px/>
+  </div>
 
-<div #vidDiv style="display:none;">
-<video #videoPlayer
-  (ended)="endOfVid()"
-  autoplay
-  [muted]="'muted'"
-  playsinline
-  id="videoPlayer"
-  height="500"
-  width="800">
-</video>
+  <div>
+    <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+    <defs>
+    <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+    </defs>
+    <g class="parallax">
+    <use xlink:href="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7" />
+    <use xlink:href="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+    <use xlink:href="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+    <use xlink:href="#gentle-wave" x="48" y="7" fill="#fff" />
+    </g>
+    </svg>
+  </div>
+
 </div>
+
+
+<body>
+  <br><br>
+  <div style="position:relative; text-align:center;">
+    <label>Enter a sentence:</label>&nbsp;
+    <input #box maxlength="35" size="40"(keyup)="updateChar()">&nbsp;<label style="color: grey">{{char}}/35</label>
+    &nbsp;&nbsp;
+    <button (click)="onButton(box.value)">Enter</button>
+    <br><br>
+    <label>{{output}}</label>
+    <label>{{message}}</label>
+  </div>
+
+
+  <div class="vidDiv" #vidDiv>
+    <video #videoPlayer2
+      class="beNone"
+      src="./assets/videos/young.mp4"
+      (ended)="endOfVid()"
+      [muted]="'muted'"
+      playsinline
+      id="videoPlayer"
+      width="500">
+    </video>
+    <video #videoPlayer
+      class="beNone"
+      src="./assets/videos/young.mp4"
+      (ended)="endOfVid()"
+      [muted]="'muted'"
+      playsinline
+      id="videoPlayer"
+      width="500">
+    </video>
+  </div>
+</body>
 
 
 
