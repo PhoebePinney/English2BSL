@@ -44,9 +44,9 @@
 ./assets/videos/child.mp4,child
 ./assets/videos/children.mp4,children
 ./assets/videos/chocolate.mp4,chocolate
-./assets/videos/clothes.mp4,clothes
+./assets/videos/clothes.mp4,cloth
 ./assets/videos/coffee.mp4,coffee
-./assets/videos/cold.mp4,cold_chilly_freezing
+./assets/videos/cold.mp4,cold_chilly_freeze
 ./assets/videos/come.mp4,come
 ./assets/videos/computer.mp4,computer_type
 ./assets/videos/d.mp4,d
@@ -80,7 +80,7 @@
 ./assets/videos/half.mp4,half
 ./assets/videos/happy.mp4,happy
 ./assets/videos/have.mp4,have
-./assets/videos/hearing.mp4,hearing
+./assets/videos/hearing.mp4,hear
 ./assets/videos/hello.mp4,hello_hey_hi
 ./assets/videos/help.mp4,help
 ./assets/videos/holiday.mp4,holiday
@@ -159,7 +159,7 @@
 ./assets/videos/slow.mp4,slow
 ./assets/videos/snow.mp4,snow
 ./assets/videos/sorry.mp4,sorry
-./assets/videos/spouse.mp4,spouse_husband_wife_fiance_married_engaged_wedding
+./assets/videos/spouse.mp4,spouse_husband_wife_fiance_marry_wedding
 ./assets/videos/spring.mp4,spring
 ./assets/videos/start.mp4,start
 ./assets/videos/stop.mp4,stop
@@ -177,7 +177,7 @@
 ./assets/videos/today.mp4,today
 ./assets/videos/toilet.mp4,toilet
 ./assets/videos/tomorrow.mp4,tomorrow
-./assets/videos/translation.mp4,translation
+./assets/videos/translation.mp4,translate
 ./assets/videos/tree.mp4,tree
 ./assets/videos/tuesday.mp4,tuesday
 ./assets/videos/u.mp4,u

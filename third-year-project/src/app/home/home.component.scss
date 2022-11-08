@@ -25,7 +25,7 @@ p, label {
   grid-column: 1 / -1;
 }
 
-.button-54 {
+.enter-button {
   font-family: "Tahoma", sans-serif;
   font-size: 16px;
   letter-spacing: 2px;
@@ -42,7 +42,29 @@ p, label {
   touch-action: manipulation;
 }
 
-.button-54:active {
+.replay-button {
+  font-family: "Tahoma", sans-serif;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #b2a7a1;
+  cursor: pointer;
+  border: 3px solid;
+  padding: 0.25em 0.5em;
+  position: relative;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.enter-button:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 5px;
+  left: 5px;
+}
+
+.replay-button:active {
   box-shadow: 0px 0px 0px 0px;
   top: 5px;
   left: 5px;
@@ -60,6 +82,20 @@ p, label {
   line-height: 281px;
   border:2px solid rgb(77, 77, 77);
   background: radial-gradient(#cfc4bd, #7a6f6b);
+}
+
+.replayDiv {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+}
+
+.cloudy {
+  text-align: center;
+  line-height: 281px;
+  width:500px;
+  margin: auto;
+  height:281px;
+  background: rgba(255, 255, 255, 0.482);
 }
 
 .beNone {

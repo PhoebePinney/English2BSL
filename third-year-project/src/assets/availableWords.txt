@@ -71,8 +71,8 @@ children
 car
 cold
 chilly
-freezing
-clothes
+freeze
+cloth
 coffee
 come
 computer
@@ -123,7 +123,7 @@ h
 happy
 half
 have
-hearing
+hear
 hello
 hey
 hi
@@ -156,7 +156,7 @@ live
 love
 m
 man
-maths
+math
 number
 me
 my
@@ -202,7 +202,7 @@ purple
 q
 quick
 quiet
-peaceful
+peace
 calm
 fast
 r
@@ -234,8 +234,7 @@ spouse
 husband
 wife
 fiance
-married
-engaged
+marry
 wedding
 spring
 stop
@@ -257,7 +256,6 @@ today
 toilet
 tomorrow
 tuesday
-translation
 translate
 tree
 u

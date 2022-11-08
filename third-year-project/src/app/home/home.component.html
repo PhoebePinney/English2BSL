@@ -28,7 +28,7 @@
     <label>Enter a sentence:</label>&nbsp;
     <input #box maxlength="35" size="40"(keyup)="updateChar()">&nbsp;<label style="color: grey">{{char}}/35</label>
     &nbsp;&nbsp;
-    <button class="button-54" (click)="onButton(box.value)">Enter</button>
+    <button class="enter-button" (click)="onButton(box.value)">Enter</button>
     <br><br>
     <label>{{output}}</label>
     <label>{{message}}</label>
@@ -55,6 +55,9 @@
       id="videoPlayer"
       width="500">
     </video>
+    <div class="replayDiv beNone" #replayDiv>
+      <div class = "cloudy"><button class="replay-button" (click)="onButton(box.value)">REPLAY</button></div>
+    </div>
   </div>
 </body>
 
