@@ -75,15 +75,16 @@ export class HomeComponent implements AfterViewInit{
     this.i = 0;
 
     // Check if input is valid
+    userInput = userInput.replace("'", '');
     const checkInput = new RegExp(/[^a-zA-Z0-9\s\.]/);
     if (!checkInput.test(userInput)){
-      if (userInput === ''){
+      this.listOfWords = userInput.split(' '); // List of words the user entered
+      var filtered = this.listOfWords.filter(function(value, index, arr){ return value != "";}); // remove blank tokens
+      if (filtered.length ==0){ // if no words input
         this.message = 'Please input a word or phase';
         return;
       }
-
-      this.listOfWords = userInput.split(' '); // List of words the user entered
-      this.output = this.translate.in(this.listOfWords, this.availableWords) // return translated list of words
+      this.output = this.translate.in(filtered, this.availableWords) // return translated list of words
 
       for (const word in this.output){
         for (const link in this.listOfVideos){
