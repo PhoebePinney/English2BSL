@@ -78,7 +78,7 @@
 ./assets/videos/grey.mp4,grey
 ./assets/videos/h.mp4,h
 ./assets/videos/half.mp4,half
-./assets/videos/happyA.mp4,happy
+./assets/videos/happy.mp4,happy
 ./assets/videos/have.mp4,have
 ./assets/videos/hearing.mp4,hear
 ./assets/videos/hello.mp4,hello_hey_hi
@@ -177,7 +177,7 @@
 ./assets/videos/today.mp4,today
 ./assets/videos/toilet.mp4,toilet
 ./assets/videos/tomorrow.mp4,tomorrow
-./assets/videos/translation.mp4,translate
+./assets/videos/translation.mp4,translate_translation
 ./assets/videos/tree.mp4,tree
 ./assets/videos/tuesday.mp4,tuesday
 ./assets/videos/u.mp4,u
@@ -188,7 +188,7 @@
 ./assets/videos/walk.mp4,walk
 ./assets/videos/water.mp4,water
 ./assets/videos/wednesday.mp4,wednesday
-./assets/videos/welcomeA.mp4,welcome_weather
+./assets/videos/welcome.mp4,welcome_weather
 ./assets/videos/went.mp4,went
 ./assets/videos/what.mp4,what
 ./assets/videos/where.mp4,where

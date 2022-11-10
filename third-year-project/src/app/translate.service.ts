@@ -20,6 +20,9 @@ export class TranslateService {
       if (listOfWords[w] != 'I'){ // retain I as a possesive pronoun
         listOfWords[w] = listOfWords[w].toLowerCase(); // set to lowercase
       }
+      else{
+        listOfWords[w]='me';
+      }
       listOfWords[w] = this.pluralize.singular(listOfWords[w])
       if (!this.stopWords.includes(listOfWords[w])){ // remove stopwords
         s = s + listOfWords[w] + ' ';
@@ -129,7 +132,7 @@ export class TranslateService {
   }
 
   getSW(){
-    const SW = ['be', 'the', 'away', 'it', 'do', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they'];
+    const SW = ['so','be', 'the', 'away', 'it', 'do', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'am', 'and'];
     return SW;
   }
 
