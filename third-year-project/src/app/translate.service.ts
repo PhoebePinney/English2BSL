@@ -7,6 +7,7 @@ import {lemmatizer} from "lemmatizer";
 export class TranslateService {
   posTagger = require( 'wink-pos-tagger' );
   pluralize = require('pluralize');
+  contractions = require('expand-contractions');
   tagger = this.posTagger();
   stopWords = this.getSW();
   months = this.getMonths();
@@ -15,7 +16,7 @@ export class TranslateService {
 
   constructor() { }
 
-  in(listOfWords: string[], availableWords: string[]) {
+  translate(listOfWords: string[], availableWords: string[]) {
     var out: string[] = []; // temp
     var s = '';
     for (let w in listOfWords){
@@ -28,7 +29,7 @@ export class TranslateService {
       if (this.months.includes(listOfWords[w])){
         listOfWords[w] = listOfWords[w].substring(0, 3);
       }
-      listOfWords[w] = this.pluralize.singular(listOfWords[w])
+      //listOfWords[w] = this.pluralize.singular(listOfWords[w])
       if (!this.stopWords.includes(listOfWords[w])){ // remove stopwords
         s = s + listOfWords[w] + ' ';
       }
@@ -165,7 +166,6 @@ export class TranslateService {
   }
 
   getBSLOrder(){
-    // SPLIT AT 'IN'
     var order = ['UH', // interjections
     'T', // temporal words
     'JJ', 'JJR', 'JJS', 'CD', 'PDT', 'DT', // adjectives, numbers, determiners
@@ -195,11 +195,12 @@ export class TranslateService {
     BTS['dontlike'] = ['dont', 'like'];
     BTS['howmuch'] = ['how', 'much'];
     BTS['thankyou'] = ['thank', 'you'];
+    BTS['cant']  = ['can', 'not'];
     return BTS;
   }
 
   getSW(){
-    const SW = ['I','so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'am', 'and', 'for', 'nor', 'but', 'or', 'yet'];
+    const SW = ['I','so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'am', 'and', 'for', 'nor', 'but', 'or', 'yet', 'him', 'her', 'his', 'hers'];
     return SW;
   }
 

@@ -65,6 +65,7 @@ truck
 c
 cake
 can
+cant
 able
 cat
 child

@@ -8,6 +8,7 @@ import { TranslateService } from '../translate.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements AfterViewInit{
+  contractions = require('expand-contractions');
   availableWords: string[] = [];
   listOfWords: string[] = [];
   output: string[] = [];
@@ -24,6 +25,7 @@ export class HomeComponent implements AfterViewInit{
   @ViewChild('replayDiv') replayDiv!: ElementRef;
   httpClient: HttpClient;
   translate: TranslateService;
+
 
   constructor(http: HttpClient, translate: TranslateService) {
     this.httpClient = http;
@@ -75,7 +77,8 @@ export class HomeComponent implements AfterViewInit{
     this.i = 0;
 
     // Check if input is valid
-    userInput = userInput.replace("'", '');
+    //userInput = userInput.replace("'", '');
+    userInput = this.contractions.expand(userInput);
     const checkInput = new RegExp(/[^a-zA-Z0-9\s\.]/);
     if (!checkInput.test(userInput)){
       this.listOfWords = userInput.split(' '); // List of words the user entered
@@ -84,7 +87,11 @@ export class HomeComponent implements AfterViewInit{
         this.message = 'Please input a word or phase';
         return;
       }
-      this.output = this.translate.in(filtered, this.availableWords) // return translated list of words
+      this.output = this.translate.translate(filtered, this.availableWords) // return translated list of words
+      if (this.output.length < 1){
+        this.message = 'Invalid phrase';
+        return;
+      }
 
       for (const word in this.output){
         for (const link in this.listOfVideos){
@@ -97,7 +104,6 @@ export class HomeComponent implements AfterViewInit{
         }
       }
       // Show video div and play first vid in playlist
-      // this.vidDiv.nativeElement.setAttribute("style", "display:block;")
       this.playVid();
 
     } else{
