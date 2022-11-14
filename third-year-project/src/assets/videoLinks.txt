@@ -79,7 +79,7 @@
 ./assets/videos/h.mp4,h
 ./assets/videos/half.mp4,half
 ./assets/videos/happy.mp4,happy
-./assets/videos/have.mp4,have
+./assets/videos/have.mp4,have_has_get_got
 ./assets/videos/hearing.mp4,hear
 ./assets/videos/hello.mp4,hello_hey_hi
 ./assets/videos/help.mp4,help
@@ -173,7 +173,6 @@
 ./assets/videos/thousand.mp4,thousand
 ./assets/videos/thursday.mp4,thursday
 ./assets/videos/time.mp4,time
-./assets/videos/to.mp4,to
 ./assets/videos/today.mp4,today
 ./assets/videos/toilet.mp4,toilet
 ./assets/videos/tomorrow.mp4,tomorrow

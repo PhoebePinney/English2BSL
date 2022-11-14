@@ -25,7 +25,7 @@ export class HomeComponent implements AfterViewInit{
   httpClient: HttpClient;
   translate: TranslateService;
 
-  constructor(private renderer: Renderer2, http: HttpClient, translate: TranslateService) {
+  constructor(http: HttpClient, translate: TranslateService) {
     this.httpClient = http;
     this.translate = translate;
   }

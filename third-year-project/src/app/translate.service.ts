@@ -9,6 +9,9 @@ export class TranslateService {
   posTagger = require( 'wink-pos-tagger' );
   tagger = this.posTagger();
   stopWords = this.getSW();
+  months = this.getMonths();
+  temporalWords = this.getTemporalWords();
+  orderBSL = this.getBSLOrder();
   pluralize = require('pluralize');
 
   constructor() { }
@@ -22,6 +25,9 @@ export class TranslateService {
       }
       else{
         listOfWords[w]='me';
+      }
+      if (this.months.includes(listOfWords[w])){
+        listOfWords[w] = listOfWords[w].substring(0, 3);
       }
       listOfWords[w] = this.pluralize.singular(listOfWords[w])
       if (!this.stopWords.includes(listOfWords[w])){ // remove stopwords
@@ -81,15 +87,31 @@ export class TranslateService {
   getOrder(wordList: string[]){
     wordList.pop();
     wordList = this.checkForBigrams(wordList);
+    var u = "";
+    for (let o in wordList){
+      u = u + wordList[o] + ' ';
+    }
+    var taggedSentence = this.tagger.tagSentence(u);
     var availablePositions = [...Array(wordList.length).keys()];
     var positions = [];
     for (let word in wordList){
-      var tagged = this.tagger.tagSentence(wordList[word]);
+      var thisPOS: any = '';
+      for (let t in taggedSentence){
+        if ((taggedSentence[t].value)==wordList[word]){
+          thisPOS = taggedSentence[t].pos;
+        }
+      }
       if (wordList[word]=='howmuch'){
         positions.push([wordList[word], -1, 'WRB'])
       }
+      else if (wordList[word]=='like'){
+        positions.push([wordList[word], -1, 'VR'])
+      }
+      else if (this.temporalWords.includes(wordList[word])){
+        positions.push([wordList[word], -1, 'T'])
+      }
       else{
-        positions.push([wordList[word], -1, tagged[0].pos])
+        positions.push([wordList[word], -1, thisPOS])
       }
     }
     for (let w in positions){
@@ -132,8 +154,18 @@ export class TranslateService {
   }
 
   getSW(){
-    const SW = ['so','be', 'the', 'away', 'it', 'do', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'am', 'and'];
+    const SW = ['to','so','be', 'the', 'away', 'it', 'do', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'am', 'and', 'for', 'nor', 'but', 'or', 'yet'];
     return SW;
+  }
+
+  getTemporalWords(){
+    const t = ['yesterday', 'tomorrow', 'now', 'today'];
+    return t;
+  }
+
+  getMonths(){
+    const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+    return months;
   }
 
   getBigramsToSigns(){
@@ -144,6 +176,22 @@ export class TranslateService {
     BTS['howmuch'] = ['how', 'much'];
     BTS['thankyou'] = ['thank', 'you'];
     return BTS;
+  }
+
+  getBSLOrder(){
+    // SPLIT AT 'IN'
+    var order = ['UH', // interjections
+    'T', // temporal words
+    'JJ', 'JJR', 'JJS', 'CD', 'PDT', 'DT', // adjectives, numbers, determiners
+    'NN', 'NNS', 'NNP', 'NNPS', // nouns
+    'FW', // foreign words
+    'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', // verbs
+    'RB', 'RBR', 'RBS', 'EX', 'MD', //adverbs, ex there, modals
+    'PRP', 'PRP$', // pronouns
+    'WDT', 'WP', 'wP$', 'WRB' //question words
+    ];
+    return order;
+
   }
 
 

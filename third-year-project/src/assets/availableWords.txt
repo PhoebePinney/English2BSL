@@ -126,6 +126,9 @@ h
 happy
 half
 have
+has
+get
+got
 hear
 hello
 hey
@@ -258,7 +261,6 @@ thanks
 thousand
 thursday
 time
-to
 today
 toilet
 tomorrow
