@@ -1,4 +1,3 @@
-import { ParseSourceFile } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import {lemmatizer} from "lemmatizer";
 
@@ -7,12 +6,12 @@ import {lemmatizer} from "lemmatizer";
 })
 export class TranslateService {
   posTagger = require( 'wink-pos-tagger' );
+  pluralize = require('pluralize');
   tagger = this.posTagger();
   stopWords = this.getSW();
   months = this.getMonths();
   temporalWords = this.getTemporalWords();
   orderBSL = this.getBSLOrder();
-  pluralize = require('pluralize');
 
   constructor() { }
 
@@ -24,7 +23,7 @@ export class TranslateService {
         listOfWords[w] = listOfWords[w].toLowerCase(); // set to lowercase
       }
       else{
-        listOfWords[w]='me';
+        listOfWords[w]='I';
       }
       if (this.months.includes(listOfWords[w])){
         listOfWords[w] = listOfWords[w].substring(0, 3);
@@ -39,6 +38,9 @@ export class TranslateService {
       if (availableWords.includes(listOfWords[w])){ // if available, push whole word
         out.push(listOfWords[w]);
       }
+      else if (availableWords.includes(lemmatizer(listOfWords[w]))){
+        out.push(lemmatizer(listOfWords[w]));
+      }
       else{ // else split into letters and push letters
         const splitWord = listOfWords[w].split('');
         for (const l in splitWord){
@@ -49,12 +51,36 @@ export class TranslateService {
     return out;
   }
 
-  getBigrams(wordList: string[]){
-    var bigrams = [];
-    for (let i = 0; i <= (wordList.length); i++){
-      bigrams.push([wordList[i],wordList[i+1]])
+  getOrder(wordList: string[]){
+    wordList.pop();
+    wordList = this.checkForBigrams(wordList);
+    var wordListString = "";
+    for (let o in wordList){
+      wordListString = wordListString + wordList[o] + ' ';
     }
-    return bigrams;
+    var taggedSentence = this.tagger.tagSentence(wordListString);
+    var positions = [];
+    for (let word in wordList){
+      var thisPOS: any = '';
+      for (let t in taggedSentence){
+        if ((taggedSentence[t].value)==wordList[word]){
+          thisPOS = taggedSentence[t].pos;
+        }
+      }
+      if (wordList[word]=='howmuch'){
+        positions.push([wordList[word], -1, 'WRB'])
+      }
+      else if (wordList[word]=='like'){
+        positions.push([wordList[word], -1, 'VB'])
+      }
+      else if (this.temporalWords.includes(wordList[word])){
+        positions.push([wordList[word], -1, 'T'])
+      }
+      else{
+        positions.push([wordList[word], -1, thisPOS])
+      }
+    }
+    return (this.assignPositions(wordList, wordListString, positions));
   }
 
   checkForBigrams(wordList: string[]){
@@ -84,65 +110,50 @@ export class TranslateService {
     return wordList;
   }
 
-  getOrder(wordList: string[]){
-    wordList.pop();
-    wordList = this.checkForBigrams(wordList);
-    var u = "";
-    for (let o in wordList){
-      u = u + wordList[o] + ' ';
-    }
-    var taggedSentence = this.tagger.tagSentence(u);
-    var availablePositions = [...Array(wordList.length).keys()];
-    var positions = [];
-    for (let word in wordList){
-      var thisPOS: any = '';
-      for (let t in taggedSentence){
-        if ((taggedSentence[t].value)==wordList[word]){
-          thisPOS = taggedSentence[t].pos;
-        }
-      }
-      if (wordList[word]=='howmuch'){
-        positions.push([wordList[word], -1, 'WRB'])
-      }
-      else if (wordList[word]=='like'){
-        positions.push([wordList[word], -1, 'VR'])
-      }
-      else if (this.temporalWords.includes(wordList[word])){
-        positions.push([wordList[word], -1, 'T'])
+  assignPositions(wordList: string[], wordListString: string, positions: any[][]){
+    var SCs = []; // subordinating conjunctions
+    var splitUp: any[][] = [[]];
+    var allOrdered: any[] = [];
+    var c = 0;
+    for (let p in positions){
+      if (positions[p][2]=='IN'){
+        SCs.push(positions[p][0]);
+        c +=1;
+        splitUp.push([]);
       }
       else{
-        positions.push([wordList[word], -1, thisPOS])
+        splitUp[c].push(positions[p][0])
       }
     }
-    for (let w in positions){
-      if (positions[w][2]=="UH"){
-        if (availablePositions[0]==0){
-          positions[w][1]=0;
-          availablePositions.shift();
-        }
-        else{
-          for (let ww in positions){
-            positions[ww][1]=positions[ww][1]+1;
-            for (let a in availablePositions){
-              availablePositions[a]=availablePositions[a]-1;
-            }
+    var next = 0;
+    for (let part in splitUp){
+      var thesePositions = [];
+      for (let p in splitUp[part]){
+          thesePositions.push(positions[next])
+          next +=1;
+      }
+      next +=1;
+      var availablePositions = [...Array(splitUp[part].length).keys()];
+      for (let tag in this.orderBSL){
+        for (let each in thesePositions){
+          if (thesePositions[each][2]==this.orderBSL[tag]){
+            thesePositions[each][1]=availablePositions[0];
+            availablePositions.shift();
           }
-          positions[w][1]=0;
-          availablePositions.shift();
         }
       }
-      else if (positions[w][2]=="WDT"||positions[w][2]=="WP"||positions[w][2]=="WP$"||positions[w][2]=="WRB"){
-        positions[w][1]=(wordList.length-1);
-        availablePositions.pop();
-      }
-      else{
-          positions[w][1]=availablePositions[0];
-          availablePositions.shift();
+      allOrdered = allOrdered.concat(this.orderFromPositions(thesePositions));
+      if (SCs.length>0){
+        allOrdered.push(SCs[0]);
+        SCs.shift();
       }
     }
-    console.log(positions)
+    return allOrdered;
+  }
+
+  orderFromPositions(positions: any[][]){
     var ordered = [];
-    var order = [...Array(wordList.length).keys()];
+    var order = [...Array(positions.length).keys()];
     for (var o in order){
       for (let www in positions){
         if (positions[www][1]==order[o]){
@@ -153,19 +164,28 @@ export class TranslateService {
     return ordered;
   }
 
-  getSW(){
-    const SW = ['to','so','be', 'the', 'away', 'it', 'do', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'am', 'and', 'for', 'nor', 'but', 'or', 'yet'];
-    return SW;
+  getBSLOrder(){
+    // SPLIT AT 'IN'
+    var order = ['UH', // interjections
+    'T', // temporal words
+    'JJ', 'JJR', 'JJS', 'CD', 'PDT', 'DT', // adjectives, numbers, determiners
+    'NNP', 'NNS', 'NN', 'NNPS', // nouns
+    'FW', // foreign words
+    'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', // verbs
+    'RB', 'RBR', 'RBS', 'EX', 'MD', //adverbs, ex there, modals
+    'PRP', 'PRP$', // pronouns
+    'WDT', 'WP', 'wP$', 'WRB' //question words
+    ];
+    return order;
+
   }
 
-  getTemporalWords(){
-    const t = ['yesterday', 'tomorrow', 'now', 'today'];
-    return t;
-  }
-
-  getMonths(){
-    const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
-    return months;
+  getBigrams(wordList: string[]){
+    var bigrams = [];
+    for (let i = 0; i <= (wordList.length); i++){
+      bigrams.push([wordList[i],wordList[i+1]])
+    }
+    return bigrams;
   }
 
   getBigramsToSigns(){
@@ -178,20 +198,19 @@ export class TranslateService {
     return BTS;
   }
 
-  getBSLOrder(){
-    // SPLIT AT 'IN'
-    var order = ['UH', // interjections
-    'T', // temporal words
-    'JJ', 'JJR', 'JJS', 'CD', 'PDT', 'DT', // adjectives, numbers, determiners
-    'NN', 'NNS', 'NNP', 'NNPS', // nouns
-    'FW', // foreign words
-    'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', // verbs
-    'RB', 'RBR', 'RBS', 'EX', 'MD', //adverbs, ex there, modals
-    'PRP', 'PRP$', // pronouns
-    'WDT', 'WP', 'wP$', 'WRB' //question words
-    ];
-    return order;
+  getSW(){
+    const SW = ['I','so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'am', 'and', 'for', 'nor', 'but', 'or', 'yet'];
+    return SW;
+  }
 
+  getTemporalWords(){
+    const t = ['yesterday', 'tomorrow', 'now', 'today'];
+    return t;
+  }
+
+  getMonths(){
+    const months = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+    return months;
   }
 
 

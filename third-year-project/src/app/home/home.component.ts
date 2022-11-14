@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '../translate.service';
 
