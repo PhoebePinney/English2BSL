@@ -29,23 +29,24 @@ export class TranslateService {
       if (this.months.includes(listOfWords[w])){
         listOfWords[w] = listOfWords[w].substring(0, 3);
       }
-      //listOfWords[w] = this.pluralize.singular(listOfWords[w])
       if (!this.stopWords.includes(listOfWords[w])){ // remove stopwords
         s = s + listOfWords[w] + ' ';
       }
     }
     listOfWords = this.getOrder(s.split(' '));
     for (let w in listOfWords){
-      if (availableWords.includes(listOfWords[w])){ // if available, push whole word
-        out.push(listOfWords[w]);
-      }
-      else if (availableWords.includes(lemmatizer(listOfWords[w]))){
-        out.push(lemmatizer(listOfWords[w]));
-      }
-      else{ // else split into letters and push letters
-        const splitWord = listOfWords[w].split('');
-        for (const l in splitWord){
-          out.push(splitWord[l]);
+      if (listOfWords[w]!='I'){
+        if (availableWords.includes(listOfWords[w])){ // if available, push whole word
+          out.push(listOfWords[w]);
+        }
+        else if (availableWords.includes(lemmatizer(listOfWords[w]))){
+          out.push(lemmatizer(listOfWords[w]));
+        }
+        else{ // else split into letters and push letters
+          const splitWord = listOfWords[w].split('');
+          for (const l in splitWord){
+            out.push(splitWord[l]);
+          }
         }
       }
     }
@@ -112,13 +113,13 @@ export class TranslateService {
   }
 
   assignPositions(wordList: string[], wordListString: string, positions: any[][]){
-    var SCs = []; // subordinating conjunctions
+    var conjunctions = []; // subordinating & coordinating conjunctions
     var splitUp: any[][] = [[]];
     var allOrdered: any[] = [];
     var c = 0;
     for (let p in positions){
-      if (positions[p][2]=='IN'){
-        SCs.push(positions[p][0]);
+      if (positions[p][2]=='IN' || positions[p][2]=='CC'){
+        conjunctions.push(positions[p][0]);
         c +=1;
         splitUp.push([]);
       }
@@ -143,10 +144,11 @@ export class TranslateService {
           }
         }
       }
+      console.log(thesePositions)
       allOrdered = allOrdered.concat(this.orderFromPositions(thesePositions));
-      if (SCs.length>0){
-        allOrdered.push(SCs[0]);
-        SCs.shift();
+      if (conjunctions.length>0){
+        allOrdered.push(conjunctions[0]);
+        conjunctions.shift();
       }
     }
     return allOrdered;
@@ -196,11 +198,12 @@ export class TranslateService {
     BTS['howmuch'] = ['how', 'much'];
     BTS['thankyou'] = ['thank', 'you'];
     BTS['cant']  = ['can', 'not'];
+    BTS['me'] = ['I', 'am'];
     return BTS;
   }
 
   getSW(){
-    const SW = ['I','so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'am', 'and', 'for', 'nor', 'but', 'or', 'yet', 'him', 'her', 'his', 'hers'];
+    const SW = ['so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'her', 'his', 'hers'];
     return SW;
   }
 
