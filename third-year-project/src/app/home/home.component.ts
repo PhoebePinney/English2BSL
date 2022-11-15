@@ -25,6 +25,7 @@ export class HomeComponent implements AfterViewInit{
   @ViewChild('replayDiv') replayDiv!: ElementRef;
   httpClient: HttpClient;
   translate: TranslateService;
+  currentSign = '';
 
 
   constructor(http: HttpClient, translate: TranslateService) {
@@ -114,6 +115,7 @@ export class HomeComponent implements AfterViewInit{
 
   playVid() {
     this.i = 0;
+    this.currentSign=this.output[this.i];
     this.videoPlayer.nativeElement.classList.remove("beNone");
     this.videoPlayer2.nativeElement.classList.add("beNone");
     this.videoPlayer.nativeElement.setAttribute("src", this.playlist[this.i]);
@@ -126,6 +128,7 @@ export class HomeComponent implements AfterViewInit{
   endOfVid(): void{
     // Once video ended
     this.i ++;
+    this.currentSign=this.output[this.i];
     if(this.i + 1 > this.playlist.length){
       this.replayDiv.nativeElement.classList.remove("beNone");
       return

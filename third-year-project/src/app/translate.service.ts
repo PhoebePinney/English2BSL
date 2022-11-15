@@ -203,7 +203,7 @@ export class TranslateService {
   }
 
   getSW(){
-    const SW = ['so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'her', 'his', 'hers'];
+    const SW = ['of','so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'her', 'his', 'hers'];
     return SW;
   }
 
