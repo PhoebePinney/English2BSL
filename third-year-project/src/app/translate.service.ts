@@ -191,8 +191,8 @@ export class TranslateService {
   getBigramsToSigns(){
     var BTS: { [sign: string] : string[]; } = {};
     BTS['nameme'] = ['my', 'name'];
-    BTS['dontknow'] = ['dont', 'know'];
-    BTS['dontlike'] = ['dont', 'like'];
+    BTS['dontknow'] = ['not', 'know'];
+    BTS['dontlike'] = ['not', 'like'];
     BTS['howmuch'] = ['how', 'much'];
     BTS['thankyou'] = ['thank', 'you'];
     BTS['cant']  = ['can', 'not'];
