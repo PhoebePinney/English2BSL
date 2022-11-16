@@ -1,27 +1,43 @@
-<div class="header">
-    <h1>English to BSL Translation Tool</h1>
-  <nav>
-    <a href="#">Translation Tool</a>
-    <a href="#">About</a>
-    <a href="#">Sign Dictionary</a>
-    <a href="#">Acknowledgments</a>
-    <div class="animation start-home"></div>
-  </nav>
-</div>
-
+<head>
+  <title>Translation Tool</title>
+</head>
 
 <body>
-  <br><br>
-  <div style="position:relative; text-align:center;">
-    <label>Enter a sentence:</label>&nbsp;
-    <input #box maxlength="35" size="40"(keyup)="updateChar()">&nbsp;<label style="color: grey">{{char}}/35</label>
-    &nbsp;&nbsp;
-    <button class="enter-button" (click)="onButton(box.value)">Enter</button>
-    <br><br>
-    <label>{{output}}</label>
-    <label>{{message}}</label>
+  <div class="nav-container">
+  <nav>
+      <a href="#">Translation Tool</a>
+      <a href="#">About</a>
+      <a href="#">Sign Dictionary</a>
+      <a href="#">Acknowledgments</a>
+      <div class="animation start-home"></div>
+    </nav>
   </div>
 
+  <div class="heading-container">
+    <h1><span>English to BSL Translation Tool</span></h1>
+    <div class="blobs blobs_1"></div>
+    <div class="blobs blobs_2"></div>
+    <div class="blobs blobs_3"></div>
+    <div class="blobs blobs_4"></div>
+    <div class="blobs blobs_5"></div>
+    <div class="blobs blobs_6"></div>
+    <div class="blobs blobs_7"></div>
+    <div class="blobs blobs_8"></div>
+    <div class="blobs blobs_9"></div>
+  </div>
+
+  <label class="subHeading">Translate written English into a video of British Sign Language!</label>
+  <br><br>
+
+  <div style="text-align:center;">
+    <label class="inputLabel">Enter a sentence:</label>&nbsp;
+    <input #box maxlength="35" size="40"(keyup)="updateChar()">&nbsp;<label class="inputLabel" style="color: grey; font-size: 1vw;">{{char}}/35</label>
+    &nbsp;&nbsp;
+    <button class="enter-button" (click)="onButton(box.value)">Translate!</button>
+    <br>
+    <label class="inputLabel" style="color: grey; font-size: 1vw;">{{message}}</label>
+  </div>
+  <br>
 
   <div class="vidDiv" #vidDiv>
     <div class = "frame"></div>
@@ -30,23 +46,28 @@
       (ended)="endOfVid()"
       [muted]="'muted'"
       playsinline
-      id="videoPlayer"
-      width="500">
+      id="videoPlayer">
     </video>
     <video #videoPlayer
       class="beNone"
       (ended)="endOfVid()"
       [muted]="'muted'"
       playsinline
-      id="videoPlayer"
-      width="500">
+      id="videoPlayer">
     </video>
     <div class="replayDiv beNone" #replayDiv>
       <div class = "cloudy"><button class="replay-button" (click)="onButton(box.value)">REPLAY</button></div>
     </div>
-    <label>{{currentSign}}</label>
+  </div>
+
+  <div class="cutputTextDiv">
+    <label class="currentSignLabel">{{currentSign}}</label>
+    <br>
+    <label class="allSigns">{{out}}</label>
   </div>
 </body>
+
+
 
 
 

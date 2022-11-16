@@ -12,7 +12,8 @@ export class HomeComponent implements AfterViewInit{
   availableWords: string[] = [];
   listOfWords: string[] = [];
   output: string[] = [];
-  message = '';
+  out: string = ' ';
+  message: string = '';
   char = 0;
   listOfVideos: string[][] = [];
   playlist: string[] = [];
@@ -76,6 +77,7 @@ export class HomeComponent implements AfterViewInit{
     this.playlist = []; // List of videos to be shown
     this.message = ' ';
     this.i = 0;
+    this.out = '';
 
     // Check if input is valid
     //userInput = userInput.replace("'", '');
@@ -106,6 +108,12 @@ export class HomeComponent implements AfterViewInit{
       }
       // Show video div and play first vid in playlist
       this.playVid();
+      var output = '';
+      for (let o in this.output){
+        output = output + this.output[o] + ' - ';
+      }
+      output = output.slice(0, -2);
+      this.out = '[ '+output+']';
 
     } else{
       this.message = 'Invalid input';
