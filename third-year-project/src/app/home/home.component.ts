@@ -107,14 +107,34 @@ export class HomeComponent implements AfterViewInit{
         }
       }
       // Show video div and play first vid in playlist
-      this.playVid();
       var output = '';
       for (let o in this.output){
+        if (this.output[o].length<2){
+          this.output[o] = this.output[o].toUpperCase();
+        }
+        if (this.output[o]=='nameme'){
+          this.output[o] = 'name (my)';
+        }
+        else if (this.output[o]=='thankyou'){
+          this.output[o] = 'thank you';
+        }
+        else if (this.output[o]=='dontknow'){
+          this.output[o] = "don't know";
+        }
+        else if (this.output[o]=='dontlike'){
+          this.output[o] = "don't like";
+        }
+        else if (this.output[o]=='howmuch'){
+          this.output[o] = "how much";
+        }
+        else if (this.output[o]=='cant'){
+          this.output[o] = "can't";
+        }
         output = output + this.output[o] + ' - ';
       }
       output = output.slice(0, -2);
       this.out = '[ '+output+']';
-
+      this.playVid();
     } else{
       this.message = 'Invalid input';
       this.output = [];
