@@ -26,7 +26,17 @@
     <div class="blobs blobs_9"></div>
   </div>
 
-  <label class="subHeading">Here are all 211 signs in the database!</label>
+  <label class="subHeading">Here are all 274 words in the database of signs!</label>
   <br><br>
+
+  <div class="wordButtonDiv" *ngFor="let word of availableWords">
+    <div *ngIf="word.length<2">
+      <button style="background-color: #91ff91;" class="word-button">{{word}}</button>
+    </div>
+    <div *ngIf="word.length>1">
+      <button class="word-button">{{word}}</button>
+    </div>
+
+  </div>
 
 </body>

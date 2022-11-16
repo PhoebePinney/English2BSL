@@ -140,6 +140,9 @@ export class HomeComponent implements AfterViewInit{
         else if (this.output[o]=='howmuch'){
           this.output[o] = "how much";
         }
+        else if (this.output[o]=='howmold'){
+          this.output[o] = "how old";
+        }
         else if (this.output[o]=='cant'){
           this.output[o] = "can't";
         }

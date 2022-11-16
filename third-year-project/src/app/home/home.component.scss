@@ -13,7 +13,7 @@ body {
 }
 nav {
 	position: relative;
-	background-color: #ababab7e;
+	background-color: #d7d7d7;
 }
 nav a {
   font-family: 'Nunito', sans-serif;
@@ -173,6 +173,19 @@ h1 span:before{
 	90%{border-radius:25% 75% 70% 30% / 39% 50% 50% 61%}
 	100%{border-radius:66% 34% 33% 67% / 65% 73% 27% 35%}
 }
+@keyframes blobframe{
+	0%{border-radius:26% 24% 21% 29% / 24% 27% 23% 26%}
+	10%{border-radius:24% 26% 27% 23% / 28% 26% 24% 22%}
+	20%{border-radius:28% 22% 20% 20% / 27% 27% 23% 23%}
+	30%{border-radius:23% 27% 21% 23% / 28% 27% 23% 22%}
+	40%{border-radius:23% 27% 26% 24% / 25% 28% 22% 25%}
+	50%{border-radius:29% 21% 20% 20% / 21% 29% 21% 29%}
+	60%{border-radius:27% 23% 29% 21% / 23% 21% 29% 27%}
+	70%{border-radius:29% 21% 25% 25% / 24% 25% 25% 26%}
+	80%{border-radius:25% 25% 27% 23% / 28% 20% 20% 22%}
+	90%{border-radius:25% 25% 20% 20% / 29% 20% 20% 21%}
+	100%{border-radius:26% 24% 23% 27% / 25% 23% 27% 25%}
+}
 .subHeading{
   position:relative;
   font-family:'Nunito', sans-serif;
@@ -206,10 +219,8 @@ input:focus{
 
 // BUTTONS
 .enter-button {
-  width: 10vw;
-  height: 3vw;
   font-weight: 700;
-  animation:blobs 15s ease-in-out infinite alternate;
+  animation:blobframe 15s ease-in-out infinite alternate;
   background: #c988e3;
   font-family: 'Nunito', sans-serif;
   font-size: 1.5vw;
@@ -219,12 +230,11 @@ input:focus{
   position: relative;
   border: none;
   box-shadow: 0.5vw 0.5vw #acacac80;
+  padding: 1vw 2vw;
 }
 .replay-button {
-  width: 10vw;
-  height: 3vw;
   font-weight: 700;
-  animation:blobs 15s ease-in-out infinite alternate;
+  animation:blobframe 15s ease-in-out infinite alternate;
   background: #a095a5;
   font-family: 'Nunito', sans-serif;
   font-size: 1.5vw;
@@ -232,7 +242,8 @@ input:focus{
   color: #ffffff;
   cursor: pointer;
   position: relative;
-  border: none;
+  border: 0.5vw solid #5656562e;
+  padding: 1vw 2vw;
 }
 .enter-button:active {
   box-shadow: 0px 0px 0px 0px;
@@ -254,7 +265,7 @@ input:focus{
   display: grid;
   place-items: center;
   overflow:hidden;
-  animation:blobs 15s ease-in-out infinite alternate;
+  animation:blobframe 15s ease-in-out infinite alternate;
   border:1vw solid #c988e3;
 }
 .vidDiv video {
@@ -275,10 +286,11 @@ input:focus{
   text-align: center;
   height:22.5vw;
   line-height: 22.5vw;
+  outline: 2vw solid #837773;
   border-radius: 1vw;
   background: radial-gradient(#cfc4bd, #7a6f6b);
   box-shadow: 0.5vw 0.5vw #acacac80;
-  animation:blobs 15s ease-in-out infinite alternate;
+  animation:blobframe 15s ease-in-out infinite alternate;
 }
 .replayDiv {
   grid-row: 1 / -1;
@@ -310,14 +322,13 @@ input:focus{
 .currentSignLabel{
   position: relative;
   color: #8c8c8c;
-  top:8vw;
+  top:5vw;
 	font-family:'Titan One',cursive;
-	font-size:5vw;
+	font-size:6vw;
 	font-weight:700;
 	flex-flow:row wrap;
 	align-content:center;
 	justify-content:center;
-  box-shadow: 0.5vw 0.5vw #acacac80;
 }
 .allSigns{
   font-family: 'Nunito', sans-serif;

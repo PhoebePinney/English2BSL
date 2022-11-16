@@ -195,6 +195,7 @@ export class TranslateService {
     BTS['dontknow'] = ['not', 'know'];
     BTS['dontlike'] = ['not', 'like'];
     BTS['howmuch'] = ['how', 'much'];
+    BTS['howold'] = ['how', 'old'];
     BTS['thankyou'] = ['thank', 'you'];
     BTS['cant']  = ['can', 'not'];
     BTS['me'] = ['I', 'am'];
