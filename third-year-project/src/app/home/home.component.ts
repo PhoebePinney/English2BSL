@@ -1,6 +1,7 @@
 import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '../translate.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -29,9 +30,19 @@ export class HomeComponent implements AfterViewInit{
   currentSign = '';
 
 
-  constructor(http: HttpClient, translate: TranslateService) {
+  constructor(http: HttpClient, translate: TranslateService, private router: Router) {
     this.httpClient = http;
     this.translate = translate;
+  }
+
+  gotoAbout(){
+    this.router.navigate(['/about']);
+  }
+  gotoSD(){
+    this.router.navigate(['/signdictionary']);
+  }
+  gotoAcknowledgments(){
+    this.router.navigate(['/acknowledgments']);
   }
 
   ngAfterViewInit(): void {
