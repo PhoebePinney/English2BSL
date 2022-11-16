@@ -25,6 +25,7 @@ export class HomeComponent implements AfterViewInit{
   @ViewChild('videoPlayer2') videoPlayer2!: ElementRef;
   @ViewChild('vidDiv') vidDiv!: ElementRef;
   @ViewChild('replayDiv') replayDiv!: ElementRef;
+  @ViewChild('allSigns') allSigns!: ElementRef;
   httpClient: HttpClient;
   translate: TranslateService;
   currentSign = '';
@@ -84,6 +85,7 @@ export class HomeComponent implements AfterViewInit{
   onButton(userInput: string){
     // When button pressed
     this.replayDiv.nativeElement.classList.add("beNone");
+    this.allSigns.nativeElement.classList.remove("fade");
     this.output = []; // List of words to be output
     this.playlist = []; // List of videos to be shown
     this.message = ' ';
@@ -170,6 +172,7 @@ export class HomeComponent implements AfterViewInit{
     this.currentSign=this.output[this.i];
     if(this.i + 1 > this.playlist.length){
       this.replayDiv.nativeElement.classList.remove("beNone");
+      this.allSigns.nativeElement.classList.add("fade");
       return
     }
     const inRange = this.i + 1 < this.playlist.length
