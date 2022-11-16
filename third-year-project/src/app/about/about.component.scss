@@ -173,6 +173,14 @@ h1 span:before{
 	90%{border-radius:25% 75% 70% 30% / 39% 50% 50% 61%}
 	100%{border-radius:66% 34% 33% 67% / 65% 73% 27% 35%}
 }
+.subHeading{
+  position:relative;
+  font-family:'Nunito', sans-serif;
+	font-size:1.5vw;
+  letter-spacing: 0.2vw;
+  top: -1vw;
+  color: #81d9c7;
+}
 // HEADING
 
 

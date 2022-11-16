@@ -253,6 +253,9 @@ input:focus{
   margin-left: 5%;
   display: grid;
   place-items: center;
+  overflow:hidden;
+  animation:blobs 15s ease-in-out infinite alternate;
+  border:1vw solid #c988e3;
 }
 .vidDiv video {
   grid-row: 1 / -1;
@@ -260,6 +263,11 @@ input:focus{
   width:40vw;
 }
 .frame {
+  font-family: 'Nunito', sans-serif;
+  letter-spacing: 0.1vw;
+  font-size:1.5vw;
+  color: white;
+  font-weight: 900;
   grid-row: 1 / -1;
   grid-column: 1 / -1;
   width:40vw;
@@ -267,10 +275,10 @@ input:focus{
   text-align: center;
   height:22.5vw;
   line-height: 22.5vw;
-  border:1vw solid #c988e3;
   border-radius: 1vw;
   background: radial-gradient(#cfc4bd, #7a6f6b);
   box-shadow: 0.5vw 0.5vw #acacac80;
+  animation:blobs 15s ease-in-out infinite alternate;
 }
 .replayDiv {
   grid-row: 1 / -1;
@@ -308,7 +316,8 @@ input:focus{
 	font-weight:700;
 	flex-flow:row wrap;
 	align-content:center;
-	justify-content:center
+	justify-content:center;
+  box-shadow: 0.5vw 0.5vw #acacac80;
 }
 .allSigns{
   font-family: 'Nunito', sans-serif;
