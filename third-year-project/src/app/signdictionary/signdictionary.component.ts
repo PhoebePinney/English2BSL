@@ -1,4 +1,4 @@
-import { Component, AfterViewInit  } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
@@ -11,7 +11,9 @@ export class SDComponent implements AfterViewInit{
   httpClient: HttpClient;
   listOfVideos: string[][] = [];
   availableWords: string[] = [];
+  letterGroups: string[][] = [[]];
   dontInclude = this.getDontInclude();
+  alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
 
   constructor(http: HttpClient, private router: Router) {
     this.httpClient = http;
@@ -40,6 +42,7 @@ export class SDComponent implements AfterViewInit{
       }
     }
     this.availableWords = this.availableWords.sort();
+    this.getLetterGroups();
   }
 
   gotoHome(){
@@ -55,5 +58,17 @@ export class SDComponent implements AfterViewInit{
   getDontInclude(){
     const DI = ['I', 'airplane', 'clothing', 'daddy', 'gran', 'grandfather', 'granny', 'grandmother', 'grandpa', 'hey', 'mummy', 'thanks', 'translation', 'uni'];
     return DI;
+  }
+
+  getLetterGroups(){
+    var count = 0;
+    for (let a in this.availableWords){
+      if (this.availableWords[a].charAt(0)!=this.letterGroups[count][0]){
+        count +=1;
+        this.letterGroups.push([])
+      }
+      this.letterGroups[count].push(this.availableWords[a]);
+    }
+    this.letterGroups.shift();
   }
 }

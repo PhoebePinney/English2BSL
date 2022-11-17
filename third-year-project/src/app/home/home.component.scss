@@ -174,17 +174,17 @@ h1 span:before{
 	100%{border-radius:66% 34% 33% 67% / 65% 73% 27% 35%}
 }
 @keyframes blobframe{
-	0%{border-radius:26% 24% 21% 29% / 24% 27% 23% 26%}
-	10%{border-radius:24% 26% 27% 23% / 28% 26% 24% 22%}
-	20%{border-radius:28% 22% 20% 20% / 27% 27% 23% 23%}
-	30%{border-radius:23% 27% 21% 23% / 28% 27% 23% 22%}
-	40%{border-radius:23% 27% 26% 24% / 25% 28% 22% 25%}
-	50%{border-radius:29% 21% 20% 20% / 21% 29% 21% 29%}
-	60%{border-radius:27% 23% 29% 21% / 23% 21% 29% 27%}
-	70%{border-radius:29% 21% 25% 25% / 24% 25% 25% 26%}
-	80%{border-radius:25% 25% 27% 23% / 28% 20% 20% 22%}
-	90%{border-radius:25% 25% 20% 20% / 29% 20% 20% 21%}
-	100%{border-radius:26% 24% 23% 27% / 25% 23% 27% 25%}
+	0%{border-radius:16% 34% 31% 19% / 24% 37% 13% 26%}
+	10%{border-radius:34% 16% 27% 23% / 28% 26% 24% 12%}
+	20%{border-radius:28% 22% 10% 30% / 17% 17% 33% 33%}
+	30%{border-radius:33% 17% 27% 23% / 18% 37% 13% 32%}
+	40%{border-radius:33% 17% 26% 24% / 15% 18% 32% 35%}
+	50%{border-radius:19% 31% 30% 10% / 31% 19% 31% 19%}
+	60%{border-radius:17% 33% 19% 21% / 33% 21% 29% 17%}
+	70%{border-radius:19% 31% 35% 15% / 34% 35% 15% 16%}
+	80%{border-radius:25% 25% 17% 23% / 18% 10% 30% 32%}
+	90%{border-radius:15% 35% 30% 10% / 19% 20% 20% 31%}
+	100%{border-radius:36% 14% 13% 37% / 35% 23% 17% 15%}
 }
 .subHeading{
   position:relative;
@@ -250,10 +250,16 @@ input:focus{
   top: 0.2vw;
   left: 0.2vw;
 }
+.enter-button:hover {
+  background: #865f96;
+}
 .replay-button:active {
   box-shadow: 0px 0px 0px 0px;
   top: 0.2vw;
   left: 0.2vw;
+}
+.replay-button:hover {
+  background: #7f7882
 }
 // BUTTONS
 
@@ -286,11 +292,9 @@ input:focus{
   text-align: center;
   height:22.5vw;
   line-height: 22.5vw;
-  outline: 2vw solid #837773;
   border-radius: 1vw;
   background: radial-gradient(#cfc4bd, #7a6f6b);
   box-shadow: 0.5vw 0.5vw #acacac80;
-  animation:blobframe 15s ease-in-out infinite alternate;
 }
 .replayDiv {
   grid-row: 1 / -1;

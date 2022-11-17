@@ -3,6 +3,9 @@ body {
   height: 100vh;
   text-align: center;
 }
+html {
+  scroll-behavior: smooth;
+}
 
 // NAV BAR
 .nav-container{
@@ -179,17 +182,17 @@ h1 span:before{
 	100%{border-radius:66% 34% 33% 67% / 65% 73% 27% 35%}
 }
 @keyframes blobframe{
-	0%{border-radius:26% 24% 21% 29% / 24% 27% 23% 26%}
-	10%{border-radius:24% 26% 27% 23% / 28% 26% 24% 22%}
-	20%{border-radius:28% 22% 20% 20% / 27% 27% 23% 23%}
-	30%{border-radius:23% 27% 21% 23% / 28% 27% 23% 22%}
-	40%{border-radius:23% 27% 26% 24% / 25% 28% 22% 25%}
-	50%{border-radius:29% 21% 20% 20% / 21% 29% 21% 29%}
-	60%{border-radius:27% 23% 29% 21% / 23% 21% 29% 27%}
-	70%{border-radius:29% 21% 25% 25% / 24% 25% 25% 26%}
-	80%{border-radius:25% 25% 27% 23% / 28% 20% 20% 22%}
-	90%{border-radius:25% 25% 20% 20% / 29% 20% 20% 21%}
-	100%{border-radius:26% 24% 23% 27% / 25% 23% 27% 25%}
+	0%{border-radius:16% 34% 31% 19% / 24% 37% 13% 26%}
+	10%{border-radius:34% 16% 27% 23% / 28% 26% 24% 12%}
+	20%{border-radius:28% 22% 10% 30% / 17% 17% 33% 33%}
+	30%{border-radius:33% 17% 27% 23% / 18% 37% 13% 32%}
+	40%{border-radius:33% 17% 26% 24% / 15% 18% 32% 35%}
+	50%{border-radius:19% 31% 30% 10% / 31% 19% 31% 19%}
+	60%{border-radius:17% 33% 19% 21% / 33% 21% 29% 17%}
+	70%{border-radius:19% 31% 35% 15% / 34% 35% 15% 16%}
+	80%{border-radius:25% 25% 17% 23% / 18% 10% 30% 32%}
+	90%{border-radius:15% 35% 30% 10% / 19% 20% 20% 31%}
+	100%{border-radius:36% 14% 13% 37% / 35% 23% 17% 15%}
 }
 .subHeading{
   position:relative;
@@ -211,18 +214,59 @@ video {
 // VIDEOS
 
 // WORDS
-.wordButtonDiv {
+.letterHeading {
   position: relative;
-  display:inline-block;
+  background: white;
+  color: #74eded;
+	width:100%;
+	height:1vh;
+	padding: 0 10px;
+  margin: 5vh;
+  padding-bottom: 1vw;
+	font-family:'Titan One',cursive;
+	font-size:3vw;
+	font-weight:700;
+  top: -2vh;
+}
+.wordButtonsDiv {
+  position: relative;
+  display: block;
   margin: 2vw 1vw;
   align-items: left;
-  text-align: left
+  text-align: left;
+}
+.alphabetList{
+  display: inline-block;
+  font-family:'Nunito', sans-serif;
+  font-size: 1.5vw;
+  color: #565656;
+  font-weight: 600;
+  background-color: #eaffff;
+}
+a:link {
+  text-decoration: none;
+  color: #565656;
+}
+a:visited {
+  text-decoration: none;
+  color: #565656;
+}
+a:hover {
+  color: #fcff55;
+  text-decoration: underline;
+  font-weight: 900;
+}
+.letterGroup{
+  display: inline-block;
+  align-items: left;
+  text-align: left;
 }
 // WORDS
 
 // BUTTONS
 .word-button {
   padding: 1vw 2vw;
+  margin: 1vw 1vw;
   font-weight: 700;
   animation:blobframe 15s ease-in-out infinite alternate;
   background: #ff94fa;
@@ -239,5 +283,11 @@ video {
   box-shadow: 0px 0px 0px 0px;
   top: 0.2vw;
   left: 0.2vw;
+}
+.word-button:hover {
+  background: #d178cd;
+}
+.letter {
+  background-color: #91ff91;
 }
 // BUTTONS
