@@ -39,8 +39,11 @@ export class TranslateService {
         if (availableWords.includes(listOfWords[w])){ // if available, push whole word
           out.push(listOfWords[w]);
         }
-        else if (availableWords.includes(lemmatizer(listOfWords[w]))){
+        else if (availableWords.includes(lemmatizer(listOfWords[w]))){ // check if lemmatising makes it available
           out.push(lemmatizer(listOfWords[w]));
+        }
+        else if (availableWords.includes(this.pluralize.singular(listOfWords[w]))){ // check if singularising makes it available
+          out.push(this.pluralize.singular(listOfWords[w]));
         }
         else{ // else split into letters and push letters
           const splitWord = listOfWords[w].split('');
@@ -79,6 +82,9 @@ export class TranslateService {
         positions.push([wordList[word], -1, 'T'])
       }
       else{
+        if (thisPOS.length<1){
+          thisPOS = 'NNP';
+        }
         positions.push([wordList[word], -1, thisPOS])
       }
     }
@@ -173,9 +179,9 @@ export class TranslateService {
     'NNP', 'NNS', 'NN', 'NNPS', // nouns
     'FW', // foreign words
     'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', // verbs
-    'RB', 'RBR', 'RBS', 'EX', 'MD', //adverbs, ex there, modals
+    'RB', 'RBR', 'RBS', 'EX', 'MD', // adverbs, ex there, modals
     'PRP', 'PRP$', // pronouns
-    'WDT', 'WP', 'wP$', 'WRB' //question words
+    'WDT', 'WP', 'wP$', 'WRB' // question words
     ];
     return order;
 
@@ -203,7 +209,7 @@ export class TranslateService {
   }
 
   getSW(){
-    const SW = ['of','so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'him', 'her', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'her', 'his', 'hers'];
+    const SW = ['of','so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'her', 'his', 'hers', 'would', 'could', 'should'];
     return SW;
   }
 

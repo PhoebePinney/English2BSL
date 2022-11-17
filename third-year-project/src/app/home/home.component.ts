@@ -93,68 +93,62 @@ export class HomeComponent implements AfterViewInit{
     this.out = '';
 
     // Check if input is valid
-    //userInput = userInput.replace("'", '');
-    userInput = this.contractions.expand(userInput);
-    const checkInput = new RegExp(/[^a-zA-Z0-9\s\.]/);
-    if (!checkInput.test(userInput)){
-      this.listOfWords = userInput.split(' '); // List of words the user entered
-      var filtered = this.listOfWords.filter(function(value, index, arr){ return value != "";}); // remove blank tokens
-      if (filtered.length ==0){ // if no words input
-        this.message = 'Please input a word or phase';
-        return;
-      }
-      this.output = this.translate.translate(filtered, this.availableWords) // return translated list of words
-      if (this.output.length < 1){
-        this.message = 'Invalid phrase';
-        return;
-      }
+    userInput = this.contractions.expand(userInput); // expand contractions
+    userInput = userInput.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()@\+\?><\[\]\+]/g, '');
+    this.listOfWords = userInput.split(' '); // List of words the user entered
+    var filtered = this.listOfWords.filter(function(value, index, arr){ return value != "";}); // remove blank tokens
+    if (filtered.length ==0){ // if no words input
+      this.message = 'Please input a word or phase';
+      return;
+    }
+    this.output = this.translate.translate(filtered, this.availableWords) // return translated list of words
+    if (this.output.length < 1){
+      this.message = 'Invalid phrase';
+      return;
+    }
 
-      for (const word in this.output){
-        for (const link in this.listOfVideos){
-          const possible = this.listOfVideos[link][1].split('_'); // all words for that video link
-          for (const p in possible){
-            if (this.output[word]===possible[p]){
-              this.playlist.push(this.listOfVideos[link][0]); // push link to playlist
-            }
+    for (const word in this.output){
+      for (const link in this.listOfVideos){
+        const possible = this.listOfVideos[link][1].split('_'); // all words for that video link
+        for (const p in possible){
+          if (this.output[word]===possible[p]){
+            this.playlist.push(this.listOfVideos[link][0]); // push link to playlist
           }
         }
       }
-      // Show video div and play first vid in playlist
-      var output = '';
-      for (let o in this.output){
-        if (this.output[o].length<2){
-          this.output[o] = this.output[o].toUpperCase();
-        }
-        if (this.output[o]=='nameme'){
-          this.output[o] = 'name (my)';
-        }
-        else if (this.output[o]=='thankyou'){
-          this.output[o] = 'thank you';
-        }
-        else if (this.output[o]=='dontknow'){
-          this.output[o] = "don't know";
-        }
-        else if (this.output[o]=='dontlike'){
-          this.output[o] = "don't like";
-        }
-        else if (this.output[o]=='howmuch'){
-          this.output[o] = "how much";
-        }
-        else if (this.output[o]=='howmold'){
-          this.output[o] = "how old";
-        }
-        else if (this.output[o]=='cant'){
-          this.output[o] = "can't";
-        }
-        output = output + this.output[o] + ' - ';
-      }
-      output = output.slice(0, -2);
-      this.out = '[ '+output+']';
-      this.playVid();
-    } else{
-      this.message = 'Invalid input';
-      this.output = [];
     }
+    // Show video div and play first vid in playlist
+    var output = '';
+    for (let o in this.output){
+      if (this.output[o].length<2){
+        this.output[o] = this.output[o].toUpperCase();
+      }
+      if (this.output[o]=='nameme'){
+        this.output[o] = 'name (my)';
+      }
+      else if (this.output[o]=='thankyou'){
+        this.output[o] = 'thank you';
+      }
+      else if (this.output[o]=='dontknow'){
+        this.output[o] = "don't know";
+      }
+      else if (this.output[o]=='dontlike'){
+        this.output[o] = "don't like";
+      }
+      else if (this.output[o]=='howmuch'){
+        this.output[o] = "how much";
+      }
+      else if (this.output[o]=='howmold'){
+        this.output[o] = "how old";
+      }
+      else if (this.output[o]=='cant'){
+        this.output[o] = "can't";
+      }
+      output = output + this.output[o] + ' - ';
+    }
+    output = output.slice(0, -2);
+    this.out = '[ '+output+']';
+    this.playVid();
   }
 
   playVid() {
