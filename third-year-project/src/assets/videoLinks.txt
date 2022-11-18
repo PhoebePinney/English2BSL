@@ -41,8 +41,8 @@
 ./assets/videos/cant.mp4,cant
 ./assets/videos/car.mp4,car
 ./assets/videos/cat.mp4,cat
-./assets/videos/child.mp4,child
-./assets/videos/children.mp4,children
+./assets/videos/child.mp4,child_kid
+./assets/videos/children.mp4,children_kids
 ./assets/videos/chocolate.mp4,chocolate
 ./assets/videos/clothes.mp4,clothes_clothing
 ./assets/videos/coffee.mp4,coffee

@@ -27,7 +27,7 @@
     <div class="blobs blobs_9"></div>
   </div>
 
-  <label class="subHeading">Here are all 274 words in this web-app's database of signs!</label>
+  <label class="subHeading">Here are all 273 words in this web-app's database of signs!</label>
   <br><br><br>
 
   <div class="alphabetList" *ngFor="let letter of alphabet">
@@ -38,7 +38,8 @@
   <br><br>
 
   <div class="wordButtonzDiv" *ngFor="let l of letterGroups">
-    <div id="{{l[0]}}" style="margin: 4vh; width: 100%; height: 1vh; border-bottom: 1vh solid rgb(209, 209, 209); text-align: center">
+    <div id="{{l[0]}}"><br></div>
+    <div  style="margin: 4vh; width: 100%; height: 1vh; border-bottom: 1vh solid rgb(209, 209, 209); text-align: center">
       <span class="letterHeading">
         {{l[0]}}
       </span>

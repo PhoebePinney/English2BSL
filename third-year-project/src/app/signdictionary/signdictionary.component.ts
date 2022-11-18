@@ -56,7 +56,7 @@ export class SDComponent implements AfterViewInit{
   }
 
   getDontInclude(){
-    const DI = ['I', 'airplane', 'clothing', 'daddy', 'gran', 'grandfather', 'granny', 'grandmother', 'grandpa', 'hey', 'mummy', 'thanks', 'translation', 'uni'];
+    const DI = ['dontlike', 'I', 'airplane', 'clothing', 'daddy', 'gran', 'grandfather', 'granny', 'grandmother', 'grandpa', 'hey', 'mummy', 'thanks', 'translation', 'uni'];
     return DI;
   }
 

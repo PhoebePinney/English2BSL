@@ -69,7 +69,9 @@ cant
 able
 cat
 child
+kid
 children
+kids
 car
 cold
 chilly

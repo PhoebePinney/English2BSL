@@ -20,6 +20,9 @@ export class TranslateService {
     var out: string[] = []; // temp
     var s = '';
     for (let w in listOfWords){
+      if (listOfWords[w]=='i'){
+        listOfWords[w]='I';
+      }
       if (listOfWords[w] != 'I'){ // retain I as a possesive pronoun
         listOfWords[w] = listOfWords[w].toLowerCase(); // set to lowercase
       }
