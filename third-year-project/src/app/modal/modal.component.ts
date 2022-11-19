@@ -10,9 +10,11 @@ export class ModalComponent {
   @ViewChild('myModal', { static: false })
   modal!: ElementRef;
   word: string = '';
+  videoLink: string = '';
 
-  open(word: string) {
+  open(videoLink: string, word: string) {
     this.word = word;
+    this.videoLink = videoLink;
     this.modal.nativeElement.style.display = 'block';
   }
 

@@ -23,7 +23,16 @@ export class SDComponent implements AfterViewInit{
   }
 
   openModal(word: string) {
-    this.modal.open(word);
+    var videoLink = '';
+    for (const link in this.listOfVideos){
+      const possible = this.listOfVideos[link][1].split('_');
+      for (const p in possible){
+        if (word.toLowerCase()===possible[p]){
+          videoLink = this.listOfVideos[link][0];
+        }
+      }
+    }
+    this.modal.open(videoLink, word);
   }
 
   ngAfterViewInit(): void {
