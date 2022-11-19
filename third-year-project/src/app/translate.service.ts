@@ -153,6 +153,7 @@ export class TranslateService {
           }
         }
       }
+      console.log(thesePositions)
       allOrdered = allOrdered.concat(this.orderFromPositions(thesePositions));
       if (conjunctions.length>0){
         allOrdered.push(conjunctions[0]);

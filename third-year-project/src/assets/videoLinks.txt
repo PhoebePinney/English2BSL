@@ -46,7 +46,7 @@
 ./assets/videos/chocolate.mp4,chocolate
 ./assets/videos/clothes.mp4,clothes_clothing
 ./assets/videos/coffee.mp4,coffee
-./assets/videos/cold.mp4,cold_chilly_freeze
+./assets/videos/cold.mp4,cold_chilly_freezing
 ./assets/videos/come.mp4,come
 ./assets/videos/computer.mp4,computer_type
 ./assets/videos/d.mp4,d

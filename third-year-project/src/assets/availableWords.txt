@@ -75,7 +75,7 @@ kids
 car
 cold
 chilly
-freeze
+freezing
 clothes
 clothing
 coffee
