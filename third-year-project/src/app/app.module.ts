@@ -10,6 +10,7 @@ import { TranslateService } from './translate.service';
 import { AboutComponent } from './about/about.component';
 import { SDComponent } from './signdictionary/signdictionary.component';
 import { AcknowledgmentsComponent } from './acknowledgments/acknowledgments.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { AcknowledgmentsComponent } from './acknowledgments/acknowledgments.comp
     HomeComponent,
     AboutComponent,
     SDComponent,
-    AcknowledgmentsComponent
+    AcknowledgmentsComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,

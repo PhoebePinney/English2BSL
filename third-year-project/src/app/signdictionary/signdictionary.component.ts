@@ -1,6 +1,7 @@
 import { Component, AfterViewInit, ViewChild, ElementRef  } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { ModalComponent } from '../modal/modal.component';
 
 @Component({
   selector: 'app-signdictionary',
@@ -14,9 +15,15 @@ export class SDComponent implements AfterViewInit{
   letterGroups: string[][] = [[]];
   dontInclude = this.getDontInclude();
   alphabet = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+  @ViewChild('modal', { static: false })
+  modal: ModalComponent = new ModalComponent;
 
   constructor(http: HttpClient, private router: Router) {
     this.httpClient = http;
+  }
+
+  openModal(word: string) {
+    this.modal.open(word);
   }
 
   ngAfterViewInit(): void {

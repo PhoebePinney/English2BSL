@@ -1,0 +1,13 @@
+<div #myModal class="container">
+  <div class="content">
+    <p>{{word}}</p>
+    <video
+      src="./assets/videos/{{word.toLowerCase()}}.mp4"
+      width=500vw;
+      [muted]="'muted'"
+      autoplay
+      playsinline>
+    </video>
+    <button (click)="close()">Close</button>
+  </div>
+</div>

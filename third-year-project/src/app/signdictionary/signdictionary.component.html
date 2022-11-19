@@ -35,6 +35,8 @@
     &nbsp;&nbsp;
   </div>
 
+  <app-modal #modal></app-modal>
+
   <br><br>
 
   <div class="wordButtonzDiv" *ngFor="let l of letterGroups">
@@ -46,10 +48,10 @@
     </div>
     <div class="letterGroup" *ngFor="let word of l">
       <div *ngIf="word.length<2">
-        <button class="word-button letter">{{word}}</button>
+        <button (click)="openModal(word)" class="word-button letter">{{word}}</button>
       </div>
       <div *ngIf="word.length>1">
-        <button class="word-button">{{word}}</button>
+        <button (click)="openModal(word)" class="word-button">{{word}}</button>
       </div>
     </div>
   </div>
