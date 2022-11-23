@@ -94,7 +94,7 @@ export class HomeComponent implements AfterViewInit{
 
     // Check if input is valid
     userInput = this.contractions.expand(userInput); // expand contractions
-    userInput = userInput.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');
+    userInput = userInput.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');
     this.listOfWords = userInput.split(' '); // List of words the user entered
     var filtered = this.listOfWords.filter(function(value, index, arr){ return value != "";}); // remove blank tokens
     if (filtered.length == 0){ // if no words input

@@ -19,6 +19,17 @@ export class TranslateService {
   translate(listOfWords: string[], availableWords: string[]) {
     var out: string[] = []; // temp
     var s = '';
+    var temp = [];
+    for (let w in listOfWords){
+      if (listOfWords[w].includes(',')){
+        temp.push(listOfWords[w].replace(',',''));
+        temp.push(',');
+      }
+      else{
+        temp.push(listOfWords[w]);
+      }
+    }
+    listOfWords = temp;
     for (let w in listOfWords){
       if (listOfWords[w]=='i'){
         listOfWords[w]='I';
@@ -38,8 +49,8 @@ export class TranslateService {
     }
     listOfWords = this.getOrder(s.split(' '));
     for (let w in listOfWords){
-      if (listOfWords[w]!='I'){
-        if (availableWords.includes(listOfWords[w])){ // if available, push whole word
+      if (listOfWords[w]!='I' && listOfWords[w]!=','){
+        if (availableWords.includes(listOfWords[w]) || listOfWords[w]==','){ // if available, push whole word
           out.push(listOfWords[w]);
         }
         else if (availableWords.includes(lemmatizer(listOfWords[w]))){ // check if lemmatising makes it available
@@ -81,6 +92,9 @@ export class TranslateService {
       else if (wordList[word]=='like'){
         positions.push([wordList[word], -1, 'VB'])
       }
+      // else if (wordList[word]=='out'){
+      //   positions.push([wordList[word], -1, 'JJ'])
+      // }
       else if (this.temporalWords.includes(wordList[word])){
         positions.push([wordList[word], -1, 'T'])
       }
@@ -122,12 +136,13 @@ export class TranslateService {
   }
 
   assignPositions(wordList: string[], wordListString: string, positions: any[][]){
-    var conjunctions = []; // subordinating & coordinating conjunctions
+    var conjunctions = []; // coordinating conjunctions
     var splitUp: any[][] = [[]];
     var allOrdered: any[] = [];
     var c = 0;
     for (let p in positions){
-      if (positions[p][2]=='IN' || positions[p][2]=='CC'){
+      // if (positions[p][2]=='IN' || positions[p][2]=='CC'){
+      if (positions[p][2]=='CC' || positions[p][0]==','){
         conjunctions.push(positions[p][0]);
         c +=1;
         splitUp.push([]);
@@ -178,7 +193,7 @@ export class TranslateService {
 
   getBSLOrder(){
     var order = ['UH', // interjections
-    'T', // temporal words
+    'T', 'IN', // temporal words
     'JJ', 'JJR', 'JJS', 'CD', 'PDT', 'DT', // adjectives, numbers, determiners
     'NNP', 'NNS', 'NN', 'NNPS', // nouns
     'FW', // foreign words
