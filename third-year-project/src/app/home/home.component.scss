@@ -345,3 +345,44 @@ input:focus{
   color: #56565675;
 }
 // TEXT OUTPUT
+
+// TOOLTIP
+.tooltip {
+  position: absolute;
+  left: 46vw;
+  top: 90vh;
+  font-size: 2.5vw;
+  font-family: 'Nunito', sans-serif;
+  color: #7f7882;
+}
+.tooltip .tooltiptext {
+  font-size: 1.5vw;
+  visibility: hidden;
+  width: 20vw;
+  background-color: #865f96;
+  color: #fff;
+  text-align: center;
+  border-radius: 1vw;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -10vw;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+// TOOLTIP
