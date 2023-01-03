@@ -53,7 +53,7 @@ export class TranslateService {
         if (availableWords.includes(listOfWords[w]) || listOfWords[w]==','){ // if available, push whole word
           out.push(listOfWords[w]);
         }
-        else if (availableWords.includes(lemmatizer(listOfWords[w]))){ // check if lemmatising makes it available
+        else if (availableWords.includes(lemmatizer(listOfWords[w])) && (lemmatizer(listOfWords[w]).length>1)){ // check if lemmatising makes it available
           out.push(lemmatizer(listOfWords[w]));
         }
         else if (availableWords.includes(this.pluralize.singular(listOfWords[w]))){ // check if singularising makes it available
@@ -173,7 +173,7 @@ export class TranslateService {
           }
         }
       }
-      console.log(thesePositions)
+      //console.log(thesePositions)
       allOrdered = allOrdered.concat(this.orderFromPositions(thesePositions));
       if (conjunctions.length>0){
         allOrdered.push(conjunctions[0]);

@@ -115,12 +115,11 @@ export class HomeComponent implements AfterViewInit{
 
   runTest(){
     // RUN TEST
-    // for (let s in this.testSentences){
-    //   console.log(s)
-    // }
-    for (let i = 0; i <= (this.testSentences.length); i++){
+    var correct = [];
+    var correctNum = 0;
+    var incorrect = [];
+    for (let i = 0; i <= (this.testSentences.length)-1; i++){
       console.log(i)
-      console.log(this.testSentences[i])
       var sentence = this.contractions.expand(this.testSentences[i]); // expand contractions
       sentence = sentence.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');
       var sentenceWords: string[] = sentence.split(' '); // List of words the user entered
@@ -130,10 +129,20 @@ export class HomeComponent implements AfterViewInit{
       for (let w in output){
         outputString = outputString + output[w] + ' '
       }
+      outputString = outputString.slice(0, -1);
       console.log(sentence)
-      console.log(outputString)
-      console.log(this.testSentencesTruth[i])
+      console.log("given---", outputString)
+      console.log("true---", this.testSentencesTruth[i])
+      if (outputString==this.testSentencesTruth[i]){
+        correct.push(outputString);
+        correctNum +=1;
+      }
+      else{
+        incorrect.push([outputString,this.testSentencesTruth[i]]);
+      }
     }
+    console.log(correctNum, correctNum/150)
+    console.log(incorrect)
   }
 
   onButton(userInput: string){
