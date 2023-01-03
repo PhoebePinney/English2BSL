@@ -16,7 +16,7 @@ export class TranslateService {
 
   constructor() { }
 
-  translate(listOfWords: string[], availableWords: string[]) {
+  translate(listOfWords: string[], availableWords: string[], testMode=false) {
     var out: string[] = []; // temp
     var s = '';
     var temp = [];
@@ -60,9 +60,14 @@ export class TranslateService {
           out.push(this.pluralize.singular(listOfWords[w]));
         }
         else{ // else split into letters and push letters
-          const splitWord = listOfWords[w].split('');
-          for (const l in splitWord){
-            out.push(splitWord[l]);
+          if (testMode==true){
+            out.push(listOfWords[w])
+          }
+          else{
+            const splitWord = listOfWords[w].split('');
+            for (const l in splitWord){
+              out.push(splitWord[l]);
+            }
           }
         }
       }
@@ -228,7 +233,7 @@ export class TranslateService {
   }
 
   getSW(){
-    const SW = ['of','so','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'her', 'his', 'hers', 'would', 'could', 'should'];
+    const SW = ['of','so','also','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'her', 'his', 'hers', 'would', 'could', 'should'];
     return SW;
   }
 

@@ -29,7 +29,8 @@ export class HomeComponent implements AfterViewInit{
   httpClient: HttpClient;
   translate: TranslateService;
   currentSign = '';
-
+  testSentences: string[] = [];
+  testSentencesTruth: string[] = [];
 
   constructor(http: HttpClient, translate: TranslateService, private router: Router) {
     this.httpClient = http;
@@ -53,6 +54,12 @@ export class HomeComponent implements AfterViewInit{
     // Get list of available words
     this.httpClient.get('./assets/availableWords.txt', { responseType: 'text' })
       .subscribe(wordsTextFile => this.getAvailableWords(wordsTextFile));
+
+    // TESTING
+    this.httpClient.get('./assets/testData.txt', { responseType: 'text' })
+      .subscribe(testData => this.getTestData(testData));
+    this.httpClient.get('./assets/testDataTruth.txt', { responseType: 'text' })
+      .subscribe(testDataTruth => this.getTestDataTruth(testDataTruth));
   }
 
   getVidList(textFile: string){
@@ -77,12 +84,60 @@ export class HomeComponent implements AfterViewInit{
     }
   }
 
+  getTestData(textFile: string){
+    // Creates a list of sentences from the testData text file
+    let lines = textFile.split('\n');
+    for (const l in lines){
+      lines[l] = lines[l].replace('\r','');
+    }
+    const pop = lines.pop();
+    for (const l in lines){
+      this.testSentences.push(lines[l]);
+    }
+  }
+
+  getTestDataTruth(textFile: string){
+    // Creates a list of sentences from the testData text file
+    let lines = textFile.split('\n');
+    for (const l in lines){
+      lines[l] = lines[l].replace('\r','');
+    }
+    const pop = lines.pop();
+    for (const l in lines){
+      this.testSentencesTruth.push(lines[l]);
+    }
+  }
+
   updateChar(){
     var inputValue = this.box.nativeElement.value;
     this.char = inputValue.length;
   }
 
+  runTest(){
+    // RUN TEST
+    // for (let s in this.testSentences){
+    //   console.log(s)
+    // }
+    for (let i = 0; i <= (this.testSentences.length); i++){
+      console.log(i)
+      console.log(this.testSentences[i])
+      var sentence = this.contractions.expand(this.testSentences[i]); // expand contractions
+      sentence = sentence.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');
+      var sentenceWords: string[] = sentence.split(' '); // List of words the user entered
+      var filteredSentence = sentenceWords.filter(function(value, index, arr){ return value != "";})
+      var output = this.translate.translate(filteredSentence, this.availableWords, true)
+      var outputString = '';
+      for (let w in output){
+        outputString = outputString + output[w] + ' '
+      }
+      console.log(sentence)
+      console.log(outputString)
+      console.log(this.testSentencesTruth[i])
+    }
+  }
+
   onButton(userInput: string){
+    this.runTest();
     // When button pressed
     this.replayDiv.nativeElement.classList.add("beNone");
     this.allSigns.nativeElement.classList.remove("fade");
