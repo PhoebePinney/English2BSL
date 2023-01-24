@@ -119,7 +119,7 @@ export class HomeComponent implements AfterViewInit{
     var correct = [];
     var correctNum = 0;
     var incorrect = [];
-    for (let i = 0; i <= 75; i++){
+    for (let i = 75; i < 150; i++){
       console.log(i)
       var sentence = this.contractions.expand(this.testSentences[i]); // expand contractions
       sentence = sentence.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');

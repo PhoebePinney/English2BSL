@@ -56,7 +56,7 @@ export class TranslateService {
         else if (availableWords.includes(lemmatizer(listOfWords[w])) && (lemmatizer(listOfWords[w]).length>1)){ // check if lemmatising makes it available
           out.push(lemmatizer(listOfWords[w]));
         }
-        else if (availableWords.includes(this.pluralize.singular(listOfWords[w]))){ // check if singularising makes it available
+        else if (availableWords.includes(this.pluralize.singular(listOfWords[w])) && this.pluralize.singular(listOfWords[w])!='i'){ // check if singularising makes it available
           out.push(this.pluralize.singular(listOfWords[w]));
         }
         else{ // else split into letters and push letters
@@ -99,6 +99,12 @@ export class TranslateService {
         positions.push([wordList[word], -1, 'VB'])
       }
       else if (wordList[word]=='if'){
+        positions.push([wordList[word], -1, 'CC'])
+      }
+      else if (wordList[word]=='out'){
+        positions.push([wordList[word], -1, 'RB'])
+      }
+      else if (wordList[word]=='after'){
         positions.push([wordList[word], -1, 'CC'])
       }
       else if (this.temporalWords.includes(wordList[word])){
@@ -147,7 +153,6 @@ export class TranslateService {
     var allOrdered: any[] = [];
     var c = 0;
     for (let p in positions){
-      // if (positions[p][2]=='IN' || positions[p][2]=='CC'){
       if (positions[p][2]=='CC' || positions[p][0]==','){
         conjunctions.push(positions[p][0]);
         c +=1;
@@ -166,15 +171,17 @@ export class TranslateService {
       }
       next +=1;
       var availablePositions = [...Array(splitUp[part].length).keys()];
-      for (let tag in this.orderBSL){
-        for (let each in thesePositions){
-          if (thesePositions[each][2]==this.orderBSL[tag]){
-            thesePositions[each][1]=availablePositions[0];
-            availablePositions.shift();
+      for (var tagSet = 0; tagSet <=this.orderBSL.length; tagSet++){
+        for (let tag in this.orderBSL[tagSet]){
+          for (let each in thesePositions){
+            if (thesePositions[each][2]==this.orderBSL[tagSet][tag]){
+              thesePositions[each][1]=availablePositions[0];
+              availablePositions.shift();
+            }
           }
         }
       }
-      //console.log(thesePositions)
+      console.log(thesePositions)
       allOrdered = allOrdered.concat(this.orderFromPositions(thesePositions));
       if (conjunctions.length>0){
         allOrdered.push(conjunctions[0]);
@@ -198,15 +205,17 @@ export class TranslateService {
   }
 
   getBSLOrder(){
-    var order = ['UH', // interjections
-    'T', 'IN', // temporal words
-    'JJ', 'JJR', 'JJS', 'CD', 'PDT', 'DT', // adjectives, numbers, determiners
-    'NNP', 'NNS', 'NN', 'NNPS', // nouns
-    'FW', // foreign words
-    'VB', 'VBD', 'VBG', 'VBN', 'VBP', 'VBZ', // verbs
-    'RB', 'RBR', 'RBS', 'EX', 'MD', // adverbs, ex there, modals
-    'PRP', 'PRP$', // pronouns
-    'WDT', 'WP', 'wP$', 'WRB' // question words
+    var order = [['UH'], // interjections
+    ['T'], // temporal words
+    ['IN'],  //  prepositions
+    ['DT'], // determiners
+    ['JJ', 'JJR', 'JJS', 'CD', 'PDT'],  // adjectives, numbers
+    ['NN', 'NNP', 'NNS', 'NNPS'], // nouns
+    ['FW'], // foreign words
+    ['VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'VB'], // verbs
+    ['RB', 'RBR', 'RBS', 'EX', 'MD'], // adverbs, ex there, modals
+    ['PRP', 'PRP$'], // pronouns
+    ['WDT', 'WP', 'wP$', 'WRB'] // question words
     ];
     return order;
 
@@ -234,7 +243,7 @@ export class TranslateService {
   }
 
   getSW(){
-    const SW = ['as','of','so','also','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'himself', 'herself', 'her', 'his', 'hers', 'would', 'could', 'should'];
+    const SW = ['as','of','so','also','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'himself', 'herself', 'her', 'his', 'hers', 'would', 'could', 'should', 'we', 'us'];
     return SW;
   }
 
