@@ -26,7 +26,7 @@ export class HomeComponent implements AfterViewInit{
   @ViewChild('vidDiv') vidDiv!: ElementRef;
   @ViewChild('replayDiv') replayDiv!: ElementRef;
   @ViewChild('allSigns') allSigns!: ElementRef;
-  @ViewChild('tooltip') tooltip!: ElementRef;
+  @ViewChild('currentSignP') currentSignP!: ElementRef;
   httpClient: HttpClient;
   translate: TranslateService;
   currentSign = '';
@@ -147,12 +147,13 @@ export class HomeComponent implements AfterViewInit{
   }
 
   onButton(userInput: string){
-    this.runTest();
+    // this.runTest();
     // When button pressed
     this.replayDiv.nativeElement.classList.add("beNone");
     this.allSigns.nativeElement.classList.remove("fade");
+    this.allSigns.nativeElement.classList.remove("beNone");
+    this.currentSignP.nativeElement.classList.remove("beNone");
     this.vidDiv.nativeElement.classList.remove("moveToMiddle");
-    this.tooltip.nativeElement.classList.remove("beNone");
     this.output = []; // List of words to be output
     this.playlist = []; // List of videos to be shown
     this.message = ' ';
@@ -167,7 +168,8 @@ export class HomeComponent implements AfterViewInit{
     if (filtered.length == 0){ // if no words input
       this.message = 'Invalid phrase';
       this.vidDiv.nativeElement.classList.add("moveToMiddle");
-      this.tooltip.nativeElement.classList.add("beNone");
+      this.allSigns.nativeElement.classList.add("beNone");
+      this.currentSignP.nativeElement.classList.add("beNone");
       this.videoPlayer.nativeElement.setAttribute("src", "");
       this.videoPlayer2.nativeElement.setAttribute("src", "");
       return;
@@ -175,6 +177,9 @@ export class HomeComponent implements AfterViewInit{
     this.output = this.translate.translate(filtered, this.availableWords) // return translated list of words
     if (this.output.length < 1){
       this.message = 'Invalid phrase';
+      this.vidDiv.nativeElement.classList.add("moveToMiddle");
+      this.allSigns.nativeElement.classList.add("beNone");
+      this.currentSignP.nativeElement.classList.add("beNone");
       this.videoPlayer.nativeElement.setAttribute("src", "");
       this.videoPlayer2.nativeElement.setAttribute("src", "");
       return;

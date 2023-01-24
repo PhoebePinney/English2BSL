@@ -4,7 +4,7 @@
 
 <body>
   <div class="nav-container">
-  <nav>
+    <nav>
       <a>Translation Tool</a>
       <a (click)="gotoAbout()">About</a>
       <a (click)="gotoSD()">Sign Dictionary</a>
@@ -14,60 +14,50 @@
   </div>
 
   <div class="heading-container">
-    <h1><span>English to BSL Translation Tool</span></h1>
-    <div class="blobs blobs_1"></div>
-    <div class="blobs blobs_2"></div>
-    <div class="blobs blobs_3"></div>
-    <div class="blobs blobs_4"></div>
-    <div class="blobs blobs_5"></div>
-    <div class="blobs blobs_6"></div>
-    <div class="blobs blobs_7"></div>
-    <div class="blobs blobs_8"></div>
-    <div class="blobs blobs_9"></div>
+    <h1><span>ENGLISH TO BSL TRANSLATION TOOL</span></h1>
   </div>
 
   <label class="subHeading">Translate written English into a video of British Sign Language!</label>
-  <br><br>
 
-  <div style="text-align:center;">
-    <label class="inputLabel">Enter a sentence:</label>&nbsp;
-    <input #box maxlength="45" size="40"(keyup)="updateChar()">&nbsp;<label class="inputLabel" style="color: grey; font-size: 1vw;">{{char}}/45</label>
-    &nbsp;&nbsp;
+  <div class="inputSection">
+    <label class="inputLabel">Enter a sentence:</label>
+    <input #box class="sentenceInput" maxlength="45" size="40" (keyup)="updateChar()">
+    <label class="inputLabel chars">{{char}}/45</label>
     <button class="enter-button" (click)="onButton(box.value)">Translate!</button>
-    <br>
-    <label class="inputLabel" style="color: grey; font-size: 1vw;">{{message}}</label>
-  </div>
-
-  <div class="vidDiv moveToMiddle" #vidDiv>
-    <div class = "frame">VIDEO WILL APPEAR HERE</div>
-    <video #videoPlayer2
-      class="beNone"
-      (ended)="endOfVid()"
-      [muted]="'muted'"
-      playsinline
-      id="videoPlayer">
-    </video>
-    <video #videoPlayer
-      class="beNone"
-      (ended)="endOfVid()"
-      [muted]="'muted'"
-      playsinline
-      id="videoPlayer">
-    </video>
-    <div class="replayDiv beNone" #replayDiv>
-      <div class = "cloudy"><button class="replay-button" (click)="onButton(box.value)">REPLAY</button></div>
+    <div #tooltip class="tooltip">
+      &#9432;
+      <span class="tooltiptext">Words that are not in the sign dictionary will be spelt out letter-by-letter!</span>
     </div>
   </div>
 
-  <div #tooltip class="tooltip beNone">
-    &#9432;
-    <span class="tooltiptext">Words that are not in the sign dictionary will be spelt out letter-by-letter!</span>
-  </div>
+  <label class="inputLabel errMsg">{{message}}</label><br>
 
-  <div>
-    <label class="currentSignLabel">{{currentSign}}</label>
-    <br>
-    <label #allSigns class="allSigns">{{out}}</label>
+  <div class="videoWrapper">
+    <div class="vidDiv moveToMiddle" #vidDiv>
+      <div class="frame">VIDEO WILL APPEAR HERE</div>
+      <video #videoPlayer2
+        class="beNone"
+        (ended)="endOfVid()"
+        [muted]="'muted'"
+        playsinline
+        id="videoPlayer">
+      </video>
+      <video #videoPlayer
+        class="beNone"
+        (ended)="endOfVid()"
+        [muted]="'muted'"
+        playsinline
+        id="videoPlayer">
+      </video>
+      <div class="replayDiv beNone" #replayDiv>
+        <button class="replay-button" (click)="onButton(box.value)">REPLAY</button>
+      </div>
+    </div>
+
+    <div class="outputTextDiv">
+      <p #currentSignP class="currentSignLabel">{{currentSign}}</p>
+      <p #allSigns class="allSigns">{{out}}</p>
+    </div>
   </div>
 
 </body>

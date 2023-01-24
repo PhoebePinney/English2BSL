@@ -13,11 +13,11 @@ body {
 }
 nav {
 	position: relative;
-	background-color: #d7d7d7;
+	background-color: #baced7;
 }
 nav a {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 500;
+  font-family: 'Didact Gothic', sans-serif;
+  font-weight: 1000;
 	line-height: 5vh;;
 	font-size: 1.5vw;
 	display: inline-block;
@@ -26,7 +26,7 @@ nav a {
 	text-decoration: none;
 	text-transform: uppercase;
 	text-align: center;
-	color: white;
+	color: #f0ebf4;
 	cursor: pointer;
 }
 nav .animation {
@@ -52,197 +52,135 @@ a:nth-child(4) {
 nav .start-home, a:nth-child(1):hover~.animation {
 	width: 25%;
 	left: 0;
-	background-color: #c988e3;
+	background-color: #a1c3d1;
 }
 nav .start-about, a:nth-child(2):hover~.animation {
 	width: 25%;
 	left: 25%;
-	background-color: #9fe6d8;
+	background-color: #b39bc8;
 }
 nav .start-signdictionary, a:nth-child(3):hover~.animation {
 	width: 25%;
 	left: 50%;
-	background-color: #ff94fa;
+	background-color: #f172a1;
 }
 nav .start-acknowledgments, a:nth-child(4):hover~.animation {
 	width: 25%;
 	left: 75%;
-	background-color: #ff965d;
+	background-color: #e64398;
 }
 // NAV BAR
 
+@keyframes morph {
+  0% {
+			border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
+			background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+	}
+	50% {
+			border-radius:  30% 50% 60% 40% / 40% 50% 30% 50%;
+			background: linear-gradient(45deg, var(--third) 0%, var(--secondary) 100%);
+	}
+	100% {
+		border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
+		background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+	}
+}
+
 // HEADING
-@import url('https://fonts.googleapis.com/css?family=Titan+One');
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Didact Gothic');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 .heading-container{
   display: block;
   position: sticky;
 	width:100%;
 	height:15%;
 }
-h1{
-  background: white;
-	width:100%;
+h1 {
+  color: #f0ebf4;
+  font-family:'Oswald';
+  width:100%;
 	height:100%;
 	margin:0;
 	padding:0;
 	display:flex;
-	font-family:'Titan One',cursive;
-	font-size:5vw;
-	font-weight:700;
+  font-size:5vw;
+	font-weight:1000;
 	flex-flow:row wrap;
 	align-content:center;
-	justify-content:center
-}
-h1 span{
-  width:100%;
-  position:relative;
-}
-h1 span:before{
-	background:linear-gradient(45deg,#c988e3,#81d9c7);
-	width:100%;
-	height:100%;
-	display:block;
-	position:absolute;
-	content:"";
-	mix-blend-mode:screen
-}
-.blobs {
-  display: block;
-  position: absolute;
-  width:5%;
-	height:50%;
-  mix-blend-mode:color;
-  animation:blobs 15s ease-in-out infinite alternate;
-}
-.blobs_1{
-	background:#ff1493;
-	top:10%;
-	left:10%;
-}
-.blobs_2{
-	background:#ff4500;
-	top:40%;
-	left:20%;
-}
-.blobs_3{
-	background:#91ff91;
-	top:10%;
-	left:30%;
-}
-.blobs_4{
-	background:#ff0000;
-	top:40%;
-	left:40%;
-}
-.blobs_5{
-	background:#ffff00;
-	top:10%;
-	left:50%;
-}
-.blobs_6{
-	background:#65fefe;
-	top:40%;
-	left:60%;
-}
-.blobs_7{
-	background:#ff8c00;
-	top:10%;
-	left:70%;
-}
-.blobs_8{
-	background:#91ff91;
-	top:40%;
-	left:80%;
-}
-.blobs_9{
-	background:#ff91e2;
-	top:10%;
-	left:90%;
-}
-@keyframes blobs{
-	0%{border-radius:26% 74% 61% 39% / 54% 67% 33% 46%}
-	10%{border-radius:74% 26% 47% 53% / 68% 46% 54% 32%}
-	20%{border-radius:48% 52% 30% 70% / 27% 37% 63% 73%}
-	30%{border-radius:73% 27% 57% 43% / 28% 67% 33% 72%}
-	40%{border-radius:63% 37% 56% 44% / 25% 28% 72% 75%}
-	50%{border-radius:39% 61% 70% 30% / 61% 29% 71% 39%}
-	60%{border-radius:27% 73% 29% 71% / 73% 51% 49% 27%}
-	70%{border-radius:39% 61% 65% 35% / 74% 65% 35% 26%}
-	80%{border-radius:55% 45% 37% 63% / 38% 30% 70% 62%}
-	90%{border-radius:25% 75% 70% 30% / 39% 50% 50% 61%}
-	100%{border-radius:66% 34% 33% 67% / 65% 73% 27% 35%}
-}
-@keyframes blobframe{
-	0%{border-radius:16% 34% 31% 19% / 24% 37% 13% 26%}
-	10%{border-radius:34% 16% 27% 23% / 28% 26% 24% 12%}
-	20%{border-radius:28% 22% 10% 30% / 17% 17% 33% 33%}
-	30%{border-radius:33% 17% 27% 23% / 18% 37% 13% 32%}
-	40%{border-radius:33% 17% 26% 24% / 15% 18% 32% 35%}
-	50%{border-radius:19% 31% 30% 10% / 31% 19% 31% 19%}
-	60%{border-radius:17% 33% 19% 21% / 33% 21% 29% 17%}
-	70%{border-radius:19% 31% 35% 15% / 34% 35% 15% 16%}
-	80%{border-radius:25% 25% 17% 23% / 18% 10% 30% 32%}
-	90%{border-radius:15% 35% 30% 10% / 19% 20% 20% 31%}
-	100%{border-radius:36% 14% 13% 37% / 35% 23% 17% 15%}
+	justify-content:center;
 }
 .subHeading{
   position:relative;
-  font-family:'Nunito', sans-serif;
+  font-family:'Didact Gothic', sans-serif;
 	font-size:1.5vw;
+  font-weight: 1000;
   letter-spacing: 0.2vw;
   top: -0.5vw;
-  color: #c988e3;
+  color: #f0ebf4;
 }
 // HEADING
 
 // INPUT
-input{
-  font-family: 'Nunito', sans-serif;
+.inputSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.sentenceInput{
+  font-weight: 1000;
+  font-family: 'Didact Gothic', sans-serif;
   letter-spacing: 0.1vw;
   font-size:1.5vw;
-  color: #565656;
+  color: #b39bc8;
+  border-radius: 10%;
+  background-color: #f0ebf4;
 }
 .inputLabel{
-  font-family: 'Nunito', sans-serif;
+  font-weight: 1000;
+  font-family: 'Didact Gothic', sans-serif;
   letter-spacing: 0.1vw;
   font-size:1.5vw;
-  color: #565656;
+  color: #f0ebf4;
   border: 1px solid #ffffff00;
+}
+.chars, .errMsg {
+  font-weight: 1000;
+  color: #f0ebf4;
+  font-size: 1.2vw;
 }
 input:focus{
   outline: none;
-  border-color: #c988e3;
-  box-shadow: 0 0 10px #c988e3;
+  border-color: #b39bc8;
+  box-shadow: 0 0 10px #b39bc8;
 }
 // INPUT
 
 // BUTTONS
 .enter-button {
-  font-weight: 700;
-  animation:blobframe 15s ease-in-out infinite alternate;
-  background: #c988e3;
-  font-family: 'Nunito', sans-serif;
+  font-weight: 1000;
+  background: #b39bc8;
+  font-family: 'Didact Gothic', sans-serif;
   font-size: 1.5vw;
   letter-spacing: 0.2vw;
-  color: #ffffff;
+  color: #f0ebf4;
   cursor: pointer;
   position: relative;
   border: none;
-  box-shadow: 0.5vw 0.5vw #acacac80;
+  border-radius: 15%;
+  box-shadow: 0.5vw 0.5vw #e64398;
   padding: 1vw 2vw;
 }
 .replay-button {
   font-weight: 700;
-  animation:blobframe 15s ease-in-out infinite alternate;
-  background: #a095a5;
-  font-family: 'Nunito', sans-serif;
+  background: #b39bc8;
+  font-family: 'Didact Gothic', sans-serif;
   font-size: 1.5vw;
   letter-spacing: 0.2vw;
-  color: #ffffff;
+  color: #f0ebf4;
   cursor: pointer;
-  position: relative;
-  border: 0.5vw solid #5656562e;
+  border: 0.5vw solid #e64398;
+  border-radius: 15%;
   padding: 1vw 2vw;
 }
 .enter-button:active {
@@ -251,7 +189,7 @@ input:focus{
   left: 0.2vw;
 }
 .enter-button:hover {
-  background: #865f96;
+  background: #957ea9;
 }
 .replay-button:active {
   box-shadow: 0px 0px 0px 0px;
@@ -259,113 +197,98 @@ input:focus{
   left: 0.2vw;
 }
 .replay-button:hover {
-  background: #7f7882
+  background: #957ea9
 }
 // BUTTONS
 
 // VIDEOS
-.vidDiv {
-  position: sticky;
-  float: left;
-  margin-left: 5%;
+.videoWrapper {
   display: grid;
-  place-items: center;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr 2.5vw;
+  padding-inline: 1rem;
+}
+.vidDiv {
+  width: 45vw;
+  display: grid;
+  grid-row: 1 / -1;
   overflow:hidden;
-  animation:blobframe 15s ease-in-out infinite alternate;
-  border:1vw solid #c988e3;
+  animation: morph 8s ease-in-out infinite;
+  border:0.5vw solid #b39bc8;
+  transform: translate(10%);
+  transition: transform 500ms ease-in-out;
 }
 .vidDiv video {
   grid-row: 1 / -1;
   grid-column: 1 / -1;
-  width:40vw;
+  width: 100%;
 }
 .frame {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
   letter-spacing: 0.1vw;
   font-size:1.5vw;
-  color: white;
-  font-weight: 900;
+  color: #f0ebf4;
+  font-weight: 1000;
   grid-row: 1 / -1;
   grid-column: 1 / -1;
-  width:40vw;
+  width:100%;
   margin: auto;
+  height: 100%;
   text-align: center;
-  height:22.5vw;
   line-height: 22.5vw;
-  border-radius: 1vw;
   background: radial-gradient(#cfc4bd, #7a6f6b);
-  box-shadow: 0.5vw 0.5vw #acacac80;
 }
 .replayDiv {
-  grid-row: 1 / -1;
-  grid-column: 1 / -1;
-}
-.cloudy {
-  text-align: center;
-  line-height: 22.5vw;
-  width:40vw;
-  margin: auto;
-  height:22.5vw;
-  background: rgba(255, 255, 255, 0.482);
+  background: #f0ebf458;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
 }
 .beNone {
   display: none;
 }
 .moveToMiddle {
- float:none;
- margin: auto;
- width: 40vw;
+  transform: translateX(55%) translateY(2%);
 }
 // VIDEOS
 
 // TEXT OUTPUT
-.outputTextDiv{
-  position: sticky;
-  line-height: 22.5vw;
-  align-items: center;
-  text-align: center;
-  float:right;
-  width:50vw;
-  height:22.5vw;
+.outputTextDiv {
+  align-self: end;
 }
 .currentSignLabel{
-  position: relative;
-  color: #8c8c8c;
-  top:5vw;
-	font-family:'Titan One',cursive;
+  color: #f0ebf4;
+	font-family:'Didact Gothic';
 	font-size:6vw;
-	font-weight:700;
-	flex-flow:row wrap;
-	align-content:center;
-	justify-content:center;
+	font-weight:1000;
 }
 .allSigns{
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Didact Gothic';
+  font-weight: 1000;
   font-size:2vw;
-  color: #565656;
-  position: relative;
-  top:12vw;
+  color: #d4d4d4;
+  margin-bottom: 0;
 }
 .fade {
-  color: #56565675;
+  color: #5b5b5b;
 }
 // TEXT OUTPUT
 
 // TOOLTIP
 .tooltip {
   position: absolute;
-  left: 46vw;
-  top: 90vh;
+  right: 10vw;
   font-size: 2.5vw;
-  font-family: 'Nunito', sans-serif;
-  color: #7f7882;
+  font-family: 'Didact Gothic', sans-serif;
+  color: #f172a1;
 }
 .tooltip .tooltiptext {
   font-size: 1.5vw;
   visibility: hidden;
   width: 20vw;
-  background-color: #865f96;
-  color: #fff;
+  background-color: #f172a1;
+  color: #f0ebf4;
   text-align: center;
   border-radius: 1vw;
   position: absolute;
@@ -384,7 +307,7 @@ input:focus{
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
-  border-color: #555 transparent transparent transparent;
+  border-color: #e64398 transparent transparent transparent;
 }
 .tooltip:hover .tooltiptext {
   visibility: visible;

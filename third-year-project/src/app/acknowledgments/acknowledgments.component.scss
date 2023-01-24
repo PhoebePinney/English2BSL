@@ -13,7 +13,7 @@ body {
 }
 nav {
 	position: relative;
-	background-color: #d7d7d7;
+	background-color: #ffab7d;
 }
 nav a {
   font-family: 'Nunito', sans-serif;
@@ -201,18 +201,26 @@ h1 span:before{
   animation:blobframe 15s ease-in-out infinite alternate;
   left: 3.5vw;
   padding: 1vw 2vw;
-  background: #ffe1d0;
-  border: #ff965d 2vw solid;
+  background: #ff965d;
   width: 85%;
-  height: 50%;
   position:absolute
 };
 .text{
   font-family: 'Nunito', sans-serif;
   font-size: 2vw;
-  color: #a9a9a9;
+  color: white;
   font-weight: 700;
-  padding: 2vw 5vw;
+  padding: 2vw 25vw;
+  text-align: left;
+  width: 100%;
+}
+a {
+  color: white;
+  text-decoration: none;
+  border-bottom: 3px solid #fff3;
+}
+a:hover {
+  border-bottom-color: #fff9;
 }
 // TEXT
 
