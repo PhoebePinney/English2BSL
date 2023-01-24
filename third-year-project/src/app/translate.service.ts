@@ -72,6 +72,7 @@ export class TranslateService {
         }
       }
     }
+    out = this.checkForBigrams(out);
     return out;
   }
 
@@ -97,9 +98,9 @@ export class TranslateService {
       else if (wordList[word]=='like'){
         positions.push([wordList[word], -1, 'VB'])
       }
-      // else if (wordList[word]=='out'){
-      //   positions.push([wordList[word], -1, 'JJ'])
-      // }
+      else if (wordList[word]=='if'){
+        positions.push([wordList[word], -1, 'CC'])
+      }
       else if (this.temporalWords.includes(wordList[word])){
         positions.push([wordList[word], -1, 'T'])
       }
@@ -122,7 +123,7 @@ export class TranslateService {
       if (!skip){
         var notBoth=false;
         for (var bts in BTS){
-          if (bigrams[b][0]==BTS[bts][0] && bigrams[b][1]==BTS[bts][1]){
+          if ((bigrams[b][0]==BTS[bts][0] && bigrams[b][1]==BTS[bts][1]) || (bigrams[b][0]==BTS[bts][1] && bigrams[b][1]==BTS[bts][0])){
             wordList.push(bts)
             skip=true;
             notBoth=true;
@@ -233,7 +234,7 @@ export class TranslateService {
   }
 
   getSW(){
-    const SW = ['of','so','also','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'in', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'her', 'his', 'hers', 'would', 'could', 'should'];
+    const SW = ['as','of','so','also','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'or', 'yet', 'him', 'himself', 'herself', 'her', 'his', 'hers', 'would', 'could', 'should'];
     return SW;
   }
 

@@ -26,6 +26,7 @@ export class HomeComponent implements AfterViewInit{
   @ViewChild('vidDiv') vidDiv!: ElementRef;
   @ViewChild('replayDiv') replayDiv!: ElementRef;
   @ViewChild('allSigns') allSigns!: ElementRef;
+  @ViewChild('tooltip') tooltip!: ElementRef;
   httpClient: HttpClient;
   translate: TranslateService;
   currentSign = '';
@@ -118,7 +119,7 @@ export class HomeComponent implements AfterViewInit{
     var correct = [];
     var correctNum = 0;
     var incorrect = [];
-    for (let i = 0; i <= (this.testSentences.length)-1; i++){
+    for (let i = 0; i <= 75; i++){
       console.log(i)
       var sentence = this.contractions.expand(this.testSentences[i]); // expand contractions
       sentence = sentence.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');
@@ -141,7 +142,7 @@ export class HomeComponent implements AfterViewInit{
         incorrect.push([outputString,this.testSentencesTruth[i]]);
       }
     }
-    console.log(correctNum, correctNum/150)
+    console.log(correctNum, correctNum/75)
     console.log(incorrect)
   }
 
@@ -150,6 +151,8 @@ export class HomeComponent implements AfterViewInit{
     // When button pressed
     this.replayDiv.nativeElement.classList.add("beNone");
     this.allSigns.nativeElement.classList.remove("fade");
+    this.vidDiv.nativeElement.classList.remove("moveToMiddle");
+    this.tooltip.nativeElement.classList.remove("beNone");
     this.output = []; // List of words to be output
     this.playlist = []; // List of videos to be shown
     this.message = ' ';
@@ -163,6 +166,8 @@ export class HomeComponent implements AfterViewInit{
     var filtered = this.listOfWords.filter(function(value, index, arr){ return value != "";}); // remove blank tokens
     if (filtered.length == 0){ // if no words input
       this.message = 'Invalid phrase';
+      this.vidDiv.nativeElement.classList.add("moveToMiddle");
+      this.tooltip.nativeElement.classList.add("beNone");
       this.videoPlayer.nativeElement.setAttribute("src", "");
       this.videoPlayer2.nativeElement.setAttribute("src", "");
       return;

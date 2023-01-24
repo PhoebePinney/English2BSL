@@ -38,7 +38,7 @@
     <label class="inputLabel" style="color: grey; font-size: 1vw;">{{message}}</label>
   </div>
 
-  <div class="vidDiv" #vidDiv>
+  <div class="vidDiv moveToMiddle" #vidDiv>
     <div class = "frame">VIDEO WILL APPEAR HERE</div>
     <video #videoPlayer2
       class="beNone"
@@ -59,7 +59,7 @@
     </div>
   </div>
 
-  <div class="tooltip">
+  <div #tooltip class="tooltip beNone">
     &#9432;
     <span class="tooltiptext">Words that are not in the sign dictionary will be spelt out letter-by-letter!</span>
   </div>
