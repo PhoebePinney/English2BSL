@@ -9,17 +9,16 @@
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.174);
+  background-color: #b39bc8a4;
 }
 
-@import url('https://fonts.googleapis.com/css?family=Titan+One');
-@import url('https://fonts.googleapis.com/css?family=Nunito');
-
+@import url('https://fonts.googleapis.com/css?family=Didact Gothic');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 h1{
 	margin:0;
 	padding:0;
-  color: aquamarine;
-	font-family:'Titan One',cursive;
+  color: #f0ebf4;
+	font-family:'Oswald',cursive;
 	font-size:4vw;
 	font-weight:700;
   letter-spacing: 1vw;
@@ -35,7 +34,7 @@ h1{
   right: -1.35vw;
   place-items: center;
   overflow:hidden;
-  border:1vw solid #ff5e9c;
+  border:1vw solid #e64398;
   border-radius: 2vw;
   margin-bottom: 1vw;
 }
@@ -45,10 +44,9 @@ h1{
   width:40vw;
 }
 .frame {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
   letter-spacing: 0.1vw;
   font-size:1.5vw;
-  color: white;
   font-weight: 900;
   grid-row: 1 / -1;
   grid-column: 1 / -1;
@@ -63,19 +61,20 @@ h1{
 }
 
 .content {
-  background-color: #ffffff;
+  background-color: #f172a1;
   margin: auto;
   width: 50%;
   height: 75%;
   border-radius: 2vw;
   align-items: center;
   text-align: center;
+  padding: 1vw;
 }
 
 .close-icon {
   right: -1.35vw;
   font-family: 'Nunito', sans-serif;
-  background-color: #cbcbcb;
+  background-color: #f0ebf4;
   border-radius: 1vw;
   padding: 0vw 1vw;
   line-height: 2vw;
@@ -84,8 +83,8 @@ h1{
   cursor: pointer;
   position: relative;
   width: 1.5vw;
-  color: #ffffff;
+  color: #e64398;
 }
 .close-icon:hover {
-  background-color: #9f9f9f;
+  background-color: #acacac;
 }
