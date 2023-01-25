@@ -2,6 +2,12 @@ body {
   margin: -0.65%;
   height: 100vh;
   text-align: center;
+  background: url(/assets/waves4.svg) no-repeat center fixed;
+  background-size: cover;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 // NAV BAR
@@ -13,11 +19,11 @@ body {
 }
 nav {
 	position: relative;
-	background-color: #ffab7d;
+	background-color: #f868b2;
 }
 nav a {
-  font-family: 'Nunito', sans-serif;
-  font-weight: 500;
+  font-family: 'Didact Gothic', sans-serif;
+  font-weight: 1000;
 	line-height: 5vh;;
 	font-size: 1.5vw;
 	display: inline-block;
@@ -26,7 +32,7 @@ nav a {
 	text-decoration: none;
 	text-transform: uppercase;
 	text-align: center;
-	color: white;
+	color: #f0ebf4;
 	cursor: pointer;
 }
 nav .animation {
@@ -52,174 +58,96 @@ a:nth-child(4) {
 nav .start-home, a:nth-child(1):hover~.animation {
 	width: 25%;
 	left: 0;
-	background-color: #c988e3;
+	background-color: #a1c3d1;
 }
 nav .start-about, a:nth-child(2):hover~.animation {
 	width: 25%;
 	left: 25%;
-	background-color: #9fe6d8;
+	background-color: #b39bc8;
 }
 nav .start-signdictionary, a:nth-child(3):hover~.animation {
 	width: 25%;
 	left: 50%;
-	background-color: #ff94fa;
+	background-color: #f172a1;
 }
 nav .start-acknowledgments, a:nth-child(4):hover~.animation {
 	width: 25%;
 	left: 75%;
-	background-color: #ff965d;
+	background-color: #e64398;
 }
 // NAV BAR
 
+@keyframes morph {
+  0% {
+			border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
+			background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+	}
+	50% {
+			border-radius:  30% 50% 60% 40% / 40% 50% 30% 50%;
+			background: linear-gradient(45deg, var(--third) 0%, var(--secondary) 100%);
+	}
+	100% {
+		border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
+		background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+	}
+}
+
 // HEADING
-@import url('https://fonts.googleapis.com/css?family=Titan+One');
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css?family=Didact Gothic');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
 .heading-container{
   display: block;
   position: sticky;
 	width:100%;
 	height:15%;
 }
-h1{
-  background: white;
-	width:100%;
+h1 {
+  color: white;
+  font-family:'Oswald';
+  width:100%;
 	height:100%;
 	margin:0;
 	padding:0;
 	display:flex;
-	font-family:'Titan One',cursive;
-	font-size:5vw;
-	font-weight:700;
+  font-size:5vw;
+	font-weight:1000;
 	flex-flow:row wrap;
 	align-content:center;
-	justify-content:center
-}
-h1 span{
-  width:100%;
-  position:relative;
-}
-h1 span:before{
-	background:linear-gradient(45deg,#ff965d,#ff965d, #c988e3);
-	width:100%;
-	height:100%;
-	display:block;
-	position:absolute;
-	content:"";
-	mix-blend-mode:screen
-}
-.blobs {
-  display: block;
-  position: absolute;
-  width:5%;
-	height:50%;
-  mix-blend-mode:color;
-  animation:blobs 15s ease-in-out infinite alternate;
-}
-.blobs_1{
-	background:#ff1493;
-	top:10%;
-	left:10%;
-}
-.blobs_2{
-	background:#ff4500;
-	top:40%;
-	left:20%;
-}
-.blobs_3{
-	background:#91ff91;
-	top:10%;
-	left:30%;
-}
-.blobs_4{
-	background:#ff0000;
-	top:40%;
-	left:40%;
-}
-.blobs_5{
-	background:#ffff00;
-	top:10%;
-	left:50%;
-}
-.blobs_6{
-	background:#65fefe;
-	top:40%;
-	left:60%;
-}
-.blobs_7{
-	background:#ff8c00;
-	top:10%;
-	left:70%;
-}
-.blobs_8{
-	background:#91ff91;
-	top:40%;
-	left:80%;
-}
-.blobs_9{
-	background:#ff91e2;
-	top:10%;
-	left:90%;
-}
-@keyframes blobs{
-	0%{border-radius:26% 74% 61% 39% / 54% 67% 33% 46%}
-	10%{border-radius:74% 26% 47% 53% / 68% 46% 54% 32%}
-	20%{border-radius:48% 52% 30% 70% / 27% 37% 63% 73%}
-	30%{border-radius:73% 27% 57% 43% / 28% 67% 33% 72%}
-	40%{border-radius:63% 37% 56% 44% / 25% 28% 72% 75%}
-	50%{border-radius:39% 61% 70% 30% / 61% 29% 71% 39%}
-	60%{border-radius:27% 73% 29% 71% / 73% 51% 49% 27%}
-	70%{border-radius:39% 61% 65% 35% / 74% 65% 35% 26%}
-	80%{border-radius:55% 45% 37% 63% / 38% 30% 70% 62%}
-	90%{border-radius:25% 75% 70% 30% / 39% 50% 50% 61%}
-	100%{border-radius:66% 34% 33% 67% / 65% 73% 27% 35%}
-}
-@keyframes blobframe{
-	0%{border-radius:16% 34% 31% 19% / 24% 37% 13% 26%}
-	10%{border-radius:34% 16% 27% 23% / 28% 26% 24% 12%}
-	20%{border-radius:28% 22% 10% 30% / 17% 17% 33% 33%}
-	30%{border-radius:33% 17% 27% 23% / 18% 37% 13% 32%}
-	40%{border-radius:33% 17% 26% 24% / 15% 18% 32% 35%}
-	50%{border-radius:19% 31% 30% 10% / 31% 19% 31% 19%}
-	60%{border-radius:17% 33% 19% 21% / 33% 21% 29% 17%}
-	70%{border-radius:19% 31% 35% 15% / 34% 35% 15% 16%}
-	80%{border-radius:25% 25% 17% 23% / 18% 10% 30% 32%}
-	90%{border-radius:15% 35% 30% 10% / 19% 20% 20% 31%}
-	100%{border-radius:36% 14% 13% 37% / 35% 23% 17% 15%}
+	justify-content:center;
 }
 .subHeading{
   position:relative;
-  font-family:'Nunito', sans-serif;
+  font-family:'Didact Gothic', sans-serif;
 	font-size:1.5vw;
+  font-weight: 1000;
   letter-spacing: 0.2vw;
   top: -0.5vw;
-  color: #ff965d;
+  color: #f0ebf4;
 }
 // HEADING
 
 // TEXT
 .textbox{
-  animation:blobframe 15s ease-in-out infinite alternate;
   left: 3.5vw;
   padding: 1vw 2vw;
-  background: #ff965d;
+  background: #b39bc87c;
   width: 85%;
+  height: 50%;
   position:absolute
 };
 .text{
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Didact Gothic';
   font-size: 2vw;
-  color: white;
+  color: #f0ebf4;
   font-weight: 700;
-  padding: 2vw 25vw;
-  text-align: left;
-  width: 100%;
+  padding: 2vw 5vw;
 }
-a {
+.toPage {
   color: white;
   text-decoration: none;
   border-bottom: 3px solid #fff3;
 }
-a:hover {
+.toPage:hover {
   border-bottom-color: #fff9;
 }
 // TEXT
