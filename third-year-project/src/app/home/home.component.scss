@@ -205,18 +205,20 @@ input:focus{
 .videoWrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr 2.5vw;
+  grid-template-rows: minmax(auto, 50vh) 2.5vw;
   padding-inline: 1rem;
 }
 .vidDiv {
-  width: 45vw;
+  //width: 45vw;
   display: grid;
   grid-row: 1 / -1;
   overflow:hidden;
-  animation: morph 8s ease-in-out infinite;
-  border:2vw solid #b39bc8;
+  //animation: morph 8s ease-in-out infinite;
+  border:1vw solid #b39bc8;
   transform: translate(10%);
   transition: transform 500ms ease-in-out;
+  aspect-ratio: 16/9;
+  height: 100%;
 }
 .vidDiv video {
   grid-row: 1 / -1;
@@ -249,7 +251,7 @@ input:focus{
   display: none;
 }
 .moveToMiddle {
-  transform: translateX(55%) translateY(2%);
+  transform: translateX(58%);
 }
 // VIDEOS
 
