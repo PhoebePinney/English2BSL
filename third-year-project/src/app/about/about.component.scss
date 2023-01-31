@@ -1,5 +1,5 @@
 body {
-  margin: -0.65%;
+  margin: -0.8%;
   height: 100vh;
   text-align: center;
   background: url(/assets/waves2.svg) no-repeat center fixed;
@@ -76,15 +76,15 @@ nav .start-acknowledgments, a:nth-child(4):hover~.animation {
 @keyframes morph {
   0% {
 			border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
-			background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+			//background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
 	}
 	50% {
 			border-radius:  30% 50% 60% 40% / 40% 50% 30% 50%;
-			background: linear-gradient(45deg, var(--third) 0%, var(--secondary) 100%);
+			//background: linear-gradient(45deg, var(--third) 0%, var(--secondary) 100%);
 	}
 	100% {
 		border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
-		background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+		//background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
 	}
 }
 
@@ -123,20 +123,18 @@ h1 {
 // HEADING
 
 // TEXT
-.textbox{
-  left: 3.5vw;
-  padding: 1vw 2vw;
-  background: #b39bc87c;
-  width: 85%;
-  height: 50%;
-  position:absolute
-};
 .text{
+  border:1vw solid #b39bc8;
+  //animation: morph 8s ease-in-out infinite;
+  display: inline-block;
   font-family: 'Didact Gothic';
   font-size: 2vw;
   color: #f0ebf4;
+  overflow: hidden;
   font-weight: 700;
-  padding: 2vw 5vw;
+  padding: 5vw 5vw;
+  background-color: #e64398;
+  border-radius: 15%;
 }
 // TEXT
 

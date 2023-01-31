@@ -1,5 +1,5 @@
 body {
-  margin: -0.65%;
+  margin: -0.8%;
   height: 100vh;
   text-align: center;
     background: url(/assets/waves3.svg) no-repeat center fixed;
@@ -79,15 +79,15 @@ nav .start-acknowledgments, a:nth-child(4):hover~.animation {
 @keyframes morph {
   0% {
 			border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
-			background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+			//background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
 	}
 	50% {
 			border-radius:  30% 50% 60% 40% / 40% 50% 30% 50%;
-			background: linear-gradient(45deg, var(--third) 0%, var(--secondary) 100%);
+			//background: linear-gradient(45deg, var(--third) 0%, var(--secondary) 100%);
 	}
 	100% {
 		border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
-		background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+		//background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
 	}
 }
 
@@ -161,6 +161,7 @@ video {
   color: #565656;
   font-weight: 600;
   background-color: #b39bc8;
+  padding-left: 0.7vw;
 }
 a:link {
   text-decoration: none;
@@ -205,9 +206,13 @@ a:hover {
   left: 0.2vw;
 }
 .word-button:hover {
-  background: #ffa0c3;
+  background: #ff5694;
 }
 .letter {
   background-color: #91ff91;
+  color: #565656;
+}
+.letter:hover{
+  background-color: #60ff60;
 }
 // BUTTONS
