@@ -110,9 +110,18 @@ export class TranslateService {
       else if (wordList[word]=='with'){
         positions.push([wordList[word], -1, 'CC'])
       }
+      else if (wordList[word]=='left'){
+        positions.push([wordList[word], -1, 'JJ'])
+      }
       else if (wordList[word]=='out'){
         positions.push([wordList[word], -1, 'RB'])
       }
+      else if (wordList[word]=='go'){
+        positions.push([wordList[word], -1, 'VB'])
+      }
+      // else if (wordList[word]=='that'){
+      //   positions.push([wordList[word], -1, 'NN'])
+      // }
       else if (this.temporalWords.includes(wordList[word])){
         positions.push([wordList[word], -1, 'T'])
       }
@@ -253,12 +262,12 @@ export class TranslateService {
     ['T'], // temporal words
     ['DT'], // determiners
     ['IN'],  //  prepositions
-    ['JJ', 'JJR', 'JJS', 'CD', 'PDT'],  // adjectives, numbers
+    ['JJ', 'JJR', 'JJS', 'CD', 'PDT', 'PRP$'],  // adjectives, numbers, possessive pronouns
     ['NN', 'NNP', 'NNS', 'NNPS'], // nouns
     ['FW'], // foreign words
     ['VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'VB', 'RB', 'RBR', 'RBS'], // verbs and adverbs
     ['EX', 'MD'], // adverbs, ex there, modals
-    ['PRP', 'PRP$'], // pronouns
+    ['PRP'], // pronouns
     ['WDT', 'WP', 'wP$', 'WRB'] // question words
     ];
     return order;
@@ -302,7 +311,7 @@ export class TranslateService {
   }
 
   getKeepTogether(){
-    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out']];
+    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out'], ['nanjing', 'road'], ['right', 'over'], ['peach', 'rose']];
     return keepTogether;
   }
 
