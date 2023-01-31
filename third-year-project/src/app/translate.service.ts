@@ -311,7 +311,7 @@ export class TranslateService {
   }
 
   getKeepTogether(){
-    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out'], ['nanjing', 'road'], ['right', 'over'], ['peach', 'rose']];
+    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out'], ['nanjing', 'road'], ['right', 'over'], ['peach', 'rose'], ['hello', 'there'], ['hi', 'there']];
     return keepTogether;
   }
 

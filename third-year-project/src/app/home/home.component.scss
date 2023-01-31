@@ -171,6 +171,23 @@ input:focus{
   box-shadow: 0.5vw 0.5vw #e64398;
   padding: 1vw 2vw;
 }
+.speed-button {
+  font-weight: 1000;
+  background: #b39bc8;
+  font-family: 'Didact Gothic', sans-serif;
+  font-size: 1.5vw;
+  letter-spacing: 0.2vw;
+  color: #f0ebf4;
+  cursor: pointer;
+  position: relative;
+  border: none;
+  border-radius: 15%;
+  box-shadow: 0.5vw 0.5vw #e64398;
+  padding: 1vw 2vw;
+}
+.selectedSpeed {
+  background: green;
+}
 .replay-button {
   font-weight: 700;
   background: #b39bc8;
@@ -190,6 +207,17 @@ input:focus{
 }
 .enter-button:hover {
   background: #957ea9;
+}
+.speed-button:active {
+  box-shadow: 0px 0px 0px 0px;
+  top: 0.2vw;
+  left: 0.2vw;
+}
+.speed-button:hover {
+  background: #957ea9;
+}
+.selectedSpeed:hover {
+  background: darkgreen;
 }
 .replay-button:active {
   box-shadow: 0px 0px 0px 0px;

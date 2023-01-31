@@ -27,6 +27,9 @@ export class HomeComponent implements AfterViewInit{
   @ViewChild('replayDiv') replayDiv!: ElementRef;
   @ViewChild('allSigns') allSigns!: ElementRef;
   @ViewChild('currentSignP') currentSignP!: ElementRef;
+  @ViewChild('slow') slow!: ElementRef;
+  @ViewChild('normal') normal!: ElementRef;
+  @ViewChild('fast') fast!: ElementRef;
   httpClient: HttpClient;
   translate: TranslateService;
   currentSign = '';
@@ -147,7 +150,7 @@ export class HomeComponent implements AfterViewInit{
   }
 
   onButton(userInput: string){
-    this.runTest();
+    // this.runTest();
     // When button pressed
     this.replayDiv.nativeElement.classList.add("beNone");
     this.allSigns.nativeElement.classList.remove("fade");
@@ -239,6 +242,32 @@ export class HomeComponent implements AfterViewInit{
     this.videoPlayer.nativeElement.load();
     this.videoPlayer2.nativeElement.load();
     this.videoPlayer.nativeElement.play();
+  }
+
+  setSlow(){
+    this.videoPlayer.nativeElement.defaultPlaybackRate = 0.5;
+    this.videoPlayer2.nativeElement.defaultPlaybackRate = 0.5;
+    this.slow.nativeElement.classList.add("selectedSpeed");
+    this.normal.nativeElement.classList.remove("selectedSpeed");
+    this.fast.nativeElement.classList.remove("selectedSpeed");
+  }
+
+  setNormal(){
+    this.videoPlayer.nativeElement.defaultPlaybackRate = 1.0;
+    this.videoPlayer2.nativeElement.defaultPlaybackRate = 1.0;
+    this.normal.nativeElement.classList.add("selectedSpeed");
+    this.slow.nativeElement.classList.remove("selectedSpeed");
+    this.fast.nativeElement.classList.remove("selectedSpeed");
+
+  }
+
+  setFast(){
+    this.videoPlayer.nativeElement.defaultPlaybackRate = 2.0;
+    this.videoPlayer2.nativeElement.defaultPlaybackRate = 2.0;
+    this.fast.nativeElement.classList.add("selectedSpeed");
+    this.normal.nativeElement.classList.remove("selectedSpeed");
+    this.slow.nativeElement.classList.remove("selectedSpeed");
+
   }
 
   endOfVid(): void{
