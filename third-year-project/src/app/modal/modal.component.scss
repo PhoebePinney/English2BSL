@@ -10,14 +10,14 @@
   height: 100%;
   overflow: auto;
   margin-top: -8vh;
-  background-color: #b39bc8a4;
+  background-color: #b8ffd3af;
 }
-@import url('https://fonts.googleapis.com/css?family=Didact Gothic');
+@import url('https://fonts.googleapis.com/css?family=Josefin Sans');
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 h1{
 	margin:0;
 	padding:0;
-  color: #f0ebf4;
+  color: white;
 	font-family:'Oswald',cursive;
 	font-size:4vw;
 	font-weight:700;
@@ -33,7 +33,7 @@ h1{
   right: -1.35vw;
   place-items: center;
   overflow:hidden;
-  border:1vw solid #e64398;
+  border:1vw solid #40916c;
   border-radius: 2vw;
   margin-bottom: 1vw;
 }
@@ -43,7 +43,7 @@ h1{
   width:40vw;
 }
 .frame {
-  font-family: 'Didact Gothic', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
   letter-spacing: 0.1vw;
   font-size:1.5vw;
   font-weight: 900;
@@ -59,7 +59,7 @@ h1{
   box-shadow: 0.5vw 0.5vw #acacac80;
 }
 .content {
-  background-color: #f172a1;
+  background-color: #74c69d;
   margin: auto;
   width: 50%;
   height: 75%;
@@ -70,8 +70,8 @@ h1{
 }
 .close-icon {
   right: -1.35vw;
-  font-family: 'Didact Gothic', sans-serif;
-  background-color: #f0ebf4;
+  font-family: 'Josefin Sans', sans-serif;
+  background-color: white;
   border-radius: 1vw;
   padding: 0vw 1vw;
   line-height: 2vw;
@@ -80,8 +80,8 @@ h1{
   cursor: pointer;
   position: relative;
   width: 1.5vw;
-  color: #e64398;
+  color: #1b4332;
 }
 .close-icon:hover {
-  background-color: #acacac;
+  background-color: #40916c;
 }

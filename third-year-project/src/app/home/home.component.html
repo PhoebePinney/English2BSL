@@ -76,7 +76,7 @@
         </a>
         <div class="underline"></div>
       </li>
-      <li class="nav-link">
+      <li class="nav-link non">
         <a (click)="gotoAbout()">About</a>
         <div class="underline"></div>
       </li>
@@ -100,51 +100,48 @@
       </g>
     </svg>
     <ul>
-      <li class="nav-link">
-        <a (click)="gotoSD">Sign Dictionary</a>
+      <li class="nav-link non">
+        <a (click)="gotoSD()">Sign Dictionary</a>
         <div class="underline"></div>
       </li>
-      <li class="nav-link">
-        <a (click)="gotoAcknowledgments">Acknowledgments</a>
+      <li class="nav-link non">
+        <a (click)="gotoAcknowledgments()">Acknowledgments</a>
         <div class="underline"></div>
       </li>
     </ul>
   </div>
+
   <div class="content">
 
   <div class="textContainer">
-  <p class="bigText">English to BSL<br>Translation Tool</p>
-  <p class="smallText">Introducing an impressive translation tool! It transforms written English into a stunning video in British Sign Language (BSL). Perfect for education, news, and communication, it's a game-changer for accessibility and inclusiveness.</p>
+  <p class="bigText">English to BSL Translation Tool</p>
+  <p class="smallText">Use this tool to translate a sentence in written English into a video showing British Sign Language! Whether you want to help bridge the communication barrier between non-signing people and BSL users or simply want to learn some new signs, the answer is only a click away!  </p>
 
 
   <input class="c-checkbox" type="checkbox" id="checkbox">
-  <div class="c-formContainer">
+  <div id='toggle' class="c-formContainer">
     <form class="c-form" action="">
-      <input #box class="c-form__input" placeholder="Enter a sentence" maxlength="45" size="40" (keyup)="updateChar()" required>
+      <input #box class="c-form__input" placeholder="Enter a sentence..." maxlength="45" size="40" (keydown)="updateChar()" required>
       <label class="c-form__buttonLabel" for="checkbox">
         <label class="chars">{{char}}/45</label>
-        <button class="c-form__button" type="button" (click)="onButton(box.value)">Translate!</button>
+        <button class="c-form__button" type="button" onClick="document.getElementById('toggle').classList.add('moveDown');document.getElementById('vid').scrollIntoView({ behavior: 'smooth' });" (click)="onButton(box.value)">Translate!</button>
       </label>
       <label class="c-form__toggle" for="checkbox" data-title="Let's translate!"></label>
     </form>
     <label class="inputLabel errMsg">{{message}}</label><br>
   </div>
   </div>
+  </div>
 
-  <!-- <div class="inputSection">
-    <label class="inputLabel">Enter a sentence:</label>
-    <input #box  placeholder="Enter a sentence" class="sentenceInput" maxlength="45" size="40" (keyup)="updateChar()">
-    <label class="inputLabel chars">{{char}}/45</label>
-    <button class="enter-button" (click)="onButton(box.value)">Translate!</button>
-    <div #tooltip class="tooltip">
-      &#9432;
-      <span class="tooltiptext">Words that are not in the sign dictionary will be spelt out letter-by-letter!</span>
+  <div id='vid' class="videoWrapper">
+    <div class="speedButtons">
+      <button #slow class="speed-button" (click)="setSlow()">Slow</button>
+      <button #normal class="speed-button selectedSpeed" (click)="setNormal()">Normal</button>
+      <button #fast class="speed-button" (click)="setFast()">Fast</button>
     </div>
-  </div> -->
 
-  <div class="videoWrapper">
     <div class="vidDiv moveToMiddle" #vidDiv>
-      <div class="frame">VIDEO WILL APPEAR HERE</div>
+      <div class="frame"></div>
       <video #videoPlayer2
         class="beNone"
         (ended)="endOfVid()"
@@ -160,7 +157,7 @@
         id="videoPlayer">
       </video>
       <div class="replayDiv beNone" #replayDiv>
-        <button class="replay-button" (click)="onButton(box.value)">REPLAY</button>
+        <button class="replay-button" (click)="onButton(box.value)">Replay</button>
       </div>
     </div>
 
@@ -168,11 +165,7 @@
       <p #currentSignP class="currentSignLabel">{{currentSign}}</p>
       <p #allSigns class="allSigns">{{out}}</p>
     </div>
-  </div>
 
-  <button #slow class="speed-button" (click)="setSlow()">Slow</button>
-  <button #normal class="speed-button selectedSpeed" (click)="setNormal()">Normal</button>
-  <button #fast class="speed-button" (click)="setFast()">Fast</button>
 </div>
 </body>
 
