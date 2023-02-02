@@ -8,6 +8,7 @@ body {
   margin: -0.8%;
   min-height: 100vh;
   text-align: center;
+  max-width: 100%;
 }
 // LOGO
 .logo {
@@ -22,16 +23,13 @@ a {
 }
 .navbar-container {
   // position: fixed;
-  // width: 100%;
+  width: 100%;
 	text-align: center;
 	background-color: #ffffff;
 	box-shadow: 0px -5vw 1vw 5vw #366666aa;
 	padding: 1vw;
 	font-size: 0;
   font-family: 'Oswald';
-  margin-top: -1vw;
-  margin-left: -1vw;
-  margin-right: -1vw;
   z-index: 100000;
 }
 .navbar-container ul {
@@ -114,7 +112,7 @@ a {
 // HAND
 
 .heading-container{
-  padding-top: 3vw;
+  margin-top: 4vw;
   display: block;
   position: sticky;
 	width:100%;
@@ -229,7 +227,7 @@ video {
   background: #52b788;
 }
 .letter {
-  background-color: white;
+  background-color: rgb(224, 255, 230);
   color: #1B4332;
 }
 .letter:hover{

@@ -30,6 +30,7 @@ export class HomeComponent implements AfterViewInit{
   @ViewChild('slow') slow!: ElementRef;
   @ViewChild('normal') normal!: ElementRef;
   @ViewChild('fast') fast!: ElementRef;
+  @ViewChild('speedButtons') speedButtons!: ElementRef;
   httpClient: HttpClient;
   translate: TranslateService;
   currentSign = '';
@@ -157,6 +158,7 @@ export class HomeComponent implements AfterViewInit{
     this.allSigns.nativeElement.classList.remove("beNone");
     this.currentSignP.nativeElement.classList.remove("beNone");
     this.vidDiv.nativeElement.classList.remove("moveToMiddle");
+    this.speedButtons.nativeElement.classList.add("moveOver");
     this.output = []; // List of words to be output
     this.playlist = []; // List of videos to be shown
     this.message = ' ';
@@ -171,6 +173,7 @@ export class HomeComponent implements AfterViewInit{
     if (filtered.length == 0){ // if no words input
       this.message = 'Invalid phrase';
       this.vidDiv.nativeElement.classList.add("moveToMiddle");
+      this.speedButtons.nativeElement.classList.remove("moveOver");
       this.allSigns.nativeElement.classList.add("beNone");
       this.currentSignP.nativeElement.classList.add("beNone");
       this.videoPlayer.nativeElement.setAttribute("src", "");
@@ -181,6 +184,7 @@ export class HomeComponent implements AfterViewInit{
     if (this.output.length < 1){
       this.message = 'Invalid phrase';
       this.vidDiv.nativeElement.classList.add("moveToMiddle");
+      this.speedButtons.nativeElement.classList.remove("moveOver");
       this.allSigns.nativeElement.classList.add("beNone");
       this.currentSignP.nativeElement.classList.add("beNone");
       this.videoPlayer.nativeElement.setAttribute("src", "");
@@ -245,6 +249,8 @@ export class HomeComponent implements AfterViewInit{
   }
 
   setSlow(){
+    this.videoPlayer.nativeElement.playbackRate = 0.5;
+    this.videoPlayer2.nativeElement.playbackRate = 0.5;
     this.videoPlayer.nativeElement.defaultPlaybackRate = 0.5;
     this.videoPlayer2.nativeElement.defaultPlaybackRate = 0.5;
     this.slow.nativeElement.classList.add("selectedSpeed");
@@ -253,6 +259,8 @@ export class HomeComponent implements AfterViewInit{
   }
 
   setNormal(){
+    this.videoPlayer.nativeElement.playbackRate = 1.0;
+    this.videoPlayer2.nativeElement.playbackRate = 1.0;
     this.videoPlayer.nativeElement.defaultPlaybackRate = 1.0;
     this.videoPlayer2.nativeElement.defaultPlaybackRate = 1.0;
     this.normal.nativeElement.classList.add("selectedSpeed");
@@ -262,6 +270,8 @@ export class HomeComponent implements AfterViewInit{
   }
 
   setFast(){
+    this.videoPlayer.nativeElement.playbackRate = 2.0;
+    this.videoPlayer2.nativeElement.playbackRate = 2.0;
     this.videoPlayer.nativeElement.defaultPlaybackRate = 2.0;
     this.videoPlayer2.nativeElement.defaultPlaybackRate = 2.0;
     this.fast.nativeElement.classList.add("selectedSpeed");

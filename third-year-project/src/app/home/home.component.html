@@ -1,5 +1,6 @@
 <head>
   <title>Translation Tool</title>
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
 
 <!-- <body>
@@ -120,25 +121,30 @@
 
   <input class="c-checkbox" type="checkbox" id="checkbox">
   <div id='toggle' class="c-formContainer">
-    <form class="c-form" action="">
-      <input #box class="c-form__input" placeholder="Enter a sentence..." maxlength="45" size="40" (keydown)="updateChar()" required>
+    <div class="c-form">
+      <input #box class="c-form__input" placeholder="Enter a sentence..." maxlength="45" size="40" (keydown)="updateChar()">
       <label class="c-form__buttonLabel" for="checkbox">
         <label class="chars">{{char}}/45</label>
-        <button class="c-form__button" type="button" onClick="document.getElementById('toggle').classList.add('moveDown');document.getElementById('vid').scrollIntoView({ behavior: 'smooth' });" (click)="onButton(box.value)">Translate!</button>
+        <button class="c-form__button" type="button" onClick="document.getElementById('toggle').classList.add('moveDown');document.getElementById('vid').scrollIntoView({ behavior: 'smooth' });document.getElementById('tooltip').style.visibility ='visible';" (click)="onButton(box.value)">Translate!</button>
       </label>
       <label class="c-form__toggle" for="checkbox" data-title="Let's translate!"></label>
-    </form>
+      <div #tooltip id="tooltip" class="tooltip">
+        &#9432;
+        <span class="tooltiptext">Words that are not in the sign dictionary will be spelt out letter-by-letter!</span>
+      </div>
+    </div>
     <label class="inputLabel errMsg">{{message}}</label><br>
   </div>
   </div>
   </div>
 
   <div id='vid' class="videoWrapper">
-    <div class="speedButtons">
-      <button #slow class="speed-button" (click)="setSlow()">Slow</button>
-      <button #normal class="speed-button selectedSpeed" (click)="setNormal()">Normal</button>
-      <button #fast class="speed-button" (click)="setFast()">Fast</button>
-    </div>
+    <!-- <div #speedButtons class="speedButtons beNone">
+      <button #slow class="speed-button" (click)="setSlow()"><img src="https://img.icons8.com/ios-glyphs/30/null/snail.png"/></button>
+      <button #normal class="speed-button selectedSpeed" (click)="setNormal()"><img src="https://img.icons8.com/ios-glyphs/30/null/pointing-at-self.png"/></button>
+      <button #fast class="speed-button" (click)="setFast()"><img src="https://img.icons8.com/ios-glyphs/30/null/running-rabbit--v1.png"/></button>
+    </div> -->
+
 
     <div class="vidDiv moveToMiddle" #vidDiv>
       <div class="frame"></div>
@@ -165,6 +171,22 @@
       <p #currentSignP class="currentSignLabel">{{currentSign}}</p>
       <p #allSigns class="allSigns">{{out}}</p>
     </div>
+
+    <div #speedButtons class="buttonFrame">
+      <button #slow (click)="setSlow()" class="btn">
+        <img src="https://img.icons8.com/ios-glyphs/30/null/snail.png"/>
+      </button>
+      <button #normal (click)="setNormal()" class="btn selectedSpeed">
+        <img src="https://img.icons8.com/ios-glyphs/30/null/pointing-at-self.png"/>
+      </button>
+      <button #fast (click)="setFast()" class="btn">
+        <img src="https://img.icons8.com/ios-glyphs/30/null/running-rabbit--v1.png"/>
+      </button>
+
+
+    </div>
+
+
 
 </div>
 </body>
