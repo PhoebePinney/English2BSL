@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-acknowledgments',
   templateUrl: './acknowledgments.component.html',
-  styleUrls: ['./2acknowledgments.component.scss']
+  styleUrls: ['./acknowledgments.component.scss']
 })
 export class AcknowledgmentsComponent{
   constructor(private router: Router) { }

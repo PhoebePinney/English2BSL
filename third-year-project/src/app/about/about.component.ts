@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
-  styleUrls: ['./2about.component.scss']
+  styleUrls: ['./about.component.scss']
 })
 export class AboutComponent{
   constructor(private router: Router) { }

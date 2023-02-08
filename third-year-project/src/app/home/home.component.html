@@ -1,74 +1,7 @@
 <head>
-  <title>Translation Tool</title>
+  <title>English to BSL</title>
   <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 </head>
-
-<!-- <body>
-  <div class="nav-container">
-    <nav>
-      <a>Translation Tool</a>
-      <a (click)="gotoAbout()">About</a>
-      <a (click)="gotoSD()">Sign Dictionary</a>
-      <a (click)="gotoAcknowledgments()">Acknowledgments</a>
-      <div class="animation start-home"></div>
-    </nav>
-  </div>
-
-  <div class="heading-container">
-    <h1><span>ENGLISH TO BSL TRANSLATION TOOL</span></h1>
-  </div>
-
-  <label class="subHeading">Translate written English into a video of British Sign Language!</label>
-
-  <div class="inputSection">
-    <label class="inputLabel">Enter a sentence:</label>
-    <input #box class="sentenceInput" maxlength="45" size="40" (keyup)="updateChar()">
-    <label class="inputLabel chars">{{char}}/45</label>
-    <button class="enter-button" (click)="onButton(box.value)">Translate!</button>
-    <div #tooltip class="tooltip">
-      &#9432;
-      <span class="tooltiptext">Words that are not in the sign dictionary will be spelt out letter-by-letter!</span>
-    </div>
-  </div>
-
-  <label class="inputLabel errMsg">{{message}}</label><br>
-
-  <div class="videoWrapper">
-    <div class="vidDiv moveToMiddle" #vidDiv>
-      <div class="frame">VIDEO WILL APPEAR HERE</div>
-      <video #videoPlayer2
-        class="beNone"
-        (ended)="endOfVid()"
-        [muted]="'muted'"
-        playsinline
-        id="videoPlayer">
-      </video>
-      <video #videoPlayer
-        class="beNone"
-        (ended)="endOfVid()"
-        [muted]="'muted'"
-        playsinline
-        id="videoPlayer">
-      </video>
-      <div class="replayDiv beNone" #replayDiv>
-        <button class="replay-button" (click)="onButton(box.value)">REPLAY</button>
-      </div>
-    </div>
-
-    <div class="outputTextDiv">
-      <p #currentSignP class="currentSignLabel">{{currentSign}}</p>
-      <p #allSigns class="allSigns">{{out}}</p>
-    </div>
-  </div>
-
-  <button #slow class="speed-button" (click)="setSlow()">Slow</button>
-  <button #normal class="speed-button selectedSpeed" (click)="setNormal()">Normal</button>
-  <button #fast class="speed-button" (click)="setFast()">Fast</button>
-
-</body> -->
-
-<!-- TRY AGAIN -->
-
 <body>
   <div class="navbar-container">
     <ul>
@@ -139,13 +72,6 @@
   </div>
 
   <div id='vid' class="videoWrapper">
-    <!-- <div #speedButtons class="speedButtons beNone">
-      <button #slow class="speed-button" (click)="setSlow()"><img src="https://img.icons8.com/ios-glyphs/30/null/snail.png"/></button>
-      <button #normal class="speed-button selectedSpeed" (click)="setNormal()"><img src="https://img.icons8.com/ios-glyphs/30/null/pointing-at-self.png"/></button>
-      <button #fast class="speed-button" (click)="setFast()"><img src="https://img.icons8.com/ios-glyphs/30/null/running-rabbit--v1.png"/></button>
-    </div> -->
-
-
     <div class="vidDiv moveToMiddle" #vidDiv>
       <div class="frame"></div>
       <video #videoPlayer2
@@ -185,9 +111,6 @@
 
 
     </div>
-
-
-
 </div>
 </body>
 

@@ -1,106 +1,118 @@
+// FONTS
+@import url('https://fonts.googleapis.com/css?family=Josefin Sans');
+@import url('https://fonts.googleapis.com/css?family=Oswald');
+// FONTS
+
 body {
+  padding-bottom: 5vw;
   margin: -0.8%;
   min-height: 100vh;
   text-align: center;
-  background: url(/assets/waves4.svg) no-repeat center fixed;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
-html {
-  scroll-behavior: smooth;
+  max-width: 100%;
 }
 
 // NAV BAR
-.nav-container{
-  display: block;
-  position: sticky;
-  height: 5vh;
-  width:100%;
+a {
+	outline: none;
 }
-nav {
-	position: relative;
-	background-color: #f868b2;
-}
-nav a {
-  font-family: 'Didact Gothic', sans-serif;
-  font-weight: 1000;
-	line-height: 5vh;;
-	font-size: 1.5vw;
-	display: inline-block;
-	position: relative;
-	z-index: 1;
-	text-decoration: none;
-	text-transform: uppercase;
+.navbar-container {
+  // position: fixed;
+  width: 100%;
 	text-align: center;
-	color: #f0ebf4;
-	cursor: pointer;
+	background-color: #ffffff;
+	box-shadow: 0px -5vw 1vw 5vw #366666aa;
+	padding: 1vw;
+	font-size: 0;
+  font-family: 'Oswald';
+  z-index: 100000;
 }
-nav .animation {
-	position: absolute;
-	height: 100%;
-	top: 0;
-	z-index: 0;
-	transition: all .5s ease 0s;
-	border-radius: 8px;
+.navbar-container ul {
+	margin: 0;
+	padding: 0;
+	text-align: right;
+	display: inline-block;
+	vertical-align: middle;
 }
-a:nth-child(1) {
-	width: 25%;
+.navbar-container ul li {
+	display: inline-block;
+	font-size: 1.2vw;
+  cursor: pointer;
 }
-a:nth-child(2) {
-	width: 25%;
+.navbar-container ul li a {
+	color: #1B4332;
+	text-decoration: none;
+	display: inline-block;
+	padding: 0vw 3vw;
+	transition: color 0.2s;
 }
-a:nth-child(3) {
-	width: 25%;
+.navbar-container ul li .underline {
+  height: 0.001vw;
+	background-color: transparent;
+	width: 0%;
+	transition: width 0.2s, background-color 0.5s;
+	margin: 0 auto;
 }
-a:nth-child(4) {
-	width: 25%;
+.navbar-container ul li.active-link .underline {
+	width: 60%;
+	background-color: #ffffff;
+  border-bottom: dotted #1B4332 0.3vw;
 }
-nav .start-home, a:nth-child(1):hover~.animation {
-	width: 25%;
-	left: 0;
-	background-color: #a1c3d1;
+.navbar-container ul li.non .underline {
+	width: 60%;
+	background-color: #ffffff;
+  border-bottom: dotted #ffffff00 0.3vw;
 }
-nav .start-about, a:nth-child(2):hover~.animation {
-	width: 25%;
-	left: 25%;
-	background-color: #b39bc8;
+.navbar-container ul li.active-link:hover .underline {
+	width: 60%;
+	background-color: #ffffff00;
 }
-nav .start-signdictionary, a:nth-child(3):hover~.animation {
-	width: 25%;
-	left: 50%;
-	background-color: #f172a1;
+.navbar-container ul li:hover .underline {
+	background-color: #1B4332;
+	width: 60%;
 }
-nav .start-acknowledgments, a:nth-child(4):hover~.animation {
-	width: 25%;
-	left: 75%;
-	background-color: #e64398;
+.navbar-container ul li:active a {
+	transition: none;
+	color: #1B43326b;
+}
+.navbar-container ul li:active .underline {
+	transition: none;
+	background-color: #1B43326b;
 }
 // NAV BAR
 
-@keyframes morph {
-  0% {
-			border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
-			//background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
-	}
-	50% {
-			border-radius:  30% 50% 60% 40% / 40% 50% 30% 50%;
-			//background: linear-gradient(45deg, var(--third) 0%, var(--secondary) 100%);
-	}
-	100% {
-		border-radius:  50% 40% 30% 60% / 50% 30% 60% 40%;
-		//background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
-	}
+// HAND
+.hand-svg {
+  width: 4.5vw;
+  margin-bottom: -1.7vw;
 }
+.hand-svg:hover .hand-path {
+  animation: 0.3s 0.1s normal 3 wave;
+  transform-origin: bottom;
+}
+@keyframes wave {
+  0% {
+    rotate: 0;
+  }
+  25% {
+    rotate: 5deg;
+  }
+  75% {
+    rotate: -5deg;
+  }
+  100% {
+    rotate: 0;
+  }
+}
+// HAND
 
 // HEADING
-@import url('https://fonts.googleapis.com/css?family=Didact Gothic');
-@import url('https://fonts.googleapis.com/css?family=Oswald');
 .heading-container{
   display: block;
   position: sticky;
 	width:100%;
 	height:15%;
+  margin-top: 4vw;
+  margin-left: 15vw;
 }
 h1 {
   color: white;
@@ -113,33 +125,21 @@ h1 {
   font-size:5vw;
 	font-weight:1000;
 	flex-flow:row wrap;
-	align-content:center;
-	justify-content:center;
-}
-.subHeading{
-  position:relative;
-  font-family:'Didact Gothic', sans-serif;
-	font-size:1.5vw;
-  font-weight: 1000;
-  letter-spacing: 0.2vw;
-  top: -0.5vw;
-  color: #f0ebf4;
 }
 // HEADING
 
 // TEXT
 .text{
-  border:1vw solid #e64398;
-  //animation: morph 8s ease-in-out infinite;
+  border:1vw solid #1B4332;
   display: inline-block;
-  font-family: 'Didact Gothic';
+  font-family: 'Josefin Sans';
   font-size: 2vw;
-  color: #e64398;
+  color: white;
   overflow: hidden;
   font-weight: 700;
   padding: 5vw 5vw;
-  background-color: #a1c3d1;
-  border-radius: 15%;
+  background-color: #52b788;
+  border-radius: 3vw;
 }
 .t1{
   transform: translate(-5%);
@@ -154,7 +154,7 @@ h1 {
 transform: translate(10%) translateY(-18%);
 }
 li{
-  color:#f0ebf4;
+  color:white;
 }
 .toPage {
   color: white;
@@ -165,5 +165,3 @@ li{
   border-bottom-color: #fff9;
 }
 // TEXT
-
-

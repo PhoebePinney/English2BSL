@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./2home.component.scss']
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements AfterViewInit{
   contractions = require('expand-contractions');

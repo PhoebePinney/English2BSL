@@ -6,7 +6,7 @@ import { ModalComponent } from '../modal/modal.component';
 @Component({
   selector: 'app-signdictionary',
   templateUrl: './signdictionary.component.html',
-  styleUrls: ['./2signdictionary.component.scss']
+  styleUrls: ['./signdictionary.component.scss']
 })
 export class SDComponent implements AfterViewInit{
   httpClient: HttpClient;
