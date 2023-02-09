@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
-import {lemmatizer} from "lemmatizer";
+import { lemmatizer } from "lemmatizer";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TranslateService {
-  posTagger = require( 'wink-pos-tagger' );
+  posTagger = require('wink-pos-tagger');
   pluralize = require('pluralize');
   contractions = require('expand-contractions');
   tagger = this.posTagger();
@@ -45,14 +45,11 @@ export class TranslateService {
       if (this.months.includes(listOfWords[w])){
         listOfWords[w] = listOfWords[w].substring(0, 3);
       }
-      //if (!this.stopWords.includes(listOfWords[w])){ // remove stopwords
         s = s + listOfWords[w] + ' ';
-      //}
     }
     listOfWords = this.getOrder(s.split(' '));
     listOfWords = this.removeStopWords(listOfWords);
     for (let w in listOfWords){
-      console.log(lemmatizer(listOfWords[w]))
       if (listOfWords[w]!='I' && listOfWords[w]!=','){
         if (availableWords.includes(listOfWords[w]) || listOfWords[w]==','){ // if available, push whole word
           out.push(listOfWords[w]);
