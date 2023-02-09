@@ -205,7 +205,10 @@ video {
 
 // BUTTONS
 .word-button {
-  padding: 1vw 2vw;
+  padding-left: 2vw;
+  padding-right: 1.8vw;
+  padding-top: 1vw;
+  padding-bottom: 0.8vw;
   margin: 1vw 1vw;
   font-weight: 1000;
   animation:blobframe 15s ease-in-out infinite alternate;

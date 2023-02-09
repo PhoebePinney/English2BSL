@@ -176,6 +176,13 @@ li{
   margin-right: 20vw;
   margin-top: -9vw;
 }
+.heart {
+	animation: beat 1s infinite alternate;
+	transform-origin: center;
+}
+@keyframes beat{
+	to { transform: scale(1.05); }
+}
 // IMAGES
 
 .name {

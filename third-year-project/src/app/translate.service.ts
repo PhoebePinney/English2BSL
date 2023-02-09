@@ -52,6 +52,7 @@ export class TranslateService {
     listOfWords = this.getOrder(s.split(' '));
     listOfWords = this.removeStopWords(listOfWords);
     for (let w in listOfWords){
+      console.log(lemmatizer(listOfWords[w]))
       if (listOfWords[w]!='I' && listOfWords[w]!=','){
         if (availableWords.includes(listOfWords[w]) || listOfWords[w]==','){ // if available, push whole word
           out.push(listOfWords[w]);

@@ -163,9 +163,10 @@ h1 {
 }
 .spinny {
   animation-name: spin;
-  animation-duration: 9000ms;
+  animation-duration: 30000ms;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+  transform-origin: 52.5% 49.5%;
 }
 @keyframes spin {
   from {
@@ -173,6 +174,25 @@ h1 {
 }
 to {
     transform:rotate(360deg);
+}
+}
+.heart {
+	animation: beat 1s infinite alternate;
+	transform-origin: center;
+}
+@keyframes beat{
+	to { transform: scale(1.2); }
+}
+.wave{
+  animation: wavy 1.5s infinite alternate ease-in-out;
+  transform-origin: bottom;
+}
+@keyframes wavy{
+  from {
+    transform:rotate(-3deg);
+}
+to {
+    transform:rotate(3deg);
 }
 }
 // IMAGES
