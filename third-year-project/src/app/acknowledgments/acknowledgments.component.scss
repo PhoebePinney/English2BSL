@@ -129,29 +129,32 @@ h1 {
 // HEADING
 
 // TEXT
+.textBox {
+  //grid-column: span 2;
+  //background-color: #81ffca;
+}
+.subHeading {
+  font-size: 2.2vw;
+  text-transform: uppercase;
+  font-family: 'Oswald';
+  color: #1B4332;
+  text-align: left;
+}
 .text{
-  border:1vw solid #1B4332;
-  display: inline-block;
   font-family: 'Josefin Sans';
-  font-size: 2vw;
-  color: white;
-  overflow: hidden;
-  font-weight: 700;
-  padding: 5vw 5vw;
-  background-color: #52b788;
-  border-radius: 3vw;
+  font-size: 1.2vw;
+  color: #ffffff;
+  text-align: left;
+  margin-top: -2vw;
+  margin-left: 2vw;
 }
-.t1{
-  transform: translate(-5%);
-}
-.t2{
-  transform: translateY(-20%);
-}
-.t3{
- transform: translate(0%) translateY(-10%);
-}
-.t4{
-transform: translate(10%) translateY(-18%);
+.content {
+  // margin-top: vw;
+  margin-left: 7vw;
+  margin-right: 5vw;
+  // display:grid;
+  // grid-template-columns: 1fr 1fr 1fr;
+  //place-items: center;
 }
 li{
   color:white;
@@ -165,3 +168,23 @@ li{
   border-bottom-color: #fff9;
 }
 // TEXT
+
+// IMAGES
+.pic {
+  width:12vw;
+  float: right;
+  margin-right: 20vw;
+  margin-top: -9vw;
+}
+// IMAGES
+
+.name {
+  position: fixed;
+  font-family: 'Josefin Sans';
+  color: #1B4332;
+  font-size: 0.7vw;
+  left: 0;
+  bottom: 0;
+  width: 99%;
+  text-align: right;
+}

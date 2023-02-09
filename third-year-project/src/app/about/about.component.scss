@@ -129,34 +129,48 @@ h1 {
 // HEADING
 
 // TEXT
+.textBox {
+  grid-column: span 2;
+}
+.subHeading {
+  font-size: 3vw;
+  text-transform:uppercase;
+  font-family: 'Oswald';
+  color: #1B4332;
+  text-align: left;
+}
 .text{
   font-family: 'Josefin Sans';
   font-size: 2vw;
-  color: #1B4332;
-  padding: 1vw;
-}
-.tv {
-  position: relative;
-  width: 80%;
-  height: 100%;
-  background: white;
-  border-radius: 0% 0% 0% 0% / 0% 0% 0% 0% ;
-  color: white;
-  box-shadow: 20px 20px rgba(0,0,0,.15);
-  transition: all .4s ease;
-}
-.tv:hover {
-  border-radius: 0% 0% 50% 50% / 0% 0% 5% 5% ;
-  box-shadow: 10px 10px rgba(0,0,0,.25);
+  color: #ffffff;
+  text-align: justify;
+  margin-top: -2vw;
 }
 .content {
-  margin: 3vw;
+  margin-top: -1vw;
+  margin-left: 5vw;
+  margin-right: 5vw;
   display:grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   place-items: center;
-  gap: 3vw;
 }
 // TEXT
+
+// IMAGES
+.pic {
+  width:15vw;
+}
+// IMAGES
+
+.name {
+  position: fixed;
+  font-family: 'Josefin Sans';
+  color: #1B4332;
+  font-size: 0.7vw;
+  left: 0;
+  bottom: 0;
+  width: 99%;
+  text-align: right;
+}
 
 

@@ -151,7 +151,7 @@ export class HomeComponent implements AfterViewInit{
   }
 
   onButton(userInput: string){
-    // this.runTest();
+    this.runTest();
     // When button pressed
     this.replayDiv.nativeElement.classList.add("beNone");
     this.allSigns.nativeElement.classList.remove("fade");

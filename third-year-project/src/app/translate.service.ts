@@ -179,7 +179,10 @@ export class TranslateService {
     var c = 0;
     for (var p = 0; p<=positions.length-1; p++){
       if (positions[p][0]=='and'){
-        if(['NN', 'NNP', 'NNS', 'NNPS'].includes(positions[p-1][2]) && ['NN', 'NNP', 'NNS', 'NNPS'].includes(positions[p+1][2])){
+        // if(['NN', 'NNP', 'NNS', 'NNPS'].includes(positions[p-1][2]) && ['NN', 'NNP', 'NNS', 'NNPS'].includes(positions[p+1][2])){
+        //   positions[p][2]='UH'
+        // }
+        if(positions[p-1][2]==positions[p+1][2]){
           positions[p][2]='UH'
         }
       }
@@ -220,7 +223,9 @@ export class TranslateService {
                 }
               }
 
-              if(['VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'VB'].includes(thesePositions[each][2])){
+              //if(['VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'VB'].includes(thesePositions[each][2])){
+              if(['VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'VB', 'NN', 'NNP', 'NNS', 'NNPS'].includes(thesePositions[each][2])){
+              //if(['NN', 'NNP', 'NNS', 'NNPS'].includes(thesePositions[each][2])){
                 if(each>0){
                   if(['PRP', 'PRP$'].includes(thesePositions[each-1][2])){
                     //console.log(thesePositions[each-1][0],availablePositions[0])
@@ -296,7 +301,7 @@ export class TranslateService {
   }
 
   getSW(){
-    const SW = ['as','of','so','also','to','be', 'on', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'yet', 'him', 'himself', 'herself', 'her', 'his', 'hers', 'would', 'could', 'should', 'we', 'us', 'about'];
+    const SW = ['as','of','so','also','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'yet', 'him', 'himself', 'herself', 'her', 'his', 'hers', 'would', 'could', 'should', 'we', 'us', 'about'];
     return SW;
   }
 
@@ -311,7 +316,7 @@ export class TranslateService {
   }
 
   getKeepTogether(){
-    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out'], ['nanjing', 'road'], ['right', 'over'], ['peach', 'rose'], ['hello', 'there'], ['hi', 'there']];
+    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out'], ['nanjing', 'road'], ['right', 'over'], ['peach', 'rose'], ['hello', 'there'], ['hi', 'there'], ['pick', 'up'], ['chinese', 'food'], ['ring', 'up']];
     return keepTogether;
   }
 
