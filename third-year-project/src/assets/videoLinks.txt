@@ -92,7 +92,7 @@
 ./assets/videos/howold.mp4,howold
 ./assets/videos/howmuch.mp4,howmuch
 ./assets/videos/hundred.mp4,hundred
-./assets/videos/i.mp4,i
+./assets/videos/ii.mp4,i
 ./assets/videos/j.mp4,j
 ./assets/videos/k.mp4,k
 ./assets/videos/know.mp4,know_knowledge
@@ -183,7 +183,7 @@
 ./assets/videos/university.mp4,university_uni
 ./assets/videos/v.mp4,v
 ./assets/videos/vegetables.mp4,vegetable
-./assets/videos/w.mp4,w_week
+./assets/videos/ww.mp4,w_week
 ./assets/videos/walk.mp4,walk
 ./assets/videos/water.mp4,water
 ./assets/videos/wednesday.mp4,wednesday

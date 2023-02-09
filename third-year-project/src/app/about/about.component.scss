@@ -130,10 +130,10 @@ h1 {
 
 // TEXT
 .textBox {
-  grid-column: span 2;
+  grid-column: span 3;
 }
 .subHeading {
-  font-size: 3vw;
+  font-size: 2.8vw;
   text-transform:uppercase;
   font-family: 'Oswald';
   color: #1B4332;
@@ -141,7 +141,7 @@ h1 {
 }
 .text{
   font-family: 'Josefin Sans';
-  font-size: 2vw;
+  font-size: 1.8vw;
   color: #ffffff;
   text-align: justify;
   margin-top: -2vw;
@@ -151,14 +151,29 @@ h1 {
   margin-left: 5vw;
   margin-right: 5vw;
   display:grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   place-items: center;
+  gap: 0vw 5vw;
 }
 // TEXT
 
 // IMAGES
 .pic {
   width:15vw;
+}
+.spinny {
+  animation-name: spin;
+  animation-duration: 9000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+}
+to {
+    transform:rotate(360deg);
+}
 }
 // IMAGES
 

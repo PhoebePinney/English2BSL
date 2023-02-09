@@ -361,6 +361,7 @@ a {
   font-size: 1.2vw;
   position: relative;
   margin-top: 7vw;
+  margin-left: 5vw;
 }
 // TEXT OUTPUT
 
@@ -474,6 +475,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-left: -1vw;
   &::before {
       font-size: 1.5vw;
       content: attr(data-title);
@@ -481,7 +483,7 @@ a {
 }
 .c-form__toggle:hover {
   text-decoration-line: underline;
-  text-decoration-thickness: 0.5vw;
+  text-decoration-thickness: 0.4vw;
   text-decoration-style: dotted;
   text-decoration-color: #40916C;
 }
@@ -539,6 +541,9 @@ a {
   width: 8vw;
   background-color: #52B788;
   cursor: pointer;
+  margin-left: 1vw;
+  margin-right: 1vw;
+  margin-top: 0.2vw;
   box-shadow: 0.5vw 0.5vw #1B4332;
   position: relative;
   top:-1.5vw;
