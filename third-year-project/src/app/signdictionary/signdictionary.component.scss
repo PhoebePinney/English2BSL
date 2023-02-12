@@ -5,15 +5,8 @@
 
 body {
   padding-bottom: 5vw;
-  margin: -0.8%;
   min-height: 100vh;
   text-align: center;
-  max-width: 100%;
-}
-// LOGO
-.logo {
-  width: 10vw;
-  margin-bottom: -1.8vw;
 }
 // LOGO
 
@@ -23,7 +16,7 @@ a {
 }
 .navbar-container {
   // position: fixed;
-  width: 100%;
+  width: 101vw;
 	text-align: center;
 	background-color: #ffffff;
 	box-shadow: 0px -5vw 1vw 5vw #366666aa;
@@ -31,6 +24,8 @@ a {
 	font-size: 0;
   font-family: 'Oswald';
   z-index: 100000;
+  margin-left:-1.3vw;
+  margin-top:-0.8%;
 }
 .navbar-container ul {
 	margin: 0;
@@ -249,5 +244,13 @@ video {
   bottom: 0;
   width: 99%;
   text-align: right;
+}
+.line {
+  margin-bottom: 4vh;
+  margin-top: 4vh;
+  width: 100%;
+  height: 1vh;
+  border-bottom: 1vh solid #1B4332;
+  text-align: center
 }
 

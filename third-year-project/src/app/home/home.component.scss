@@ -5,10 +5,8 @@
 
 body {
   padding-bottom: 5vw;
-  margin: -0.8%;
   min-height: 100vh;
   text-align: center;
-  max-width: 100%;
 }
 // LOGO
 
@@ -18,7 +16,7 @@ a {
 }
 .navbar-container {
   // position: fixed;
-  width: 100%;
+  width: 101vw;
 	text-align: center;
 	background-color: #ffffff;
 	box-shadow: 0px -5vw 1vw 5vw #366666aa;
@@ -26,7 +24,8 @@ a {
 	font-size: 0;
   font-family: 'Oswald';
   z-index: 100000;
-
+  margin-left:-1.3vw;
+  margin-top:-0.8%;
 }
 .navbar-container ul {
 	margin: 0;
@@ -111,9 +110,6 @@ a {
 .textContainer {
   display: grid;
   text-align: left;
-  // grid-template-columns: 1fr 1fr;
-  // grid-template-rows: auto auto;
-  // padding-left: 3vw;
 }
 .bigText {
   color: #ffffff;
@@ -133,7 +129,7 @@ a {
   grid-column: 1;
   display: flex;
   justify-content: center;
-  margin-left:7.2vw;
+  margin-left:6.8vw;
   margin-right:18vw;
   margin-top:-4vw;
 }
@@ -212,7 +208,7 @@ a {
   position: relative;
   transition:box-shadow 0.6s cubic-bezier(.79,.21,.06,.81);
   border-radius: 0.5vw;
-  transform: translate(-35%);
+  transform: translate(-50%);
   box-shadow: 0 0.2vw 0.2vw rgba(black, 0.3);
 }
 .btn{
@@ -317,7 +313,7 @@ a {
   display: none;
 }
 .moveToMiddle {
-  transform: translateX(58%);
+  transform: translateX(50%);
   background-image: none;
   background: radial-gradient(#cfc4bd, #7a6f6b);
 }
