@@ -129,7 +129,7 @@ export class HomeComponent implements AfterViewInit{
       sentence = sentence.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');
       var sentenceWords: string[] = sentence.split(' '); // List of words the user entered
       var filteredSentence = sentenceWords.filter(function(value, index, arr){ return value != "";})
-      var output = this.translate.translate(filteredSentence, this.availableWords, true)
+      var output = this.translate.translate(filteredSentence, this.availableWords)
       var outputString = '';
       for (let w in output){
         outputString = outputString + output[w] + ' '
@@ -204,6 +204,8 @@ export class HomeComponent implements AfterViewInit{
     }
     // Show video div and play first vid in playlist
     var output = '';
+    // var tempOutput = this.output.slice()
+    // this.output = this.output.filter(function(e) { return e !== '*' })
     for (let o in this.output){
       if (this.output[o].length<2){
         this.output[o] = this.output[o].toUpperCase();
@@ -223,14 +225,16 @@ export class HomeComponent implements AfterViewInit{
       else if (this.output[o]=='howmuch'){
         this.output[o] = "how much";
       }
-      else if (this.output[o]=='howmold'){
+      else if (this.output[o]=='howold'){
         this.output[o] = "how old";
       }
       else if (this.output[o]=='cant'){
         this.output[o] = "can't";
       }
-      output = output + this.output[o] + ' - ';
+      output = output + ' ' + this.output[o];
     }
+    this.output = this.output.filter(function(e) { return e !== '*' })
+    output = output.replace(/[*]/g, ' - ')
     output = output.slice(0, -2);
     this.out = '[ '+output+']';
     this.playVid();

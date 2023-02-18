@@ -18,7 +18,7 @@ export class TranslateService {
 
   constructor() { }
 
-  translate(listOfWords: string[], availableWords: string[], testMode=false) {
+  translate(listOfWords: string[], availableWords: string[]) {
     var out: string[] = []; // temp
     var s = '';
     var temp = [];
@@ -52,23 +52,76 @@ export class TranslateService {
     for (let w in listOfWords){
       if (listOfWords[w]!='I' && listOfWords[w]!=','){
         if (availableWords.includes(listOfWords[w]) || listOfWords[w]==','){ // if available, push whole word
-          out.push(listOfWords[w]);
+          out.push(listOfWords[w], '*');
         }
         else if (availableWords.includes(lemmatizer(listOfWords[w])) && (lemmatizer(listOfWords[w]).length>1)){ // check if lemmatising makes it available
-          out.push(lemmatizer(listOfWords[w]));
+          out.push(lemmatizer(listOfWords[w]), '*');
         }
         else if (availableWords.includes(this.pluralize.singular(listOfWords[w])) && this.pluralize.singular(listOfWords[w])!='i'){ // check if singularising makes it available
-          out.push(this.pluralize.singular(listOfWords[w]));
+          out.push(this.pluralize.singular(listOfWords[w]), '*');
         }
-        else{ // else split into letters and push letters
-          if (testMode==true){
-            out.push(listOfWords[w])
+        else{
+          if(!isNaN(+listOfWords[w])){ // if word is a valid number
+            var stringToNum = +listOfWords[w] // convert string to number
+            var div1000 = Math.floor(stringToNum  / 1000) // divide number by a thousand
+            if(div1000>=1000){ // if number is biggger than 999,999, just split into digits
+              const splitWord = stringToNum.toString().split('');
+              for (const l in splitWord){
+                out.push(splitWord[l]);
+              }
+              out.push('*')
+            }
+            else { // if number is less than 999,999
+              if (div1000>0){
+                if (availableWords.includes(div1000.toString())){ // check if in available words
+                  out.push(div1000.toString(), '*')
+                }
+                else{
+                  const splitWord = div1000.toString().split(''); // split remaining into digits
+                  for (const l in splitWord){
+                    out.push(splitWord[l]);
+                  }
+                  out.push('*')
+                }
+                out.push('thousand', '*')
+              }
+              var lessThan1000 = (stringToNum-(div1000*1000))
+              var div100 = Math.floor( lessThan1000 / 100) // divide remaining by 100
+              if (div100>0){
+                if (availableWords.includes(div100.toString())){ // check if in available words
+                  out.push(div100.toString(), '*')
+                }
+                else{
+                  const splitWord = div100.toString().split(''); // split remaining into digits
+                  for (const l in splitWord){
+                    out.push(splitWord[l]);
+                  }
+                  out.push('*')
+                }
+                out.push('hundred', '*')
+              }
+              var lessThan100 = (lessThan1000 - (div100*100))
+              if (lessThan100>0){
+                listOfWords[w]=lessThan100.toString()
+                if (availableWords.includes(listOfWords[w])){ // check if in available words
+                  out.push(listOfWords[w], '*')
+                }
+                else{
+                  const splitWord = listOfWords[w].split(''); // split remaining into digits
+                  for (const l in splitWord){
+                    out.push(splitWord[l]);
+                  }
+                  out.push('*')
+                }
+              }
+            }
           }
-          else{
+          else{ // split up word into letters
             const splitWord = listOfWords[w].split('');
             for (const l in splitWord){
               out.push(splitWord[l]);
             }
+            out.push('*')
           }
         }
       }
