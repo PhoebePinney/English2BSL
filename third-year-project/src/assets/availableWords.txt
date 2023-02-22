@@ -141,6 +141,7 @@ hope
 wish
 holiday
 hour
+oclock
 house
 home
 how

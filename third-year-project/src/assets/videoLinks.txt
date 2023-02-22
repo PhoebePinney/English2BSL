@@ -85,7 +85,7 @@
 ./assets/videos/help.mp4,help
 ./assets/videos/holiday.mp4,holiday
 ./assets/videos/hope.mp4,hope_wish
-./assets/videos/hour.mp4,hour
+./assets/videos/hour.mp4,hour_oclock
 ./assets/videos/hot.mp4,hot_warm
 ./assets/videos/house.mp4,house_home
 ./assets/videos/how.mp4,how

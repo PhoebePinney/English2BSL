@@ -63,15 +63,32 @@ export class TranslateService {
         else{
           if(!isNaN(+listOfWords[w])){ // if word is a valid number
             var stringToNum = +listOfWords[w] // convert string to number
-            var div1000 = Math.floor(stringToNum  / 1000) // divide number by a thousand
-            if(div1000>=1000){ // if number is biggger than 999,999, just split into digits
+
+            var divMil = Math.floor(stringToNum / 1000000) // divide number by a million
+            if(divMil>=1000){ // if number is bigger than 999,999,999, just split into digits
               const splitWord = stringToNum.toString().split('');
               for (const l in splitWord){
                 out.push(splitWord[l]);
               }
               out.push('*')
             }
-            else { // if number is less than 999,999
+            else{ // if number is less than 1 billion
+              if (divMil>0){
+                if (availableWords.includes(divMil.toString())){ // check if in available words
+                  out.push(divMil.toString(), '*')
+                }
+                else{
+                  const splitWord = divMil.toString().split(''); // split remaining into digits
+                  for (const l in splitWord){
+                    out.push(splitWord[l]);
+                  }
+                  out.push('*')
+                }
+                out.push('million', '*')
+              }
+              var lessThanMil = (stringToNum-(divMil*1000000))
+              var div1000 = Math.floor(lessThanMil  / 1000) // divide number by a thousand
+              console.log(div1000)
               if (div1000>0){
                 if (availableWords.includes(div1000.toString())){ // check if in available words
                   out.push(div1000.toString(), '*')
@@ -85,7 +102,7 @@ export class TranslateService {
                 }
                 out.push('thousand', '*')
               }
-              var lessThan1000 = (stringToNum-(div1000*1000))
+              var lessThan1000 = (lessThanMil-(div1000*1000))
               var div100 = Math.floor( lessThan1000 / 100) // divide remaining by 100
               if (div100>0){
                 if (availableWords.includes(div100.toString())){ // check if in available words
@@ -230,9 +247,6 @@ export class TranslateService {
     var c = 0;
     for (var p = 0; p<=positions.length-1; p++){
       if (positions[p][0]=='and'){
-        // if(['NN', 'NNP', 'NNS', 'NNPS'].includes(positions[p-1][2]) && ['NN', 'NNP', 'NNS', 'NNPS'].includes(positions[p+1][2])){
-        //   positions[p][2]='UH'
-        // }
         if(positions[p-1][2]==positions[p+1][2]){
           positions[p][2]='UH'
         }
@@ -367,7 +381,7 @@ export class TranslateService {
   }
 
   getKeepTogether(){
-    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out'], ['nanjing', 'road'], ['right', 'over'], ['peach', 'rose'], ['hello', 'there'], ['hi', 'there'], ['pick', 'up'], ['chinese', 'food'], ['ring', 'up']];
+    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out'], ['nanjing', 'road'], ['right', 'over'], ['peach', 'rose'], ['hello', 'there'], ['hi', 'there'], ['pick', 'up'], ['chinese', 'food'], ['ring', 'up'], ['half', 'past']];
     return keepTogether;
   }
 

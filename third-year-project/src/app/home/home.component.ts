@@ -167,6 +167,9 @@ export class HomeComponent implements AfterViewInit{
 
     // Check if input is valid
     userInput = this.contractions.expand(userInput); // expand contractions
+    if (userInput.includes('of the clock')){
+      userInput = userInput.replace('of the clock', 'oclock')
+    }
     userInput = userInput.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');
     this.listOfWords = userInput.split(' '); // List of words the user entered
     var filtered = this.listOfWords.filter(function(value, index, arr){ return value != "";}); // remove blank tokens
@@ -230,6 +233,9 @@ export class HomeComponent implements AfterViewInit{
       }
       else if (this.output[o]=='cant'){
         this.output[o] = "can't";
+      }
+      else if (this.output[o]=='oclock'){
+        this.output[o] = "o'clock";
       }
       output = output + ' ' + this.output[o];
     }
