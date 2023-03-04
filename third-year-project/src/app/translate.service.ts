@@ -8,6 +8,8 @@ export class TranslateService {
   posTagger = require('wink-pos-tagger');
   pluralize = require('pluralize');
   contractions = require('expand-contractions');
+  similarity = require('similarity')
+  stringSimilarity = require("string-similarity");
   tagger = this.posTagger();
   stopWords = this.getSW();
   months = this.getMonths();
@@ -19,13 +21,13 @@ export class TranslateService {
   constructor() { }
 
   translate(listOfWords: string[], availableWords: string[]) {
-    var out: string[] = []; // temp
-    var s = '';
-    var temp = [];
+    var out: any[] = [] // temp
+    var s = ''
+    var temp = []
     for (let w in listOfWords){
       if (listOfWords[w].includes(',')){
-        temp.push(listOfWords[w].replace(',',''));
-        temp.push(',');
+        temp.push(listOfWords[w].replace(',',''))
+        temp.push(',')
       }
       else{
         temp.push(listOfWords[w]);
@@ -33,22 +35,28 @@ export class TranslateService {
     }
     listOfWords = temp;
     for (let w in listOfWords){
+      // Deal with the pronoun 'I'
       if (listOfWords[w]=='i'){
         listOfWords[w]='I';
       }
-      if (listOfWords[w] != 'I'){ // retain I as a possesive pronoun
-        listOfWords[w] = listOfWords[w].toLowerCase(); // set to lowercase
+      if (listOfWords[w] != 'I'){ // retain I as a pronoun
+        listOfWords[w] = listOfWords[w].toLowerCase(); // set all other words to lowercase
       }
       else{
         listOfWords[w]='I';
       }
+
+      // Format months as the first three letters e.g. October -> OCT
       if (this.months.includes(listOfWords[w])){
         listOfWords[w] = listOfWords[w].substring(0, 3);
       }
         s = s + listOfWords[w] + ' ';
     }
+
+    var corrections = this.checkForMistakes(listOfWords, availableWords) // check for spelling errors
+
     listOfWords = this.getOrder(s.split(' '));
-    listOfWords = this.removeStopWords(listOfWords);
+    listOfWords = this.removeStopWords(listOfWords); // remove words not used in BSL
     for (let w in listOfWords){
       if (listOfWords[w]!='I' && listOfWords[w]!=','){
         if (availableWords.includes(listOfWords[w]) || listOfWords[w]==','){ // if available, push whole word
@@ -60,7 +68,7 @@ export class TranslateService {
         else if (availableWords.includes(this.pluralize.singular(listOfWords[w])) && this.pluralize.singular(listOfWords[w])!='i'){ // check if singularising makes it available
           out.push(this.pluralize.singular(listOfWords[w]), '*');
         }
-        else{
+        else{ // word not in dictionary
           if(!isNaN(+listOfWords[w])){ // if word is a valid number
             var stringToNum = +listOfWords[w] // convert string to number
 
@@ -88,7 +96,6 @@ export class TranslateService {
               }
               var lessThanMil = (stringToNum-(divMil*1000000))
               var div1000 = Math.floor(lessThanMil  / 1000) // divide number by a thousand
-              console.log(div1000)
               if (div1000>0){
                 if (availableWords.includes(div1000.toString())){ // check if in available words
                   out.push(div1000.toString(), '*')
@@ -133,7 +140,10 @@ export class TranslateService {
               }
             }
           }
-          else{ // split up word into letters
+
+          // If not a number
+          else{
+            // Split word into letters
             const splitWord = listOfWords[w].split('');
             for (const l in splitWord){
               out.push(splitWord[l]);
@@ -144,7 +154,50 @@ export class TranslateService {
       }
     }
     out = this.checkForBigrams(out);
-    return out;
+    return [out, corrections]
+  }
+
+  checkForMistakes(listOfWords: string[], availableWords: string[]){
+    var corrections: any[][] = []
+    for (let w in listOfWords){
+      if (listOfWords[w]!=','){
+        if(listOfWords[w]=='I'){
+          corrections.push(['I', 0])
+        }
+        else if (availableWords.includes(listOfWords[w]) ||
+        (availableWords.includes(lemmatizer(listOfWords[w])) && (lemmatizer(listOfWords[w]).length>1)) ||
+        (availableWords.includes(this.pluralize.singular(listOfWords[w])) && this.pluralize.singular(listOfWords[w])!='i') ||
+        (!isNaN(+listOfWords[w])) ||
+        (this.stopWords.includes(listOfWords[w]))){ // not a mistake
+          corrections.push([listOfWords[w], 0])
+        }
+        else{
+          // Check for spelling mistakes
+
+          // Dice’s coefficient
+          var matchesDC = this.stringSimilarity.findBestMatch(listOfWords[w], availableWords);
+          // console.log(matchesDC.bestMatch.rating, matchesDC.bestMatch.target)
+
+          // Levenshtein distance
+          var matchesLD: { [aw: string] : string; } = {};
+          for(let a in availableWords){
+            matchesLD[availableWords[a]] = this.similarity(listOfWords[w], availableWords[a])
+          }
+          var bestMatchLD = Object.keys(matchesLD).reduce(function(a, b){ return matchesLD[a] > matchesLD[b] ? a : b })
+          // console.log(matchesLD[bestMatchLD], bestMatchLD)
+
+          // Get best match
+          if(matchesDC.bestMatch.rating>matchesLD[bestMatchLD]){
+            corrections.push([matchesDC.bestMatch.target, 1])
+          }
+          else{
+            corrections.push([bestMatchLD, 1])
+          }
+
+        }
+      }
+    }
+    return corrections
   }
 
   getOrder(wordList: string[]){
@@ -304,7 +357,7 @@ export class TranslateService {
           }
         }
       }
-      console.log(thesePositions)
+      //console.log(thesePositions)
       allOrdered = allOrdered.concat(this.orderFromPositions(thesePositions));
       if (conjunctions.length>0){
         allOrdered.push(conjunctions[0]);

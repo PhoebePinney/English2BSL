@@ -70,6 +70,23 @@
   </div>
   </div>
   </div>
+  <p class="corrections" *ngIf="mistakes>0">
+    Did you mean:
+    <span class="corrections_words" *ngFor="let c of corrections">
+    <i class="mistake" *ngIf="c[1]==1">{{c[0]}}&nbsp;</i>
+    <span *ngIf="c[1]==0">{{c[0]}}&nbsp;</span>
+    </span>
+    &nbsp;
+    <!-- <button class="yesBtn">
+      <img  class="yesIcon" src="https://img.icons8.com/external-bearicons-detailed-outline-bearicons/64/null/external-start-call-to-action-bearicons-detailed-outline-bearicons.png"/>
+    </button> -->
+    <button class="arrow" (click)="onButton(correctionsString); box.value=correctionsString">
+      <div class="arrow-top"></div>
+      <div class="arrow-bottom"></div>
+    </button>
+  </p>
+
+
 
   <div id='vid' class="videoWrapper">
     <div class="vidDiv moveToMiddle" #vidDiv>

@@ -12,7 +12,7 @@ export class HomeComponent implements AfterViewInit{
   contractions = require('expand-contractions');
   availableWords: string[] = [];
   listOfWords: string[] = [];
-  output: string[] = [];
+  output: any[] = [];
   out: string = ' ';
   message: string = '';
   char = 0;
@@ -36,6 +36,9 @@ export class HomeComponent implements AfterViewInit{
   currentSign = '';
   testSentences: string[] = [];
   testSentencesTruth: string[] = [];
+  corrections: any[][] = [];
+  mistakes = 0;
+  correctionsString = '';
 
   constructor(http: HttpClient, translate: TranslateService, private router: Router) {
     this.httpClient = http;
@@ -161,9 +164,12 @@ export class HomeComponent implements AfterViewInit{
     this.speedButtons.nativeElement.classList.add("moveOver");
     this.output = []; // List of words to be output
     this.playlist = []; // List of videos to be shown
+    this.corrections = [];
+    this.mistakes = 0;
     this.message = ' ';
     this.i = 0;
     this.out = '';
+    this.correctionsString = '';
 
     // Check if input is valid
     userInput = this.contractions.expand(userInput); // expand contractions
@@ -183,7 +189,17 @@ export class HomeComponent implements AfterViewInit{
       this.videoPlayer2.nativeElement.setAttribute("src", "");
       return;
     }
-    this.output = this.translate.translate(filtered, this.availableWords) // return translated list of words
+    let r = this.translate.translate(filtered, this.availableWords) // return translated list of words
+    this.output = r[0]
+    this.corrections = r[1]
+    for(let c in this.corrections){
+      if(this.corrections[c][1]==1){
+        this.mistakes +=1
+      }
+      this.correctionsString = this.correctionsString + this.corrections[c][0] + ' '
+    }
+
+
     if (this.output.length < 1){
       this.message = 'Invalid phrase';
       this.vidDiv.nativeElement.classList.add("moveToMiddle");
