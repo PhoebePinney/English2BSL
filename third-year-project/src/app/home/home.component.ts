@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements AfterViewInit{
   contractions = require('expand-contractions');
   availableWords: string[] = [];
+  inflections: string[] = [];
   listOfWords: string[] = [];
   output: any[] = [];
   out: string = ' ';
@@ -62,6 +63,9 @@ export class HomeComponent implements AfterViewInit{
     // Get list of available words
     this.httpClient.get('./assets/availableWords.txt', { responseType: 'text' })
       .subscribe(wordsTextFile => this.getAvailableWords(wordsTextFile));
+    // Get list of inflections
+    this.httpClient.get('./assets/inflections.txt', { responseType: 'text' })
+      .subscribe(wordsTextFile => this.getInflections(wordsTextFile));
 
     // TESTING
     this.httpClient.get('./assets/testData.txt', { responseType: 'text' })
@@ -89,6 +93,18 @@ export class HomeComponent implements AfterViewInit{
     const pop = lines.pop();
     for (const l in lines){
       this.availableWords.push(lines[l]);
+    }
+  }
+
+  getInflections(textFile: string){
+    // Creates a list of inflections of available words from the text file
+    let lines = textFile.split('\n');
+    for (const l in lines){
+      lines[l] = lines[l].replace('\r','');
+    }
+    const pop = lines.pop();
+    for (const l in lines){
+      this.inflections.push(lines[l]);
     }
   }
 
@@ -132,7 +148,7 @@ export class HomeComponent implements AfterViewInit{
       sentence = sentence.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');
       var sentenceWords: string[] = sentence.split(' '); // List of words the user entered
       var filteredSentence = sentenceWords.filter(function(value, index, arr){ return value != "";})
-      var output = this.translate.translate(filteredSentence, this.availableWords)
+      var output = this.translate.translate(filteredSentence, this.availableWords, this.inflections)
       var outputString = '';
       for (let w in output){
         outputString = outputString + output[w] + ' '
@@ -189,7 +205,7 @@ export class HomeComponent implements AfterViewInit{
       this.videoPlayer2.nativeElement.setAttribute("src", "");
       return;
     }
-    let r = this.translate.translate(filtered, this.availableWords) // return translated list of words
+    let r = this.translate.translate(filtered, this.availableWords, this.inflections) // return translated list of words
     this.output = r[0]
     this.corrections = r[1]
     for(let c in this.corrections){

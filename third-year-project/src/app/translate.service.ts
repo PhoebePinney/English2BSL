@@ -20,7 +20,7 @@ export class TranslateService {
 
   constructor() { }
 
-  translate(listOfWords: string[], availableWords: string[]) {
+  translate(listOfWords: string[], availableWords: string[], inflections: string[]) {
     var out: any[] = [] // temp
     var s = ''
     var temp = []
@@ -53,7 +53,7 @@ export class TranslateService {
         s = s + listOfWords[w] + ' ';
     }
 
-    var corrections = this.checkForMistakes(listOfWords, availableWords) // check for spelling errors
+    var corrections = this.checkForMistakes(listOfWords, availableWords, inflections) // check for spelling errors
 
     listOfWords = this.getOrder(s.split(' '));
     listOfWords = this.removeStopWords(listOfWords); // remove words not used in BSL
@@ -157,40 +157,40 @@ export class TranslateService {
     return [out, corrections]
   }
 
-  checkForMistakes(listOfWords: string[], availableWords: string[]){
+  checkForMistakes(listOfWords: string[], availableWords: string[], inflections: string[]){
+    var allWords = availableWords.concat(inflections)
     var corrections: any[][] = []
     for (let w in listOfWords){
       if (listOfWords[w]!=','){
         if(listOfWords[w]=='I'){
           corrections.push(['I', 0])
         }
-        else if (availableWords.includes(listOfWords[w]) ||
-        (availableWords.includes(lemmatizer(listOfWords[w])) && (lemmatizer(listOfWords[w]).length>1)) ||
-        (availableWords.includes(this.pluralize.singular(listOfWords[w])) && this.pluralize.singular(listOfWords[w])!='i') ||
+        else if (allWords.includes(listOfWords[w]) ||
         (!isNaN(+listOfWords[w])) ||
         (this.stopWords.includes(listOfWords[w]))){ // not a mistake
           corrections.push([listOfWords[w], 0])
         }
         else{
           // Check for spelling mistakes
-
           // Dice’s coefficient
-          var matchesDC = this.stringSimilarity.findBestMatch(listOfWords[w], availableWords);
+          var matchesDC = this.stringSimilarity.findBestMatch(listOfWords[w], allWords);
           // console.log(matchesDC.bestMatch.rating, matchesDC.bestMatch.target)
 
           // Levenshtein distance
           var matchesLD: { [aw: string] : string; } = {};
-          for(let a in availableWords){
-            matchesLD[availableWords[a]] = this.similarity(listOfWords[w], availableWords[a])
+          for(let a in allWords){
+            matchesLD[allWords[a]] = this.similarity(listOfWords[w], allWords[a])
           }
           var bestMatchLD = Object.keys(matchesLD).reduce(function(a, b){ return matchesLD[a] > matchesLD[b] ? a : b })
           // console.log(matchesLD[bestMatchLD], bestMatchLD)
 
           // Get best match
           if(matchesDC.bestMatch.rating>matchesLD[bestMatchLD]){
+            console.log(matchesDC.bestMatch.rating)
             corrections.push([matchesDC.bestMatch.target, 1])
           }
           else{
+            console.log(matchesLD[bestMatchLD])
             corrections.push([bestMatchLD, 1])
           }
 
