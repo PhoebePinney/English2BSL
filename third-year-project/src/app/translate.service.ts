@@ -1,3 +1,5 @@
+  // NATURAL LANGUAGE PROCESSING SERVICE FOR ENGLISH-TO-BSL TRANSLATION
+
 import { Injectable } from '@angular/core';
 import { lemmatizer } from "lemmatizer";
 
@@ -21,10 +23,11 @@ export class TranslateService {
   constructor() { }
 
   translate(listOfWords: string[], availableWords: string[], inflections: string[]) {
-    var out: any[] = [] // temp
+    var out: any[] = []
     var s = ''
     var temp = []
-    for (let w in listOfWords){
+
+    for (let w in listOfWords){ // Deal with commas for splitting sentence
       if (listOfWords[w].includes(',')){
         temp.push(listOfWords[w].replace(',',''))
         temp.push(',')
@@ -34,12 +37,13 @@ export class TranslateService {
       }
     }
     listOfWords = temp;
+
     for (let w in listOfWords){
       // Deal with the pronoun 'I'
       if (listOfWords[w]=='i'){
         listOfWords[w]='I';
       }
-      if (listOfWords[w] != 'I'){ // retain I as a pronoun
+      if (listOfWords[w] != 'I'){ // retain I as a pronoun (capitalised)
         listOfWords[w] = listOfWords[w].toLowerCase(); // set all other words to lowercase
       }
       else{
@@ -53,9 +57,10 @@ export class TranslateService {
         s = s + listOfWords[w] + ' ';
     }
 
+    // Check for suggested spelling mistakes
     var corrections = this.checkForMistakes(listOfWords, availableWords, inflections) // check for spelling errors
 
-    listOfWords = this.getOrder(s.split(' '));
+    listOfWords = this.getOrder(s.split(' ')); // get order of words
     listOfWords = this.removeStopWords(listOfWords); // remove words not used in BSL
     for (let w in listOfWords){
       if (listOfWords[w]!='I' && listOfWords[w]!=','){
@@ -153,11 +158,12 @@ export class TranslateService {
         }
       }
     }
-    out = this.checkForBigrams(out);
+    out = this.checkForBigrams(out); // Keep bigrams together
     return [out, corrections]
   }
 
   checkForMistakes(listOfWords: string[], availableWords: string[], inflections: string[]){
+    // Checks for possible spelling mistakes, used the list of available words and their inflections as a dictionary
     var allWords = availableWords.concat(inflections)
     var corrections: any[][] = []
     for (let w in listOfWords){
@@ -170,11 +176,9 @@ export class TranslateService {
         (this.stopWords.includes(listOfWords[w]))){ // not a mistake
           corrections.push([listOfWords[w], 0])
         }
-        else{
-          // Check for spelling mistakes
+        else{ // Check for spelling mistakes
           // Dice’s coefficient
           var matchesDC = this.stringSimilarity.findBestMatch(listOfWords[w], allWords);
-          // console.log(matchesDC.bestMatch.rating, matchesDC.bestMatch.target)
 
           // Levenshtein distance
           var matchesLD: { [aw: string] : string; } = {};
@@ -182,18 +186,14 @@ export class TranslateService {
             matchesLD[allWords[a]] = this.similarity(listOfWords[w], allWords[a])
           }
           var bestMatchLD = Object.keys(matchesLD).reduce(function(a, b){ return matchesLD[a] > matchesLD[b] ? a : b })
-          // console.log(matchesLD[bestMatchLD], bestMatchLD)
 
           // Get best match
           if(matchesDC.bestMatch.rating>matchesLD[bestMatchLD]){
-            console.log(matchesDC.bestMatch.rating)
             corrections.push([matchesDC.bestMatch.target, 1])
           }
           else{
-            console.log(matchesLD[bestMatchLD])
             corrections.push([bestMatchLD, 1])
           }
-
         }
       }
     }
@@ -201,13 +201,14 @@ export class TranslateService {
   }
 
   getOrder(wordList: string[]){
+    // Get BSL word order
     wordList.pop();
     wordList = this.checkForBigrams(wordList);
     var wordListString = "";
     for (let o in wordList){
       wordListString = wordListString + wordList[o] + ' ';
     }
-    var taggedSentence = this.tagger.tagSentence(wordListString);
+    var taggedSentence = this.tagger.tagSentence(wordListString); // Get POS tags
     var positions = [];
     for (let word in wordList){
       var thisPOS: any = '';
@@ -216,6 +217,7 @@ export class TranslateService {
           thisPOS = taggedSentence[t].pos;
         }
       }
+      // Special cases
       if (wordList[word]=='howmuch'){
         positions.push([wordList[word], -1, 'WRB'])
       }
@@ -240,9 +242,6 @@ export class TranslateService {
       else if (wordList[word]=='go'){
         positions.push([wordList[word], -1, 'VB'])
       }
-      // else if (wordList[word]=='that'){
-      //   positions.push([wordList[word], -1, 'NN'])
-      // }
       else if (this.temporalWords.includes(wordList[word])){
         positions.push([wordList[word], -1, 'T'])
       }
@@ -253,10 +252,11 @@ export class TranslateService {
         positions.push([wordList[word], -1, thisPOS])
       }
     }
-    return (this.assignPositions(wordList, wordListString, positions));
+    return (this.assignPositions(positions));
   }
 
   checkForBigrams(wordList: string[]){
+    // Here, bigrams are two words that should not be split up
     var bigrams = this.getBigrams(wordList);
     var BTS = this.getBigramsToSigns();
     wordList = [];
@@ -293,18 +293,18 @@ export class TranslateService {
     return cleanList;
   }
 
-  assignPositions(wordList: string[], wordListString: string, positions: any[][]){
+  assignPositions(positions: any[][]){
     var conjunctions = []; // coordinating conjunctions
-    var splitUp: any[][] = [[]];
+    var splitUp: any[][] = [[]]; // sections of the sentence
     var allOrdered: any[] = [];
     var c = 0;
     for (var p = 0; p<=positions.length-1; p++){
-      if (positions[p][0]=='and'){
+      if (positions[p][0]=='and'){ // Split at 'and'
         if(positions[p-1][2]==positions[p+1][2]){
           positions[p][2]='UH'
         }
       }
-      if (positions[p][2]=='CC' || positions[p][0]==',' || positions[p][2]=='T'){
+      if (positions[p][2]=='CC' || positions[p][0]==',' || positions[p][2]=='T'){ // Split at coordinating conjunctions (but keep in sentence)
         conjunctions.push(positions[p][0]);
         c +=1;
         splitUp.push([]);
@@ -327,7 +327,6 @@ export class TranslateService {
         for (var each = 0; each<=thesePositions.length-1; each++){
           if(!skipThese.includes(each)){
             if (this.orderBSL[tagSet].includes(thesePositions[each][2])){
-              //console.log(thesePositions[each][0],availablePositions[0])
               thesePositions[each][1]=availablePositions[0];
               availablePositions.shift();
 
@@ -341,12 +340,9 @@ export class TranslateService {
                 }
               }
 
-              //if(['VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'VB'].includes(thesePositions[each][2])){
-              if(['VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'VB', 'NN', 'NNP', 'NNS', 'NNPS'].includes(thesePositions[each][2])){
-              //if(['NN', 'NNP', 'NNS', 'NNPS'].includes(thesePositions[each][2])){
+              if(['VBD', 'VBG', 'VBN', 'VBP', 'VBZ', 'VB', 'NN', 'NNP', 'NNS', 'NNPS'].includes(thesePositions[each][2])){ // Special case for verbs and nouns
                 if(each>0){
-                  if(['PRP', 'PRP$'].includes(thesePositions[each-1][2])){
-                    //console.log(thesePositions[each-1][0],availablePositions[0])
+                  if(['PRP', 'PRP$'].includes(thesePositions[each-1][2])){ // Pronouns and possessive pronouns
                     thesePositions[each-1][1]=availablePositions[0];
                     availablePositions.shift();
                     skipThese.push(each-1)
@@ -357,10 +353,9 @@ export class TranslateService {
           }
         }
       }
-      //console.log(thesePositions)
       allOrdered = allOrdered.concat(this.orderFromPositions(thesePositions));
       if (conjunctions.length>0){
-        allOrdered.push(conjunctions[0]);
+        allOrdered.push(conjunctions[0]); // add CCs back into sentence where it was split
         conjunctions.shift();
       }
     }
@@ -368,6 +363,7 @@ export class TranslateService {
   }
 
   orderFromPositions(positions: any[][]){
+    // Obtain the order based on the positions
     var ordered = [];
     var order = [...Array(positions.length+10).keys()];
     for (var o in order){

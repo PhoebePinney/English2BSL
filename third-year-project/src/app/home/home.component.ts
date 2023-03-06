@@ -133,6 +133,7 @@ export class HomeComponent implements AfterViewInit{
   }
 
   updateChar(){
+    // Updates the character counter in input box
     var inputValue = this.box.nativeElement.value;
     this.char = inputValue.length;
   }
@@ -169,9 +170,10 @@ export class HomeComponent implements AfterViewInit{
     console.log(incorrect)
   }
 
-  onButton(userInput: string){
-    // this.runTest();
-    // When button pressed
+  onButton(userInput: string){ // When 'translate' button pressed
+    // this.runTest(); // RUN TESTS
+
+    // Reset some values
     this.replayDiv.nativeElement.classList.add("beNone");
     this.allSigns.nativeElement.classList.remove("fade");
     this.allSigns.nativeElement.classList.remove("beNone");
@@ -180,23 +182,23 @@ export class HomeComponent implements AfterViewInit{
     this.speedButtons.nativeElement.classList.add("moveOver");
     this.output = []; // List of words to be output
     this.playlist = []; // List of videos to be shown
-    this.corrections = [];
-    this.mistakes = 0;
-    this.message = ' ';
+    this.corrections = []; // Suggested spelling corrections
+    this.mistakes = 0; // Number of suggested spelling mistakes
+    this.message = ' '; // Sometimes shows error message
     this.i = 0;
     this.out = '';
-    this.correctionsString = '';
+    this.correctionsString = ''; // The outputted suggestions
 
     // Check if input is valid
     userInput = this.contractions.expand(userInput); // expand contractions
-    if (userInput.includes('of the clock')){
+    if (userInput.includes('of the clock')){ // Deal with 'o'clock' contraction - special case
       userInput = userInput.replace('of the clock', 'oclock')
     }
-    userInput = userInput.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, '');
+    userInput = userInput.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, ''); // Remove punctuation apart from commas
     this.listOfWords = userInput.split(' '); // List of words the user entered
     var filtered = this.listOfWords.filter(function(value, index, arr){ return value != "";}); // remove blank tokens
     if (filtered.length == 0){ // if no words input
-      this.message = 'Invalid phrase';
+      this.message = 'Invalid phrase'; // Error message
       this.vidDiv.nativeElement.classList.add("moveToMiddle");
       this.speedButtons.nativeElement.classList.remove("moveOver");
       this.allSigns.nativeElement.classList.add("beNone");
@@ -205,9 +207,13 @@ export class HomeComponent implements AfterViewInit{
       this.videoPlayer2.nativeElement.setAttribute("src", "");
       return;
     }
+
+    // TRANSLATE (if valid input)
     let r = this.translate.translate(filtered, this.availableWords, this.inflections) // return translated list of words
     this.output = r[0]
     this.corrections = r[1]
+
+    // Output suggested spelling corrections
     for(let c in this.corrections){
       if(this.corrections[c][1]==1){
         this.mistakes +=1
@@ -215,7 +221,7 @@ export class HomeComponent implements AfterViewInit{
       this.correctionsString = this.correctionsString + this.corrections[c][0] + ' '
     }
 
-
+    // Error message
     if (this.output.length < 1){
       this.message = 'Invalid phrase';
       this.vidDiv.nativeElement.classList.add("moveToMiddle");
@@ -227,6 +233,7 @@ export class HomeComponent implements AfterViewInit{
       return;
     }
 
+    // Display video translation
     for (const word in this.output){
       for (const link in this.listOfVideos){
         const possible = this.listOfVideos[link][1].split('_'); // all words for that video link
@@ -237,14 +244,14 @@ export class HomeComponent implements AfterViewInit{
         }
       }
     }
+
     // Show video div and play first vid in playlist
     var output = '';
-    // var tempOutput = this.output.slice()
-    // this.output = this.output.filter(function(e) { return e !== '*' })
     for (let o in this.output){
       if (this.output[o].length<2){
-        this.output[o] = this.output[o].toUpperCase();
+        this.output[o] = this.output[o].toUpperCase(); // set letters to upper case
       }
+      // Special cases
       if (this.output[o]=='nameme'){
         this.output[o] = 'name (my)';
       }
@@ -275,10 +282,11 @@ export class HomeComponent implements AfterViewInit{
     output = output.replace(/[*]/g, ' - ')
     output = output.slice(0, -2);
     this.out = '[ '+output+']';
-    this.playVid();
+    this.playVid(); // Start showing video playlist
   }
 
   playVid() {
+    // Plays videos in playlist
     this.i = 0;
     this.currentSign=this.output[this.i];
     this.videoPlayer.nativeElement.classList.remove("beNone");
@@ -291,6 +299,7 @@ export class HomeComponent implements AfterViewInit{
   }
 
   setSlow(){
+    // When slow speed selected
     this.videoPlayer.nativeElement.playbackRate = 0.5;
     this.videoPlayer2.nativeElement.playbackRate = 0.5;
     this.videoPlayer.nativeElement.defaultPlaybackRate = 0.5;
@@ -301,6 +310,7 @@ export class HomeComponent implements AfterViewInit{
   }
 
   setNormal(){
+    // When normal speed selected
     this.videoPlayer.nativeElement.playbackRate = 1.0;
     this.videoPlayer2.nativeElement.playbackRate = 1.0;
     this.videoPlayer.nativeElement.defaultPlaybackRate = 1.0;
@@ -312,6 +322,7 @@ export class HomeComponent implements AfterViewInit{
   }
 
   setFast(){
+    // When fast speed selected
     this.videoPlayer.nativeElement.playbackRate = 2.0;
     this.videoPlayer2.nativeElement.playbackRate = 2.0;
     this.videoPlayer.nativeElement.defaultPlaybackRate = 2.0;

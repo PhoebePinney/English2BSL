@@ -7,7 +7,7 @@ import { AcknowledgmentsComponent } from './acknowledgments/acknowledgments.comp
 
 const routes: Routes = [
 { path: '', component:HomeComponent },
-{ path: 'home', component:HomeComponent },  // you must add your component here
+{ path: 'home', component:HomeComponent },
 { path: 'about', component:AboutComponent },
 { path: 'signdictionary', component:SDComponent },
 { path: 'acknowledgments', component:AcknowledgmentsComponent}

@@ -10,12 +10,12 @@ export class AcknowledgmentsComponent{
   constructor(private router: Router) { }
 
   gotoHome(){
-    this.router.navigate(['/home']);  // define your component where you want to go
+    this.router.navigate(['/home']);
   }
   gotoAbout(){
     this.router.navigate(['/about']);
   }
   gotoSD(){
-    this.router.navigate(['/signdictionary']);  // define your component where you want to go
+    this.router.navigate(['/signdictionary']);
   }
 }

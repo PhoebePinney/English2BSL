@@ -23,6 +23,7 @@ export class SDComponent implements AfterViewInit{
   }
 
   openModal(word: string) {
+    // Show individual sign in modal
     var videoLink = '';
     for (const link in this.listOfVideos){
       const possible = this.listOfVideos[link][1].split('_');
@@ -62,21 +63,23 @@ export class SDComponent implements AfterViewInit{
   }
 
   gotoHome(){
-    this.router.navigate(['/home']);  // define your component where you want to go
+    this.router.navigate(['/home']);
   }
   gotoAbout(){
-    this.router.navigate(['/about']);  // define your component where you want to go
+    this.router.navigate(['/about']);
   }
   gotoAcknowledgments(){
     this.router.navigate(['/acknowledgments']);
   }
 
   getDontInclude(){
+    // These are 'duplicate words' that need not be displayed
     const DI = ['mum','dontlike', 'I', 'airplane', 'clothing', 'daddy', 'gran', 'grandfather', 'granny', 'grandmother', 'grandpa', 'hey', 'mummy', 'thanks', 'translation', 'uni'];
     return DI;
   }
 
   getLetterGroups(){
+    // Groups of words for each letter of the alphabet
     var count = 0;
     for (let a in this.availableWords){
       if (this.availableWords[a].charAt(0)!=this.letterGroups[count][0]){
