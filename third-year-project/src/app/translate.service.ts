@@ -188,11 +188,14 @@ export class TranslateService {
           var bestMatchLD = Object.keys(matchesLD).reduce(function(a, b){ return matchesLD[a] > matchesLD[b] ? a : b })
 
           // Get best match
-          if(matchesDC.bestMatch.rating>matchesLD[bestMatchLD]){
+          if((matchesDC.bestMatch.rating>=matchesLD[bestMatchLD]) && (matchesDC.bestMatch.rating>0.5)){
             corrections.push([matchesDC.bestMatch.target, 1])
           }
-          else{
+          else if ((matchesDC.bestMatch.rating<matchesLD[bestMatchLD]) && (Number(matchesLD[bestMatchLD])>0.5)){
             corrections.push([bestMatchLD, 1])
+          }
+          else{
+            corrections.push([listOfWords[w], 0])
           }
         }
       }
