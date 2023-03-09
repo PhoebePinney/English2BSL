@@ -40,6 +40,7 @@ export class HomeComponent implements AfterViewInit{
   corrections: any[][] = [];
   mistakes = 0;
   correctionsString = '';
+  wordToNum = require('word-to-numbers');
 
   constructor(http: HttpClient, translate: TranslateService, private router: Router) {
     this.httpClient = http;
@@ -171,7 +172,7 @@ export class HomeComponent implements AfterViewInit{
   }
 
   onButton(userInput: string){ // When 'translate' button pressed
-    // this.runTest(); // RUN TESTS
+    //this.runTest(); // RUN TESTS
 
     // Reset some values
     this.replayDiv.nativeElement.classList.add("beNone");
@@ -195,6 +196,8 @@ export class HomeComponent implements AfterViewInit{
       userInput = userInput.replace('of the clock', 'oclock')
     }
     userInput = userInput.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, ''); // Remove punctuation apart from commas
+    userInput = String(this.wordToNum(userInput)) // convert words to numbers
+    console.log(userInput)
     this.listOfWords = userInput.split(' '); // List of words the user entered
     var filtered = this.listOfWords.filter(function(value, index, arr){ return value != "";}); // remove blank tokens
     if (filtered.length == 0){ // if no words input
