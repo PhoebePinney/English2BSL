@@ -5,6 +5,11 @@ html {
   overflow-x: hidden;
   scroll-behavior: smooth;
 }
+body {
+  margin: 0;
+  vertical-align: top;
+  transition: all 200ms ease;
+}
 
 // HAND
 .hand-svg-loader {
@@ -32,3 +37,38 @@ html {
 }
 // HAND
 
+
+// For preventing use on mobile-sized screens
+.mobileScreen  {
+  display: none;
+  color: white;
+  font-family:'Josefin Sans';
+  font-size:3vw;
+  font-weight:1000;
+  text-align: center;
+  vertical-align: top;
+  transition: all 200ms ease;
+}
+@media only screen and (max-width: 700px) {
+  .webScreen {
+    display: none;
+  }
+  .mobileScreen {
+    display: block;
+  }
+}
+.im{
+  width: 50vw;
+}
+.wave{
+  animation: wavy 1.5s infinite alternate ease-in-out;
+  transform-origin: bottom;
+}
+@keyframes wavy{
+  from {
+    transform:rotate(-3deg);
+}
+to {
+    transform:rotate(3deg);
+}
+}

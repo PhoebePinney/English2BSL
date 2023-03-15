@@ -41,6 +41,7 @@ h1{
   grid-row: 1 / -1;
   grid-column: 1 / -1;
   width:40vw;
+  z-index: 100;
 }
 .frame {
   font-family: 'Josefin Sans', sans-serif;
@@ -55,6 +56,27 @@ h1{
   line-height: 22.5vw;
   background-image:  url(/assets/handLOGO.png), radial-gradient(#7ddeb6, #1B4332);
   background-position: center;
+}
+.loading {
+  font-family: 'Josefin Sans', sans-serif;
+  color: white;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 1;
+}
+.loader {
+  border: 0.6vw solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 0.6vw solid #95D5B2;
+  width: 3vw;
+  height: 3vw;
+  animation: spin 2s linear infinite;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 .content {
   background-color: #74c69d;
