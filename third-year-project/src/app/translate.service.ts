@@ -245,6 +245,9 @@ export class TranslateService {
       else if (wordList[word]=='go'){
         positions.push([wordList[word], -1, 'VB'])
       }
+      else if (wordList[word]=='translation'){
+        positions.push([wordList[word], -1, 'JJ'])
+      }
       else if (this.temporalWords.includes(wordList[word])){
         positions.push([wordList[word], -1, 'T'])
       }

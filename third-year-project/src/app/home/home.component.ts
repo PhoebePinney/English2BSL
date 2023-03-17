@@ -198,8 +198,11 @@ export class HomeComponent implements AfterViewInit{
       userInput = userInput.replace('of the clock', 'oclock')
     }
     userInput = userInput.replace(/[\.-\/#!$%\^&\*;:{}=\-_`~()'@\+\?><\[\]\+]/g, ''); // Remove punctuation apart from commas
-    userInput = String(this.wordToNum(userInput)) // convert words to numbers
-    console.log(userInput)
+    var re1 = new RegExp(/^\d\S*$/g);
+    var re2 = new RegExp(/\d,\d/g)
+    if (!re1.test(userInput) && !re2.test(userInput)) { // prevent bugs in wordToNum library
+      userInput = String(this.wordToNum(userInput)) // convert words to numbers
+    }
     this.listOfWords = userInput.split(' '); // List of words the user entered
     var filtered = this.listOfWords.filter(function(value, index, arr){ return value != "";}); // remove blank tokens
     if (filtered.length == 0){ // if no words input
@@ -210,6 +213,7 @@ export class HomeComponent implements AfterViewInit{
       this.currentSignP.nativeElement.classList.add("beNone");
       this.videoPlayer.nativeElement.setAttribute("src", "");
       this.videoPlayer2.nativeElement.setAttribute("src", "");
+      this.loading.nativeElement.classList.add("beNone");
       this.loading.nativeElement.classList.add("beNone");
       return;
     }
@@ -236,6 +240,7 @@ export class HomeComponent implements AfterViewInit{
       this.currentSignP.nativeElement.classList.add("beNone");
       this.videoPlayer.nativeElement.setAttribute("src", "");
       this.videoPlayer2.nativeElement.setAttribute("src", "");
+      this.loading.nativeElement.classList.add("beNone");
       return;
     }
 
