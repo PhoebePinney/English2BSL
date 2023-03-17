@@ -236,6 +236,9 @@ export class TranslateService {
       else if (wordList[word]=='with'){
         positions.push([wordList[word], -1, 'CC'])
       }
+      else if (wordList[word]=='because'){
+        positions.push([wordList[word], -1, 'CC'])
+      }
       else if (wordList[word]=='left'){
         positions.push([wordList[word], -1, 'JJ'])
       }
@@ -421,7 +424,7 @@ export class TranslateService {
   }
 
   getSW(){
-    const SW = ['am','as','of','so','also','to','be', 'the', 'away', 'it', 'do', 'did', 'a', 'an', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'yet', 'him', 'himself', 'herself', 'her', 'his', 'hers', 'would', 'could', 'should', 'we', 'us', 'about'];
+    const SW = ['am','as','of','so','also','to','be', 'the', 'away', 'it', 'do', 'did', 'a', ,'at', 'an', 'some', 'is', 'are', 'he', 'she', 'they', 'and', 'for', 'nor', 'yet', 'him', 'himself', 'herself', 'her', 'his', 'hers', 'would', 'could', 'should', 'we', 'us', 'about'];
     return SW;
   }
 

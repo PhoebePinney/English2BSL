@@ -128,7 +128,7 @@
 ./assets/videos/old.mp4,old
 ./assets/videos/office.mp4,office_write
 ./assets/videos/p.mp4,p
-./assets/videos/past.mp4,past
+./assets/videos/past.mp4,past_ago
 ./assets/videos/people.mp4,people
 ./assets/videos/person.mp4,person
 ./assets/videos/pink.mp4,pink_pound
