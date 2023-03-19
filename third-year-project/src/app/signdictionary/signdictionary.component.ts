@@ -74,7 +74,7 @@ export class SDComponent implements AfterViewInit{
 
   getDontInclude(){
     // These are 'duplicate words' that need not be displayed
-    const DI = ['mum','dontlike', 'I', 'airplane', 'clothing', 'daddy', 'gran', 'grandfather', 'granny', 'grandmother', 'grandpa', 'hey', 'mummy', 'thanks', 'translation', 'uni'];
+    const DI = ['mum','dontlike', 'I', 'airplane', 'clothing', 'daddy', 'gran', 'grandfather', 'granny', 'grandmother', 'grandpa', 'hey', 'mummy', 'thanks', 'translation', 'uni', 'ago'];
     return DI;
   }
 
