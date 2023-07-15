@@ -313,7 +313,7 @@ export class TranslateService {
           positions[p][2]='UH'
         }
       }
-      if (positions[p][2]=='CC' || positions[p][0]==',' || positions[p][2]=='T'){ // Split at coordinating conjunctions (but keep in sentence)
+      if (positions[p][2]=='CC' || positions[p][0]==','){ // Split at coordinating conjunctions (but keep in sentence)
         conjunctions.push(positions[p][0]);
         c +=1;
         splitUp.push([]);
@@ -429,7 +429,7 @@ export class TranslateService {
   }
 
   getTemporalWords(){
-    const t = ['yesterday', 'tomorrow', 'now', 'today', 'before', 'after'];
+    const t = ['yesterday', 'tomorrow', 'now', 'today', 'before', 'after', 'next'];
     return t;
   }
 
@@ -439,7 +439,7 @@ export class TranslateService {
   }
 
   getKeepTogether(){
-    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out'], ['nanjing', 'road'], ['right', 'over'], ['peach', 'rose'], ['hello', 'there'], ['hi', 'there'], ['pick', 'up'], ['chinese', 'food'], ['ring', 'up'], ['half', 'past']];
+    const keepTogether = [['something', 'else'], ['anything', 'else'], ['get, into'], ['very', 'much'], ['at', 'all'], ['this','one'], ['try', 'on'], ['get','into'], ['wiped', 'out'], ['nanjing', 'road'], ['right', 'over'], ['peach', 'rose'], ['hello', 'there'], ['hi', 'there'], ['pick', 'up'], ['chinese', 'food'], ['ring', 'up'], ['half', 'past'], ['next', 'week'], ['next', 'year']];
     return keepTogether;
   }
 
